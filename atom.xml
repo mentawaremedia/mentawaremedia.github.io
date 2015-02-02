@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Very Good Indicatorz]]></title>
+  <title><![CDATA[Very Good Indicators]]></title>
   <link href="http://mentawaremedia.github.io/atom.xml" rel="self"/>
   <link href="http://mentawaremedia.github.io/"/>
-  <updated>2015-02-02T14:46:44-06:00</updated>
+  <updated>2015-02-02T14:47:45-06:00</updated>
   <id>http://mentawaremedia.github.io/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
