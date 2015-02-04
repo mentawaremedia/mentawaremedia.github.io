@@ -99,11 +99,13 @@ module Jekyll
       categories.keys.sort_by{ |str| str.downcase }.each do |category|
         url = category_dir + category.gsub(/_|\P{Word}/u, '-').gsub(/-{2,}/u, '-').downcase
         html << "<li style='#{li_styles}'><a href='#{url}'>#{category}"
+        #html << "<li><a href='#{url}'>#{category}"
         if @opts['counter']
           html << " (#{categories[category].count})"
         end
         html << "</a></li>"
       end
+      html << "<li style='clear: both;'></li>"
       html
     end
 
