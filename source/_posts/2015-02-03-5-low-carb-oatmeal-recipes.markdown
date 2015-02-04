@@ -4,6 +4,7 @@ title: "5 Low Carb Oatmeal Recipes"
 date: 2015-02-03 14:30:56 -0600
 comments: true
 categories: [recipes, low carb]
+tags: [oatmeal, breakfast, bake free]
 ---
 
 Before going low carb, I used to enjoy the occasional bowl of oatmeal. Depending on the type of low carb diet you practice and how strict the amount of carbs are, it may not be a choice. A typical serving comes in at 20 plus or so net carbs. This prompted me to take a look around the inter webs and look some low carb alternatives. 

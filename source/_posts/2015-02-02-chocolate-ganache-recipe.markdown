@@ -4,6 +4,7 @@ title: "Chocolate Ganache Recipe"
 date: 2015-02-02 15:13:50 -0600
 comments: true
 categories: [recipes, low carb]
+tags: [chocolate, dessert, bake free]
 ---
 
 Ganache is a chocolate mixture used in several deserts. Warm ganache can be lightly poured on cake to create a glaze or it can be used as filling in cakes such as a molten lava cake. It can also drizzled on ice cream as tasty topping. Cold ganache can be rolled into chocolate truffles. 

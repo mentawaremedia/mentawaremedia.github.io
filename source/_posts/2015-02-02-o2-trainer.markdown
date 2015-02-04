@@ -3,7 +3,8 @@ layout: post
 title: "O2 Trainer"
 date: 2015-02-02 15:03:45 -0600
 comments: true
-categories: [technology,biohacking,exercise]
+categories: [technology,biohacking,performance]
+tags: [o2 trainer, o2, diaphragm, lungs, athletic performance]
 ---
 
 
