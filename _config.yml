@@ -6,7 +6,8 @@ url: http://mentawaremedia.github.io
 title: Very Good Indicators
 subtitle: A self improvement blog
 author: Mentaware Media
-simple_search: https://www.google.com/search
+lunr_search: true
+simple_search: #https://www.google.com/search
 description: A blog about the theory of anything
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
@@ -41,6 +42,7 @@ rdiscount:
     - smart
 highlighter: pygments # default python pygments have been replaced by pygments.rb
 category_title_prefix: ''
+lsi: true
 
 paginate: 10          # Posts per page on the blog index
 paginate_path: "posts/:num"  # Directory base for pagination URLs eg. /posts/2/
@@ -58,7 +60,7 @@ default_asides:  [custom/asides/category_list.html]
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
 # blog_index_asides:
-# post_asides:
+post_asides: [custom/asides/related.html, custom/asides/category_list.html]
 # page_asides:
 
 # ----------------------- #
