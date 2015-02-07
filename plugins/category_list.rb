@@ -98,27 +98,13 @@ module Jekyll
       categories = context.registers[:site].categories
       categories.keys.sort_by{ |str| str.downcase }.each do |category|
         url = category_dir + category.gsub(/_|\P{Word}/u, '-').gsub(/-{2,}/u, '-').downcase
-        html << "<li style='#{li_styles}'><a href='#{url}'>#{category}"
-        #html << "<li><a href='#{url}'>#{category}"
+        html << "<li><a href='#{url}'>#{category}"
         if @opts['counter']
           html << " (#{categories[category].count})"
         end
         html << "</a></li>"
       end
-      html << "<li style='clear: both;'></li>"
       html
-    end
-
-    def li_styles
-      #style="float: left; line-height: 0.5em; width: 50%; margin: 0 0 .5em 0; padding: .5em 0;"
-      styles = []
-      styles << "float: left"
-      styles << "line-height: 0.5em"
-      styles << "width: 50%"
-      styles << "margin: 0 0 .5em 0"
-      styles << "padding: .5em 0"
-
-      styles.join("; ")
     end
   end
 
