@@ -14,22 +14,37 @@
   //text-shadow: none;
 }
 
+.email-field {
+  display: inline;
+  position: relative;
+  left: 10px;  
+  float: left;
+}
+
+.submit-button {
+  display: inline;
+  position: relative;
+  left: 30px;    
+}
+
+#mc_embed_signup_scroll {
+  width: 500px;
+}
+
 #mc_embed_signup {
   float: left;
     // label
     .mc-field-group > label {
-  margin-top: 8px;
-  display: block;
+      margin-top: 8px;
+
     }
 
     // textfield
     input.email {
-      width: 100%; 
-      height: 24px; 
+      width: 350px; 
+      height: 35px; 
       margin-top: 8px; 
-      font-size: 14px;
-      position: relative;
-      left: 10px;
+      font-size: 16px;
     }
 
     // subscribe button
@@ -62,23 +77,25 @@
     }
 }
 
-.newsletter {
+#newsletter {
+  padding-left: 10px;
+  padding-right: 10px;
   padding-top: 40px;
   padding-bottom: 40px;
   border: 8px #429A42 solid;
   background-color: #EAF7EA;
 }
 
-.newsletter .message {
+/*.newsletter .message {
   width: 400px; 
   margin-right: 20px; 
   float: left;
-}
+}*/
 
-.newsletter .message p {
+#newsletter .message p {
   font-family: 'Roboto Condensed';
 }
 
-.newsletter .message h2 {
+#newsletter .message h2 {
   font-family: 'Roboto Condensed', sans-serif;
 }
