@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Books | Very Good Indicators]]></title>
-  <link href="http://mentawaremedia.github.io/blog/categories/books/atom.xml" rel="self"/>
-  <link href="http://mentawaremedia.github.io/"/>
-  <updated>2015-02-22T20:00:15-06:00</updated>
-  <id>http://mentawaremedia.github.io/</id>
+  <link href="http://www.verygoodindicators.com/blog/categories/books/atom.xml" rel="self"/>
+  <link href="http://www.verygoodindicators.com/"/>
+  <updated>2015-02-23T22:02:53-06:00</updated>
+  <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[How to Stay Poor]]></title>
-    <link href="http://mentawaremedia.github.io/blog/2015/02/17/how-to-stay-poor/"/>
+    <link href="http://www.verygoodindicators.com/blog/2015/02/17/how-to-stay-poor/"/>
     <updated>2015-02-17T19:33:19-06:00</updated>
-    <id>http://mentawaremedia.github.io/blog/2015/02/17/how-to-stay-poor</id>
+    <id>http://www.verygoodindicators.com/blog/2015/02/17/how-to-stay-poor</id>
     <content type="html"><![CDATA[<p>The following are some ideas regarding social economic classes and spending patterns
 introduced in various books such as <em>Rich Dad Poor Dad</em>.</p>
 

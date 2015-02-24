@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Diet | Very Good Indicators]]></title>
-  <link href="http://mentawaremedia.github.io/blog/categories/diet/atom.xml" rel="self"/>
-  <link href="http://mentawaremedia.github.io/"/>
-  <updated>2015-02-22T20:00:15-06:00</updated>
-  <id>http://mentawaremedia.github.io/</id>
+  <link href="http://www.verygoodindicators.com/blog/categories/diet/atom.xml" rel="self"/>
+  <link href="http://www.verygoodindicators.com/"/>
+  <updated>2015-02-23T22:02:53-06:00</updated>
+  <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Paleo Diet and the Missing Link]]></title>
-    <link href="http://mentawaremedia.github.io/blog/2015/02/15/the-paleo-diet-and-the-missing-link/"/>
+    <link href="http://www.verygoodindicators.com/blog/2015/02/15/the-paleo-diet-and-the-missing-link/"/>
     <updated>2015-02-15T15:40:36-06:00</updated>
-    <id>http://mentawaremedia.github.io/blog/2015/02/15/the-paleo-diet-and-the-missing-link</id>
+    <id>http://www.verygoodindicators.com/blog/2015/02/15/the-paleo-diet-and-the-missing-link</id>
     <content type="html"><![CDATA[<p><blockquote><p>Once you have to start counting calories,<br/>it takes away from the joy of eating.</p><footer><strong>Mireille Guiliano</strong></footer></blockquote></p>
 
 <p>The Paleo Diet is an effort to eat as our prehistoric ancestors did prior to the
