@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://mentawaremedia.github.io
+url: http://www.verygoodindicators.com
 title: Very Good Indicators
 subtitle: Experience by design
 author: Mentaware Media
@@ -101,7 +101,7 @@ disqus_short_name: verygoodindicators
 disqus_show_comment_count: true
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-57121489-3
 
 # Facebook Like
 facebook_like: true

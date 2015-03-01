@@ -5,6 +5,7 @@ date: 2015-02-02 15:03:45 -0600
 comments: true
 categories: [technology,biohacking,performance]
 tags: [o2 trainer, o2, diaphragm, lungs, athletic performance]
+author: "Juan Leal"
 ---
 
 
@@ -12,6 +13,12 @@ I recently received the O2 Trainer as a present this past Christmas.
 The idea of this product is to strengthen your diaphragm and lung muscles via resistance as you pull air into your lungs. 
 It consists of a mouth piece and interchangeable modules which provide 14 stages of resistance. 
 If you visit www.o2trainer.com you find various studies using the product, testimonials and instructions.
+
+{% img center /images/insp_muscle_trainer_smaller.jpeg 600 %}
+
+<p style="text-align:center;">
+   O2 Trainer
+</p>
 
 My purpose for the product is improving athletic performance. 
 I'm currently a blue belt in Kenpo Karate, a style which utilizes quick hand strikes and kicks. 

@@ -5,6 +5,7 @@ date: 2015-02-02 15:13:50 -0600
 comments: true
 categories: [recipes, low carb]
 tags: [chocolate, dessert, bake free]
+author: "Juan Leal"
 ---
 
 Ganache is a chocolate mixture used in several deserts. Warm ganache can be lightly poured on cake to create a glaze or it can be used as filling in cakes such as a molten lava cake. It can also drizzled on ice cream as tasty topping. Cold ganache can be rolled into chocolate truffles. 
@@ -15,32 +16,29 @@ The mixture will thicken to harden in the fridge. You can gently melt some in th
 
 The recipes yields about 29 oz with under 1 net carb for 2 oz serving.
 
-Ingredients 
 
-8 oz unsweetened chocolate 
-1 cup heavy cream
-1 teaspoon vanilla
-2 cups of Sin-Free Sugar
-2 tablespoons SweetLeaf
-4 tablespoons salted butter
+{% img right /images/ganache_smaller.jpg 300 %} 
 
-Steps:
+####Ingredients 
 
-Chop unsweetened chocolate and butter, place into a mixing bowl.
+* 8 oz unsweetened chocolate 
+* 1 cup heavy cream
+* 1 teaspoon vanilla
+* 2 cups of Sin-Free Sugar
+* 2 tablespoons SweetLeaf
+* 4 tablespoons salted butter
 
-Mix dry ingredients together (Sin-Free Sugar, SweetLeaf) and place into a medium saucepan.
 
-Add wet ingredients (heavy cream, vanilla) to saucepan, Stir until dry and wet ingredients are mixed well so that no large lumps are present.
+####Steps:
 
-Heat the mixture while stirring. When mixture bubbles and begins to climb the sides of the saucepan, turn off stove and remove from heat.
-
-Add hot mixture to mixing bowl containing chocolate pieces and wait 1 minute.
-
-Stir mixture in bowl until all chocolate is melted and well incorporated.
-
-Whisk until smooth and slightly thickened.
-
-Leave until a bit cooled and then move to a container and store in refrigerator.
+1. Chop unsweetened chocolate and butter, place into a mixing bowl.
+2. Mix dry ingredients together (Sin-Free Sugar, SweetLeaf) and place into a medium saucepan.
+3. Add wet ingredients (heavy cream, vanilla) to saucepan, Stir until dry and wet ingredients are mixed well so that no large lumps are present.
+4. Heat the mixture while stirring. When mixture bubbles and begins to climb the sides of the saucepan, turn off stove and remove from heat.
+5. Add hot mixture to mixing bowl containing chocolate pieces and wait 1 minute.
+6. Stir mixture in bowl until all chocolate is melted and well incorporated.
+7. Whisk until smooth and slightly thickened.
+8. Leave until a bit cooled and then move to a container and store in refrigerator.
 
 
 
