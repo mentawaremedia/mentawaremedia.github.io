@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Credit Card | Very Good Indicators]]></title>
+  <link href="http://www.verygoodindicators.com/blog/tags/credit-card/atom.xml" rel="self"/>
+  <link href="http://www.verygoodindicators.com/"/>
+  <updated>2015-03-01T23:20:12-06:00</updated>
+  <id>http://www.verygoodindicators.com/</id>
+  <author>
+    <name><![CDATA[Mentaware Media]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Pay Your Credit Cards 4 Times Faster]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/02/28/pay-your-credit-cards-6-times-faster/"/>
+    <updated>2015-02-28T20:21:02-06:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/02/28/pay-your-credit-cards-6-times-faster</id>
+    <content type="html"><![CDATA[<p><blockquote><p>&hellip;compound interest is the second greatest invention of mankind</p><footer><strong>John Maynard Keynes</strong></footer></blockquote></p>
+
+<p><img class="left" src="/images/creditcards.jpg" width="250"></p>
+
+<p>We&rsquo;re going to look at three different
+ways of paying off credit cards. Some bad and some good.
+We&rsquo;ll calculate how much you&rsquo;re
+paying on interest and the amount of time it&rsquo;ll take to pay off each card.</p>
+
+<table>
+<thead>
+<tr>
+<th>        </th>
+<th> Balance </th>
+<th> Interest Rate </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Card A </td>
+<td> 2,000   </td>
+<td>           29% </td>
+</tr>
+<tr>
+<td> Card B </td>
+<td> 2,000   </td>
+<td>           15% </td>
+</tr>
+<tr>
+<td> Card C </td>
+<td> 2,000   </td>
+<td>           11% </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br/><br/>
+Above we have three cards setup, each with a balance of 2,000 dollars and interest rates of
+29%, 15% and 11%. We&rsquo;ll assume the minimum monthly payment to be 4% or $15 whichever is
+greater.</p>
+
+<h2>The Typical: Paying the minimum.</h2>
+
+<table>
+<thead>
+<tr>
+<th>        </th>
+<th> MONTH 1 PAYMENT </th>
+<th> MONTH 6 PAYMENT </th>
+<th> MONTH 12 PAYMENT </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Card A </td>
+<td>           80.00 </td>
+<td>           71.05 </td>
+<td>            64.19 </td>
+</tr>
+<tr>
+<td> Card B </td>
+<td>           80.00 </td>
+<td>           65.58 </td>
+<td>            55.30 </td>
+</tr>
+<tr>
+<td> Card C </td>
+<td>           80.00 </td>
+<td>           64.08 </td>
+<td>            52.98 </td>
+</tr>
+<tr>
+<td> Total  </td>
+<td>          240.00 </td>
+<td>          200.71 </td>
+<td>           172.47 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br/>
+Since the balance of each card drops as payments are made then it&rsquo;s only natural
+for the minimum payment due to also drop. If a person is in the habit of paying the
+minimum then his payments will resemble the pattern above.</p>
+
+<table>
+<thead>
+<tr>
+<th>        </th>
+<th> MONTHS TO PAY OFF </th>
+<th> INTEREST </th>
+<th> TOTAL PAID </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Card A </td>
+<td>               137 </td>
+<td> 2,428.97 </td>
+<td>   4,428.97 </td>
+</tr>
+<tr>
+<td> Card B </td>
+<td>                89 </td>
+<td>   767.12 </td>
+<td>   2,767.12 </td>
+</tr>
+<tr>
+<td> Card C </td>
+<td>                82 </td>
+<td>   506.75 </td>
+<td>   2,506.75 </td>
+</tr>
+<tr>
+<td> Total  </td>
+<td>               137 </td>
+<td> 3,702.84 </td>
+<td>   9,702.84 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br/>
+The above are the results of making minimum payments. It took 137 months or 11 years and 6
+months to pay off all this debt. The $6,000 of debt we started with took a total of
+$9,702.84 in payments to eliminate; basically adding $3,702.84 of interest payments to
+$6,000 we initially had. That&rsquo;s a lot of money spent on interest.</p>
+
+<h2>Better: Fixed payments.</h2>
+
+<table>
+<thead>
+<tr>
+<th>        </th>
+<th> MONTH 1 PAYMENT </th>
+<th> MONTH 6 PAYMENT </th>
+<th> MONTH 12 PAYMENT </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Card A </td>
+<td>           80.00 </td>
+<td>           80.00 </td>
+<td>            80.00 </td>
+</tr>
+<tr>
+<td> Card B </td>
+<td>           80.00 </td>
+<td>           80.00 </td>
+<td>            80.00 </td>
+</tr>
+<tr>
+<td> Card C </td>
+<td>           80.00 </td>
+<td>           80.00 </td>
+<td>            80.00 </td>
+</tr>
+<tr>
+<td> Total  </td>
+<td>          240.00 </td>
+<td>          240.00 </td>
+<td>           240.00 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br/>
+A better way is to just keep paying our initial minimum payment each month.
+This way more and more of our payment will go towards the principal or original
+debt. This will accelerate our pay off time.</p>
+
+<table>
+<thead>
+<tr>
+<th>        </th>
+<th> MONTHS TO PAY OFF </th>
+<th> INTEREST </th>
+<th> TOTAL PAID </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Card A </td>
+<td>                38 </td>
+<td>   986.50 </td>
+<td>   2,986.50 </td>
+</tr>
+<tr>
+<td> Card B </td>
+<td>                30 </td>
+<td>   377.06 </td>
+<td>   2,377.06 </td>
+</tr>
+<tr>
+<td> Card C </td>
+<td>                29 </td>
+<td>   258.38 </td>
+<td>   2,258.38 </td>
+</tr>
+<tr>
+<td> Total  </td>
+<td>                38 </td>
+<td> 1,621.94 </td>
+<td>   7,621.94 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br/>
+Applying our fixed payment scheme has saved us a considerable amount of time and money.
+It took us only 3 years 2 months to pay the debt and we saved 2,080.90 in interest. There
+is however an even faster way to pay this off using the same total monthly payment amount.</p>
+
+<h2>Best: Adjusting payments.</h2>
+
+<table>
+<thead>
+<tr>
+<th>        </th>
+<th> MONTH 1 PAYMENT </th>
+<th> MONTH 6 PAYMENT </th>
+<th> MONTH 12 PAYMENT </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Card A </td>
+<td>           80.00 </td>
+<td>          110.34 </td>
+<td>           131.72 </td>
+</tr>
+<tr>
+<td> Card B </td>
+<td>           80.00 </td>
+<td>           65.58 </td>
+<td>            55.30 </td>
+</tr>
+<tr>
+<td> Card C </td>
+<td>           80.00 </td>
+<td>           64.08 </td>
+<td>            52.98 </td>
+</tr>
+<tr>
+<td> Total  </td>
+<td>          240.00 </td>
+<td>          240.00 </td>
+<td>           240.00 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br/>
+What we&rsquo;re going to do here is focus on making the largest payment on the highest
+interest card while paying the minimum on the remainder. If you recall Card A had the highest
+interest rate with 29%.</p>
+
+<table>
+<thead>
+<tr>
+<th>        </th>
+<th> MONTHS TO PAY OFF </th>
+<th> INTEREST </th>
+<th> TOTAL PAID </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Card A </td>
+<td>                22 </td>
+<td>   600.85 </td>
+<td>   2,600.85 </td>
+</tr>
+<tr>
+<td> Card B </td>
+<td>                28 </td>
+<td>   428.39 </td>
+<td>   2,428.39 </td>
+</tr>
+<tr>
+<td> Card C </td>
+<td>                32 </td>
+<td>   341.44 </td>
+<td>   2,341.44 </td>
+</tr>
+<tr>
+<td> Total  </td>
+<td>                32 </td>
+<td> 1,370.68 </td>
+<td>   7,621.94 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p><br/>
+By adjusting our payments we have paid our debt off 6 months faster than the previous
+method and saved an additional $251.26.</p>
+
+<p>To recap, this method of adjusting our payments took us from 137 months to 32 months and
+saved us 2,332.16 in interest.</p>
+
+<p>See if you can apply this principle to your finances you&rsquo;ll free up considerable money
+fast.</p>
+]]></content>
+  </entry>
+  
+</feed>
