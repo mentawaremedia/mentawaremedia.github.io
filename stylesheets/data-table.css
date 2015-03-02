@@ -31,7 +31,7 @@
   text-align:center;
 }*/
 
-* + table td[align="right"] {
+* + table td {
   text-align:right;
 }
  
