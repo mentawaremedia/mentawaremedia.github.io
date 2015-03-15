@@ -57,7 +57,7 @@ minimum then his payments will resemble the pattern above.
 <br/> 
 The above are the results of making minimum payments. It took 137 months or 11 years and 6
 months to pay off all this debt. The $6,000 of debt we started with took a total of
-$9,702.84 in payments to eliminate; basically adding $3,702.84 of interest payments to
+$9,702.84 in payments to eliminate; basically adding $3,702.84 of interest payments to the
 $6,000 we initially had. That's a lot of money spent on interest.
 
 ##Better: Fixed payments.
@@ -82,8 +82,8 @@ debt. This will accelerate our pay off time.
 | Total  |                38 | 1,621.94 |   7,621.94 | 
 
 <br/> 
-Applying our fixed payment scheme has saved us a considerable amount of time and money.
-It took us only 3 years 2 months to pay the debt and we saved 2,080.90 in interest. There
+Applying a fixed payment scheme has saved us a considerable amount of time and money.
+It took us only 3 years and 2 months to pay the debt and we saved $2,080.90 in interest. There
 is however an even faster way to pay this off using the same total monthly payment amount.
 
 ##Best: Adjusting payments.
@@ -114,6 +114,6 @@ method and saved an additional $251.26.
 To recap, this method of adjusting our payments took us from 137 months to 32 months and
 saved us 2,332.16 in interest.
 
-See if you can apply this principle to your finances you'll free up considerable money
+See if you can apply this principle to your finances and you'll free up considerable money
 fast.
 
