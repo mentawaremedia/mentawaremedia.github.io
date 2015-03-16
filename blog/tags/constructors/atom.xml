@@ -4,7 +4,7 @@
   <title><![CDATA[Constructors | Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/blog/tags/constructors/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-03-16T10:16:07-05:00</updated>
+  <updated>2015-03-16T10:29:49-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -57,7 +57,7 @@ end
 foo = Foo.new("a", "b")
 </code></pre>
 
-<p>What a second!? Why are talking about &lsquo;initialize&rsquo; all of a sudden?
+<p>Wait a second!? Why are talking about &lsquo;initialize&rsquo; all of a sudden?
 I thought we were talking about &lsquo;new&rsquo;?</p>
 
 <h2>#initialize vs .new</h2>
