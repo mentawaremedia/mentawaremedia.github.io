@@ -9,14 +9,8 @@
   <meta name="author" content="Mentaware Media">
 
   
-  <meta name="description" content="Visual Basic .NET1
-2
-3
-4
-5
-6
-&#39;Visual Basic .NET
-Dim sf As BaseballTeam = New BaseballTeam(&quot;San Francisco Giants&quot;) &#39;Dim - Allocates &hellip;">
+  <meta name="description" content="This will post will be short and sweet; we&rsquo;ll cover the Ruby class Class. For
+those unfamiliar with the class called Class, it is basically a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +77,112 @@ Dim sf As BaseballTeam = New BaseballTeam(&quot;San Francisco Giants&quot;) &#39
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/20/class-class/">Class Class</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-20T20:53:35-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:53 pm</span></time>
+        
+           | <a href="/blog/2015/03/20/class-class/#disqus_thread"
+             data-disqus-identifier="http://www.verygoodindicators.com/blog/2015/03/20/class-class/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This will post will be short and sweet; we&rsquo;ll cover the Ruby class Class. For
+those unfamiliar with the class called Class, it is basically a Ruby object for creating
+Ruby classes. This comes in very handy when doing metaprogramming or writing code that
+generates code.</p>
+
+<figure class='code'><figcaption><span>Typical Way of Creating a class</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">hey</span>
+</span><span class='line'>    <span class="s2">&quot;hey&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above you&rsquo;ll see the regular old way of creating a class in Ruby.</p>
+
+<figure class='code'><figcaption><span>Class Way of Creating a class</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Foo</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">hey</span>
+</span><span class='line'>    <span class="s2">&quot;hey&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can do the exact same thing using Class as the example above shows. Subclassing
+can also be done very easily.</p>
+
+<figure class='code'><figcaption><span>Typical Way of Subclassing</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="o">&lt;</span> <span class="no">Foo</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above is how one would typically do subclassing. Class Bar inherits from class Foo.</p>
+
+<figure class='code'><figcaption><span>Class Way of Subclassing</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Bar</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">Foo</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here is how it&rsquo;s accomplished with class Class.</p>
+
+<p>A usual situation where I use Class is when I need to create custom errors. I think
+we can all be code snobs from time to time (I hope it&rsquo;s not just me) so I maybe overly
+critical when I say the following. When people attempt to cram multiple lines of ruby
+code on one line using &lsquo;;&rsquo;, a little piece of my dies.</p>
+
+<figure class='code'><figcaption><span>&#8230;kill me now</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">NameNotDefined</span> <span class="o">&lt;</span> <span class="no">RuntimeError</span><span class="p">;</span> <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Is it just me or is the above just painful to look at?</p>
+
+<figure class='code'><figcaption><span>A blissful expression</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">NameNotDefined</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">RuntimeError</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now isn&rsquo;t this so much better? I can now relax.</p>
+
+<p>I hope it&rsquo;s been educational. Feel free drop some comments below. I love hearing some
+feed back.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1246,14 +1346,14 @@ I look forward to continued use of this product and effect it has on my performa
 
 <section>
   <h1>Topics</h1>
-    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (1)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (1)</a></li><li><a href='/blog/categories/performance'>performance (1)</a></li><li><a href='/blog/categories/programming'>programming (1)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li></ul>
+    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (1)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (1)</a></li><li><a href='/blog/categories/performance'>performance (1)</a></li><li><a href='/blog/categories/programming'>programming (2)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li></ul>
 </section>
 
 
 
 <section style="clear: both">
   <h1>Keywords</h1>
-    <span id="tag-cloud"><a href='/blog/tags/-100-startup' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>$100 startup</a> <a href='/blog/tags/athletic-performance' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>athletic performance</a> <a href='/blog/tags/bake-free' style='font-size: 160.0%; padding: 0.5em 0.5em 0.5em 0.5em'>bake free</a> <a href='/blog/tags/books' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>books</a> <a href='/blog/tags/breakfast' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>breakfast</a> <a href='/blog/tags/chocolate' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>chocolate</a> <a href='/blog/tags/constructors' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>constructors</a> <a href='/blog/tags/credit-card' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>credit card</a> <a href='/blog/tags/debt' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>debt</a> <a href='/blog/tags/dessert' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>dessert</a> <a href='/blog/tags/diaphragm' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>diaphragm</a> <a href='/blog/tags/entrepreneurship' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>entrepreneurship</a> <a href='/blog/tags/income' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>income</a> <a href='/blog/tags/lungs' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>lungs</a> <a href='/blog/tags/o2' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>o2</a> <a href='/blog/tags/o2-trainer' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>o2 trainer</a> <a href='/blog/tags/oatmeal' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>oatmeal</a> <a href='/blog/tags/ruby' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>ruby</a> </span>
+    <span id="tag-cloud"><a href='/blog/tags/-100-startup' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>$100 startup</a> <a href='/blog/tags/athletic-performance' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>athletic performance</a> <a href='/blog/tags/bake-free' style='font-size: 160.0%; padding: 0.5em 0.5em 0.5em 0.5em'>bake free</a> <a href='/blog/tags/books' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>books</a> <a href='/blog/tags/breakfast' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>breakfast</a> <a href='/blog/tags/chocolate' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>chocolate</a> <a href='/blog/tags/class-class' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>class Class</a> <a href='/blog/tags/constructors' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>constructors</a> <a href='/blog/tags/credit-card' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>credit card</a> <a href='/blog/tags/debt' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>debt</a> <a href='/blog/tags/dessert' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>dessert</a> <a href='/blog/tags/diaphragm' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>diaphragm</a> <a href='/blog/tags/entrepreneurship' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>entrepreneurship</a> <a href='/blog/tags/income' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>income</a> <a href='/blog/tags/lungs' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>lungs</a> <a href='/blog/tags/o2' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>o2</a> <a href='/blog/tags/o2-trainer' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>o2 trainer</a> <a href='/blog/tags/oatmeal' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>oatmeal</a> <a href='/blog/tags/ruby' style='font-size: 160.0%; padding: 0.5em 0.5em 0.5em 0.5em'>ruby</a> </span>
 </section>
   
 </aside>

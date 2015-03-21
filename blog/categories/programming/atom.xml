@@ -4,7 +4,7 @@
   <title><![CDATA[Programming | Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-03-16T10:29:49-05:00</updated>
+  <updated>2015-03-20T22:06:55-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Class Class]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/03/20/class-class/"/>
+    <updated>2015-03-20T20:53:35-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/03/20/class-class</id>
+    <content type="html"><![CDATA[<p>This will post will be short and sweet; we&rsquo;ll cover the Ruby class Class. For
+those unfamiliar with the class called Class, it is basically a Ruby object for creating
+Ruby classes. This comes in very handy when doing metaprogramming or writing code that
+generates code.</p>
+
+<pre><code class="ruby Typical Way of Creating a class">class Foo
+  def hey
+    "hey"
+  end
+end
+</code></pre>
+
+<p>Above you&rsquo;ll see the regular old way of creating a class in Ruby.</p>
+
+<pre><code class="ruby Class Way of Creating a class">Foo = Class.new do
+  def hey
+    "hey"
+  end
+end
+</code></pre>
+
+<p>You can do the exact same thing using Class as the example above shows. Subclassing
+can also be done very easily.</p>
+
+<pre><code class="ruby Typical Way of Subclassing">class Bar &lt; Foo
+
+end
+</code></pre>
+
+<p>Above is how one would typically do subclassing. Class Bar inherits from class Foo.</p>
+
+<pre><code class="ruby Class Way of Subclassing">Bar = Class.new(Foo)
+</code></pre>
+
+<p>And here is how it&rsquo;s accomplished with class Class.</p>
+
+<p>A usual situation where I use Class is when I need to create custom errors. I think
+we can all be code snobs from time to time (I hope it&rsquo;s not just me) so I maybe overly
+critical when I say the following. When people attempt to cram multiple lines of ruby
+code on one line using &lsquo;;&rsquo;, a little piece of my dies.</p>
+
+<pre><code class="ruby ...kill me now">class NameNotDefined &lt; RuntimeError; end
+</code></pre>
+
+<p>Is it just me or is the above just painful to look at?</p>
+
+<pre><code class="ruby A blissful expression">NameNotDefined = Class.new(RuntimeError)
+</code></pre>
+
+<p>Now isn&rsquo;t this so much better? I can now relax.</p>
+
+<p>I hope it&rsquo;s been educational. Feel free drop some comments below. I love hearing some
+feed back.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby Constructors]]></title>

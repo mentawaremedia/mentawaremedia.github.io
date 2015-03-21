@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>O2 Trainer - Very Good Indicators</title>
+  <title>Class Class - Very Good Indicators</title>
   <meta name="author" content="Mentaware Media">
 
   
-  <meta name="description" content="I recently received the O2 Trainer as a present this past Christmas.
-The idea of this product is to strengthen your diaphragm and lung muscles via &hellip;">
+  <meta name="description" content="This will post will be short and sweet; we&rsquo;ll cover the Ruby class Class. For
+those unfamiliar with the class called Class, it is basically a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ The idea of this product is to strengthen your diaphragm and lung muscles via &h
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.verygoodindicators.com/blog/2015/02/02/o2-trainer/">
+  <link rel="canonical" href="http://www.verygoodindicators.com/blog/2015/03/20/class-class/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -112,7 +112,7 @@ The idea of this product is to strengthen your diaphragm and lung muscles via &h
   
   <header>
     
-      <h1 class="entry-title">O2 Trainer</h1>
+      <h1 class="entry-title">Class Class</h1>
     
     
       <p class="meta">
@@ -121,7 +121,7 @@ The idea of this product is to strengthen your diaphragm and lung muscles via &h
 
 
 
-<time class='entry-date' datetime='2015-02-02T15:03:45-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>3:03 pm</span></time>
+<time class='entry-date' datetime='2015-03-20T20:53:35-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:53 pm</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://www.verygoodindicators.com">Comments</a>
@@ -131,24 +131,81 @@ The idea of this product is to strengthen your diaphragm and lung muscles via &h
   </header>
 
 
-<div class="entry-content"><p>I recently received the O2 Trainer as a present this past Christmas.
-The idea of this product is to strengthen your diaphragm and lung muscles via resistance as you pull air into your lungs.
-It consists of a mouth piece and interchangeable modules which provide 14 stages of resistance.
-If you visit www.o2trainer.com you find various studies using the product, testimonials and instructions.</p>
+<div class="entry-content"><p>This will post will be short and sweet; we&rsquo;ll cover the Ruby class Class. For
+those unfamiliar with the class called Class, it is basically a Ruby object for creating
+Ruby classes. This comes in very handy when doing metaprogramming or writing code that
+generates code.</p>
 
-<p><img class="center" src="/images/insp_muscle_trainer_smaller.jpeg" width="600"></p>
+<figure class='code'><figcaption><span>Typical Way of Creating a class</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">hey</span>
+</span><span class='line'>    <span class="s2">&quot;hey&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p style="text-align:center;">
-   O2 Trainer
-</p>
+
+<p>Above you&rsquo;ll see the regular old way of creating a class in Ruby.</p>
+
+<figure class='code'><figcaption><span>Class Way of Creating a class</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Foo</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">hey</span>
+</span><span class='line'>    <span class="s2">&quot;hey&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>My purpose for the product is improving athletic performance.
-I&rsquo;m currently a blue belt in Kenpo Karate, a style which utilizes quick hand strikes and kicks.
-Sparring can be quite intense and can quickly cause one to run out of breath.
-Tonight I started the first breathing exercise. Starting with module number 11, I did 4 sets of 12 reps.
-One breathes in hard and then exhales. Once I was done and for a few hours after, I could feel that my diagram and abs got a good workout.
-I look forward to continued use of this product and effect it has on my performance.</p>
+<p>You can do the exact same thing using Class as the example above shows. Subclassing
+can also be done very easily.</p>
+
+<figure class='code'><figcaption><span>Typical Way of Subclassing</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="o">&lt;</span> <span class="no">Foo</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above is how one would typically do subclassing. Class Bar inherits from class Foo.</p>
+
+<figure class='code'><figcaption><span>Class Way of Subclassing</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Bar</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">Foo</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here is how it&rsquo;s accomplished with class Class.</p>
+
+<p>A usual situation where I use Class is when I need to create custom errors. I think
+we can all be code snobs from time to time (I hope it&rsquo;s not just me) so I maybe overly
+critical when I say the following. When people attempt to cram multiple lines of ruby
+code on one line using &lsquo;;&rsquo;, a little piece of my dies.</p>
+
+<figure class='code'><figcaption><span>&#8230;kill me now</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">NameNotDefined</span> <span class="o">&lt;</span> <span class="no">RuntimeError</span><span class="p">;</span> <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Is it just me or is the above just painful to look at?</p>
+
+<figure class='code'><figcaption><span>A blissful expression</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">NameNotDefined</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">RuntimeError</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now isn&rsquo;t this so much better? I can now relax.</p>
+
+<p>I hope it&rsquo;s been educational. Feel free drop some comments below. I love hearing some
+feed back.</p>
 </div>
 
 
@@ -157,19 +214,19 @@ I look forward to continued use of this product and effect it has on my performa
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Juan Leal</span></span>
+<span class="byline author vcard">Posted by <span class="fn">Mentaware Media</span></span>
 
       
 
 
 
 
-<time class='entry-date' datetime='2015-02-02T15:03:45-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>3:03 pm</span></time>
+<time class='entry-date' datetime='2015-03-20T20:53:35-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>8:53 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/biohacking/'>biohacking</a>, <a class='category' href='/blog/categories/performance/'>performance</a>, <a class='category' href='/blog/categories/technology/'>technology</a>
+    <a class='category' href='/blog/categories/programming/'>programming</a>
   
 </span>
 
@@ -178,7 +235,7 @@ I look forward to continued use of this product and effect it has on my performa
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/02/02/o2-trainer/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/02/02/o2-trainer/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/03/20/class-class/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/03/20/class-class/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -191,8 +248,8 @@ I look forward to continued use of this product and effect it has on my performa
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2015/03/15/ruby-contructors/" title="Previous Post: ruby constructors">&laquo; ruby constructors</a>
       
-        <a class="basic-alignment right" href="/blog/2015/02/02/chocolate-ganache-recipe/" title="Next Post: Chocolate Ganache Recipe">Chocolate Ganache Recipe &raquo;</a>
       
     </p>
   </footer>
@@ -214,19 +271,19 @@ I look forward to continued use of this product and effect it has on my performa
     <ul class="posts">
     
         <li class="related">
-        <a href="/blog/2015/02/14/from-passion-to-income/">From Passion to Income: Convergence</a>
-        </li>
-    
-        <li class="related">
-        <a href="/blog/2015/02/15/the-paleo-diet-and-the-missing-link/">The Paleo Diet and the Missing Link</a>
-        </li>
-    
-        <li class="related">
         <a href="/blog/2015/03/15/ruby-contructors/">ruby constructors</a>
         </li>
     
         <li class="related">
-        <a href="/blog/2015/02/02/chocolate-ganache-recipe/">Chocolate Ganache Recipe</a>
+        <a href="/blog/2015/02/14/from-passion-to-income/">From Passion to Income: Convergence</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2015/02/03/5-low-carb-oatmeal-recipes/">5 Low Carb Oatmeal Recipes</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2015/02/28/pay-your-credit-cards-6-times-faster/">pay your credit cards 4 times faster</a>
         </li>
     
         <li class="related">
@@ -266,8 +323,8 @@ I look forward to continued use of this product and effect it has on my performa
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.verygoodindicators.com/blog/2015/02/02/o2-trainer/';
-        var disqus_url = 'http://www.verygoodindicators.com/blog/2015/02/02/o2-trainer/';
+        var disqus_identifier = 'http://www.verygoodindicators.com/blog/2015/03/20/class-class/';
+        var disqus_url = 'http://www.verygoodindicators.com/blog/2015/03/20/class-class/';
         var disqus_script = 'embed.js';
       
     (function () {
