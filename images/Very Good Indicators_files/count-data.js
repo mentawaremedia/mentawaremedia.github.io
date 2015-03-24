@@ -1,0 +1,5 @@
+var DISQUSWIDGETS;
+
+if (typeof DISQUSWIDGETS != 'undefined') {
+    DISQUSWIDGETS.displayCount({"text":{"and":"and","comments":{"zero":"0 Comments","multiple":"{num} Comments","one":"1 Comment"}},"counts":[{"id":"http:\/\/www.verygoodindicators.com\/blog\/2015\/03\/15\/ruby-contructors\/","comments":0},{"id":"http:\/\/www.verygoodindicators.com\/blog\/2015\/02\/02\/chocolate-ganache-recipe\/","comments":0},{"id":"http:\/\/www.verygoodindicators.com\/blog\/2015\/02\/14\/from-passion-to-income\/","comments":0},{"id":"http:\/\/www.verygoodindicators.com\/blog\/2015\/03\/21\/how-immortalize-a-former-coworker\/","comments":0},{"id":"http:\/\/www.verygoodindicators.com\/blog\/2015\/02\/17\/how-to-stay-poor\/","comments":0},{"id":"http:\/\/www.verygoodindicators.com\/blog\/2015\/03\/20\/class-class\/","comments":0},{"id":"http:\/\/www.verygoodindicators.com\/blog\/2015\/02\/15\/the-paleo-diet-and-the-missing-link\/","comments":0},{"id":"http:\/\/www.verygoodindicators.com\/blog\/2015\/02\/28\/pay-your-credit-cards-6-times-faster\/","comments":0},{"id":"http:\/\/www.verygoodindicators.com\/blog\/2015\/02\/03\/5-low-carb-oatmeal-recipes\/","comments":0}]});
+}
