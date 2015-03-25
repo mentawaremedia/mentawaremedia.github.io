@@ -20,7 +20,7 @@ of ignorance and superstition.
 ###Who am I?
 
 I'm a software developer with over 15 years experience. 
-I started out my career in technical support, I quickly
+I started out my career in technical support; I quickly
 moved on to writing enterprise desktop applications.
 Then in 2008 I began writing web applications using the popular 
 open source framework Ruby on Rails. 
