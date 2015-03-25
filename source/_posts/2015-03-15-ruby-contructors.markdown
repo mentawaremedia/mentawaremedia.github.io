@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "ruby contructors"
+title: "ruby constructors"
 date: 2015-03-15 13:24:08 -0500
 comments: true
 categories: [programming]
@@ -48,7 +48,7 @@ end
 foo = Foo.new("a", "b")
 ```
 
-What a second!? Why are talking about 'initialize' all of a sudden? 
+Wait a second!? Why are we talking about 'initialize' all of a sudden? 
 I thought we were talking about 'new'?
 
 ## #initialize vs .new
