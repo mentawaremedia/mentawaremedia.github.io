@@ -1,11 +1,17 @@
-<div class="sharing">
+<div class="sharing" style="">
+  {% if site.stumble_upon %}
+  <!-- Place this tag where you want the su badge to render -->
+  <div style="display: inline-block; vertical-align: top;">
+    <su:badge layout="5"></su:badge>
+  </div>
+  {% endif %}
   {% if site.twitter_tweet_button %}
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="{{ site.url }}{{ page.url }}" data-via="{{ site.twitter_user }}" data-counturl="{{ site.url }}{{ page.url }}" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="{{ site.url }}{{ page.url }}" data-via="{{ site.twitter_user }}" data-counturl="{{ site.url }}{{ page.url }}" style="display: inline-block; vertical-align: top;">Tweet</a>
   {% endif %}
   {% if site.google_plus_one %}
-  <div class="g-plusone" data-size="{{ site.google_plus_one_size }}"></div>
+  <div class="g-plusone" data-size="{{ site.google_plus_one_size }}" style="display: inline-block; vertical-align: top;"></div>
   {% endif %}
   {% if site.facebook_like %}
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" style="display: inline-block; vertical-align: top;"></div>
   {% endif %}
 </div>
