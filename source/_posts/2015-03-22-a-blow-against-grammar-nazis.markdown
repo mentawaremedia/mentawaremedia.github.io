@@ -156,7 +156,7 @@ workout without being solicited to do so.
 There's no such thing as a word that does not exist, only words that are not
 commonly used. There are cases where nonstandard forms are perfectly acceptable. Grammar
 helps us understand each other, it is not just a bunch of rules for the sake of rules.
-Interrupting someone's train of though is disruptive and can be considered rude.
+Interrupting someone's train of thought is disruptive and can be considered rude.
 
 In closing I leave you with this funny skit by the guys at College Humor. Notice the Nazi
 falls victim to his own unrelenting criticisms because even the most pedantic grammar critic
