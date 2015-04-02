@@ -4,7 +4,7 @@
   <title><![CDATA[Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-03-30T10:41:15-05:00</updated>
+  <updated>2015-04-01T19:41:40-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,135 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Binding Object Intro]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/"/>
+    <updated>2015-04-01T18:04:49-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro</id>
+    <content type="html"><![CDATA[<p>The following is a quick intro to Ruby&rsquo;s Binding object. The Binding object
+holds the execution context of that particular scope. You can evaluate
+variables against a particular binding to fetch or set the values of those
+variables. Let&rsquo;s look at some code and then walkthrough what is happening.</p>
+
+<p>What we&rsquo;re going to do in the following piece of code is capture the local
+variables within the scope of Foo#run and send them to our error reporting
+service which simply puts out the results to the console. In this example I am
+using Ruby version 2.2.1.</p>
+
+<figure class='code'><figcaption><span>Binding object example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
+</span><span class='line'>    <span class="n">fruit</span> <span class="o">=</span> <span class="s2">&quot;apple&quot;</span>
+</span><span class='line'>    <span class="n">vegi</span>  <span class="o">=</span> <span class="s2">&quot;corn&quot;</span>
+</span><span class='line'>    <span class="n">nut</span>   <span class="o">=</span> <span class="s2">&quot;peanut&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>      <span class="k">raise</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>      <span class="n">report_error</span><span class="p">(</span><span class="n">capture_variables</span><span class="p">(</span><span class="nb">binding</span><span class="p">,</span> <span class="o">[</span><span class="ss">:e</span><span class="o">]</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">protected</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#error reporting service</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">report_error</span><span class="p">(</span><span class="n">var_hash</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">var_hash</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">capture_variables</span><span class="p">(</span><span class="n">previous_binding</span><span class="p">,</span> <span class="n">skip_vars</span> <span class="o">=</span> <span class="o">[]</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1">#                    -- returns [:fruit, :vegi, :nut, :e]</span>
+</span><span class='line'>    <span class="c1">#                   / </span>
+</span><span class='line'>    <span class="n">previous_binding</span><span class="o">.</span><span class="n">local_variables</span><span class="o">.</span><span class="n">inject</span><span class="p">({})</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="p">,</span><span class="n">var</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">begin</span>
+</span><span class='line'>        <span class="c1"># Binding#local_variable_get will fetch the value of the local variable</span>
+</span><span class='line'>        <span class="c1">#   for example Binding#local_variable_get(:fruit) returns &quot;apple&quot;</span>
+</span><span class='line'>        <span class="nb">hash</span><span class="o">.</span><span class="n">merge!</span><span class="p">(</span><span class="n">var</span> <span class="o">=&gt;</span> <span class="n">previous_binding</span><span class="o">.</span><span class="n">local_variable_get</span><span class="p">(</span><span class="n">var</span><span class="p">))</span> <span class="k">unless</span> <span class="n">skip_vars</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">rescue</span> <span class="no">NameError</span>
+</span><span class='line'>        <span class="c1">#We rescue NameError due to a weird artifact that raise creates.</span>
+</span><span class='line'>        <span class="c1">#The artifact appears to be a local variable but &#39;raises&#39; an error</span>
+</span><span class='line'>        <span class="c1">#  when any attempt to evaluate it occurs.</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nb">hash</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you notice on lines 3-4, we&rsquo;ve set a few local variables. On line 8, we
+intentionally raise an error. Line 10 sends our reporting service a hash
+containing all variables in that scope with their values. The hash is
+generated by the method #capture_variables.</p>
+
+<p>Here&rsquo;s how the method works. We send it the current binding by simply sending it
+&lsquo;binding&rsquo; as seen on line 10. We also send it an array of symbols representing any local
+variables we&rsquo;re not interested in reporting which in our case is &lsquo;e&rsquo;.</p>
+
+<p>On line 22 we call Binding#local_variables which returns an array of symbols
+representing the local variables we defined. We iterate over the collection
+of symbols with #inject so as to build a hash with the keys being the
+variable names and the values the variable values.</p>
+
+<p>On line 27 we call Binding#local_variable_get to fetch the value of the local
+variable as defined in previous execution context. Now we execute Foo.new.run to
+see what we get.</p>
+
+<figure class='code'><figcaption><span>Console Output </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='irb'><span class='line'><span class="gp">&gt;&gt; </span><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span>
+</span><span class='line'><span class="gp">&gt;&gt; </span><span class="p">{</span><span class="ss">:fruit</span><span class="o">=&gt;</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="ss">:vegi</span><span class="o">=&gt;</span><span class="s2">&quot;corn&quot;</span><span class="p">,</span> <span class="ss">:nut</span><span class="o">=&gt;</span><span class="s2">&quot;peanut&quot;</span><span class="p">}</span>
+</span><span class='line'><span class="gp">&gt;&gt; </span><span class="kp">nil</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see above our reporting service is receiving the hash as expected.</p>
+
+<p>Feel free to drop some comments or questions below.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A Blow Against Grammar Nazis]]></title>

@@ -5,13 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>5 Low Carb Oatmeal Recipes - Very Good Indicators</title>
+  <title>Binding Object Intro - Very Good Indicators</title>
   <meta name="author" content="Mentaware Media">
 
   
-  <meta name="description" content="Before going low carb, I used to enjoy the occasional bowl of oatmeal.
-Depending on the type of low carb diet you practice and how strict
-the amount &hellip;">
+  <meta name="description" content="The following is a quick intro to Ruby&rsquo;s Binding object. The Binding object
+holds the execution context of that particular scope. You can &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ the amount &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.verygoodindicators.com/blog/2015/02/03/5-low-carb-oatmeal-recipes/">
+  <link rel="canonical" href="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -113,7 +112,7 @@ the amount &hellip;">
   
   <header>
     
-      <h1 class="entry-title">5 Low Carb Oatmeal Recipes</h1>
+      <h1 class="entry-title">Binding Object Intro</h1>
       <div class="sharing" style="">
   
   <!-- Place this tag where you want the su badge to render -->
@@ -122,7 +121,7 @@ the amount &hellip;">
   </div>
   
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/02/03/5-low-carb-oatmeal-recipes/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/02/03/5-low-carb-oatmeal-recipes/" style="display: inline-block; vertical-align: top;">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/" style="display: inline-block; vertical-align: top;">Tweet</a>
   
   
   <div class="g-plusone" data-size="medium" style="display: inline-block; vertical-align: top;"></div>
@@ -140,7 +139,7 @@ the amount &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-02-03T14:30:56-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>2:30 pm</span></time>
+<time class='entry-date' datetime='2015-04-01T18:04:49-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>6:04 pm</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://www.verygoodindicators.com">Comments</a>
@@ -150,47 +149,127 @@ the amount &hellip;">
   </header>
 
 
-<div class="entry-content"><p>Before going low carb, I used to enjoy the occasional bowl of oatmeal.
-Depending on the type of low carb diet you practice and how strict
-the amount of carbs are, it may not be a choice. A typical serving
-comes in at 20 plus or so net carbs. This prompted me to take a look
-around the inter webs and look some low carb alternatives.</p>
+<div class="entry-content"><p>The following is a quick intro to Ruby&rsquo;s Binding object. The Binding object
+holds the execution context of that particular scope. You can evaluate
+variables against a particular binding to fetch or set the values of those
+variables. Let&rsquo;s look at some code and then walkthrough what is happening.</p>
 
-<p><img class="center" src="/images/Grain-Free-Instant-Cinnamon-Oatmeal.jpg" width="500"></p>
+<p>What we&rsquo;re going to do in the following piece of code is capture the local
+variables within the scope of Foo#run and send them to our error reporting
+service which simply puts out the results to the console. In this example I am
+using Ruby version 2.2.1.</p>
 
-<p>This first recipe uses chai seeds, flax meal, shredded unsweetened
-coconut and cinnamon. Add some hot water, a bit of unsweetened
-coconut milk, sweetener  and you might have a <a href="http://holisticallyengineered.com/2013/05/instant-cinnamon-oatmeal-low-carb.html">winner</a>.</p>
+<figure class='code'><figcaption><span>Binding object example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
+</span><span class='line'>    <span class="n">fruit</span> <span class="o">=</span> <span class="s2">&quot;apple&quot;</span>
+</span><span class='line'>    <span class="n">vegi</span>  <span class="o">=</span> <span class="s2">&quot;corn&quot;</span>
+</span><span class='line'>    <span class="n">nut</span>   <span class="o">=</span> <span class="s2">&quot;peanut&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>      <span class="k">raise</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</span><span class='line'>      <span class="n">report_error</span><span class="p">(</span><span class="n">capture_variables</span><span class="p">(</span><span class="nb">binding</span><span class="p">,</span> <span class="o">[</span><span class="ss">:e</span><span class="o">]</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">protected</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#error reporting service</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">report_error</span><span class="p">(</span><span class="n">var_hash</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">var_hash</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">capture_variables</span><span class="p">(</span><span class="n">previous_binding</span><span class="p">,</span> <span class="n">skip_vars</span> <span class="o">=</span> <span class="o">[]</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1">#                    -- returns [:fruit, :vegi, :nut, :e]</span>
+</span><span class='line'>    <span class="c1">#                   / </span>
+</span><span class='line'>    <span class="n">previous_binding</span><span class="o">.</span><span class="n">local_variables</span><span class="o">.</span><span class="n">inject</span><span class="p">({})</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="p">,</span><span class="n">var</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">begin</span>
+</span><span class='line'>        <span class="c1"># Binding#local_variable_get will fetch the value of the local variable</span>
+</span><span class='line'>        <span class="c1">#   for example Binding#local_variable_get(:fruit) returns &quot;apple&quot;</span>
+</span><span class='line'>        <span class="nb">hash</span><span class="o">.</span><span class="n">merge!</span><span class="p">(</span><span class="n">var</span> <span class="o">=&gt;</span> <span class="n">previous_binding</span><span class="o">.</span><span class="n">local_variable_get</span><span class="p">(</span><span class="n">var</span><span class="p">))</span> <span class="k">unless</span> <span class="n">skip_vars</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">rescue</span> <span class="no">NameError</span>
+</span><span class='line'>        <span class="c1">#We rescue NameError due to a weird artifact that raise creates.</span>
+</span><span class='line'>        <span class="c1">#The artifact appears to be a local variable but &#39;raises&#39; an error</span>
+</span><span class='line'>        <span class="c1">#  when any attempt to evaluate it occurs.</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nb">hash</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p><img class="center" src="/images/low-carb-overnight-flax-meal-1-704x1024.jpg" width="400"></p>
 
-<p>This next recipe is called ‘Overnight Flaxmeal’.
-It incorporates yogurt, flaxseed meal, unsweetened almond milk,
-protein powder, sweetener and raspberries.
-It’s a simple recipe and the
-<a href="http://the-lowcarb-diet.com/low-carb-overnight-flax-meal">instructions</a>
-are pretty straight forward.</p>
+<p>If you notice on lines 3-4, we&rsquo;ve set a few local variables. On line 8, we
+intentionally raise an error. Line 10 sends our reporting service a hash
+containing all variables in that scope with their values. The hash is
+generated by the method #capture_variables.</p>
 
-<p><img class="center" src="/images/coconut_oatmeal.jpg" width="500"></p>
+<p>Here&rsquo;s how the method works. We send it the current binding by simply sending it
+&lsquo;binding&rsquo; as seen on line 10. We also send it an array of symbols representing any local
+variables we&rsquo;re not interested in reporting which in our case is &lsquo;e&rsquo;.</p>
 
-<p>Another showing some promise is ‘Coconut Breakfast Porridge’.
-<a href="http://freshfitnhealthy.com/2014/04/coconut-breakfast-porridge-low-carb-oatmeal">This recipe</a> uses unsweetened shredded coconut,  unsweetened
-vanilla almond milk, Coconut Flour.</p>
+<p>On line 22 we call Binding#local_variables which returns an array of symbols
+representing the local variables we defined. We iterate over the collection
+of symbols with #inject so as to build a hash with the keys being the
+variable names and the values the variable values.</p>
 
-<p><img class="center" src="/images/noatmeal-finished.jpg" width="500"></p>
+<p>On line 27 we call Binding#local_variable_get to fetch the value of the local
+variable as defined in previous execution context. Now we execute Foo.new.run to
+see what we get.</p>
 
-<p>This <a href="http://delishix.com/noatmeal-no-oatmeal-recipe">one</a> is a
-bit trickier since you have to grind up various nuts
-in a food processor and you’ll have to incorporate eggs into as well.
-The ingredients in this recipe are walnuts, pecans, almonds, pepitas,
-flax meal, cinnamon, almond butter, eggs, sweetener.</p>
+<figure class='code'><figcaption><span>Console Output </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='irb'><span class='line'><span class="gp">&gt;&gt; </span><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span>
+</span><span class='line'><span class="gp">&gt;&gt; </span><span class="p">{</span><span class="ss">:fruit</span><span class="o">=&gt;</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="ss">:vegi</span><span class="o">=&gt;</span><span class="s2">&quot;corn&quot;</span><span class="p">,</span> <span class="ss">:nut</span><span class="o">=&gt;</span><span class="s2">&quot;peanut&quot;</span><span class="p">}</span>
+</span><span class='line'><span class="gp">&gt;&gt; </span><span class="kp">nil</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p><img class="center" src="/images/low_carb_coconut_oatmeal.jpg" width="500"></p>
 
-<p>This final one is very simple straightforward
-<a href="http://www.foodiefiasco.com/low-carb-coconut-oatmeal">recipe</a>
-with minimal ingredient. The items needed are coconut,
-coconut milk, water and coconut flour.</p>
+<p>As you can see above our reporting service is receiving the hash as expected.</p>
+
+<p>Feel free to drop some comments or questions below.</p>
 </div>
 
 
@@ -206,12 +285,12 @@ coconut milk, water and coconut flour.</p>
 
 
 
-<time class='entry-date' datetime='2015-02-03T14:30:56-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>2:30 pm</span></time>
+<time class='entry-date' datetime='2015-04-01T18:04:49-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>6:04 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/low-carb/'>low carb</a>, <a class='category' href='/blog/categories/recipes/'>recipes</a>
+    <a class='category' href='/blog/categories/programming/'>programming</a>
   
 </span>
 
@@ -226,7 +305,7 @@ coconut milk, water and coconut flour.</p>
   </div>
   
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/02/03/5-low-carb-oatmeal-recipes/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/02/03/5-low-carb-oatmeal-recipes/" style="display: inline-block; vertical-align: top;">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/" style="display: inline-block; vertical-align: top;">Tweet</a>
   
   
   <div class="g-plusone" data-size="medium" style="display: inline-block; vertical-align: top;"></div>
@@ -239,10 +318,8 @@ coconut milk, water and coconut flour.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/02/02/chocolate-ganache-recipe/" title="Previous Post: Chocolate Ganache Recipe">&laquo; Chocolate Ganache Recipe</a>
+        <a class="basic-alignment left" href="/blog/2015/03/22/a-blow-against-grammar-nazis/" title="Previous Post: a blow against grammar nazis">&laquo; a blow against grammar nazis</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/02/14/from-passion-to-income/" title="Next Post: From Passion to Income: Convergence">From Passion to Income: Convergence &raquo;</a>
       
     </p>
   </footer>
@@ -264,15 +341,7 @@ coconut milk, water and coconut flour.</p>
     <ul class="posts">
     
         <li class="related">
-        <a href="/blog/2015/02/02/chocolate-ganache-recipe/">Chocolate Ganache Recipe</a>
-        </li>
-    
-        <li class="related">
-        <a href="/blog/2015/02/15/the-paleo-diet-and-the-missing-link/">The Paleo Diet and the Missing Link</a>
-        </li>
-    
-        <li class="related">
-        <a href="/blog/2015/02/17/how-to-stay-poor/">how to stay poor</a>
+        <a href="/blog/2015/03/15/ruby-contructors/">ruby constructors</a>
         </li>
     
         <li class="related">
@@ -280,7 +349,15 @@ coconut milk, water and coconut flour.</p>
         </li>
     
         <li class="related">
-        <a href="/blog/2015/02/02/o2-trainer/">O2 Trainer</a>
+        <a href="/blog/2015/03/22/a-blow-against-grammar-nazis/">a blow against grammar nazis</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2015/02/28/pay-your-credit-cards-6-times-faster/">pay your credit cards 4 times faster</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2015/02/14/from-passion-to-income/">From Passion to Income: Convergence</a>
         </li>
     
     </ul>
@@ -316,8 +393,8 @@ coconut milk, water and coconut flour.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.verygoodindicators.com/blog/2015/02/03/5-low-carb-oatmeal-recipes/';
-        var disqus_url = 'http://www.verygoodindicators.com/blog/2015/02/03/5-low-carb-oatmeal-recipes/';
+        var disqus_identifier = 'http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/';
+        var disqus_url = 'http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/';
         var disqus_script = 'embed.js';
       
     (function () {
