@@ -40,8 +40,8 @@ The recipes yields about 29 oz with under 1 net carb for 2 oz serving.
 7. Whisk until smooth and slightly thickened.
 8. Leave until a bit cooled and then move to a container and store in refrigerator.
 
-
-
+Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.
 
 
 

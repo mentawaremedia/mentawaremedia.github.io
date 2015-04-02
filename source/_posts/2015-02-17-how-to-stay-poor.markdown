@@ -54,5 +54,6 @@ stocks, bonds, intellectual property, real estate and such.
 By doing this he now lowers his recurring debt increasing his net income. Also he
 begins earning money passively thus boosting his current income. 
 
-I hope this might be useful to some you.
+I hope this might be useful to some you. Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.
 

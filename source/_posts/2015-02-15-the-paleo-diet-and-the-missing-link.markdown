@@ -90,3 +90,6 @@ better hormonal response and improved blood sugar levels. He cites various
 scientific studies and testimonials from his clients.
 
 For more information visit [www.leangains.com](http://www.leangains.com/).
+
+Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.

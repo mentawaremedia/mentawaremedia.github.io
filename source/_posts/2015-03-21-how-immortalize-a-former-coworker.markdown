@@ -46,7 +46,8 @@ world yet I have absolutely no proof whatsoever. He apparently is not compelled 
 Christmas presents to his family yet for some strange reason has no problem accepting
 them.
 
-
+Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.
 
 
 

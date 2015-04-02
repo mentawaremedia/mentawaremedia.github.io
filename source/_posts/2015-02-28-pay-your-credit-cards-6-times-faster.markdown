@@ -117,3 +117,5 @@ saved us 2,332.16 in interest.
 See if you can apply this principle to your finances and you'll free up considerable money
 fast.
 
+Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.

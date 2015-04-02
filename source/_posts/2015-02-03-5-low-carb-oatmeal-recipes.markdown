@@ -60,6 +60,9 @@ This final one is very simple straightforward
 with minimal ingredient. The items needed are coconut, 
 coconut milk, water and coconut flour. 
 
+Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.
+
 
 
 

@@ -162,5 +162,8 @@ In closing I leave you with this funny skit by the guys at College Humor. Notice
 falls victim to his own unrelenting criticisms because even the most pedantic grammar critic
 will at some point make his own grammatical transgression.
 
+Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.
+
 {% youtube N4vf8N6GpdM %}
 

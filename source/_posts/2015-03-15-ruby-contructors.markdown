@@ -196,3 +196,5 @@ instance variables and returns the instance. The method .new is a class method a
 constructor; #initialize is an instance method used to assign instance variables.
 You can write your own constructors for fun and profit.
 
+Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.

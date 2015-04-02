@@ -63,5 +63,5 @@ NameNotDefined = Class.new(RuntimeError)
 ```
 Now isn't this so much better? I can now relax.
 
-I hope it's been educational. Feel free drop some comments below. I love hearing some 
-feed back.
+I hope it's been educational. Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.

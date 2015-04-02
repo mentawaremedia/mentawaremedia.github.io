@@ -57,6 +57,9 @@ several classes at a couple of local 2 year colleges.
 To this day I continue expanding my skill set, looking at what's in demand and doing that. I've
 greatly expanded my income and I love what I do. You can do it too. 
 
+Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.
+
 
 
 
