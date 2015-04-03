@@ -4,7 +4,7 @@
   <title><![CDATA[Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-04-01T22:19:00-05:00</updated>
+  <updated>2015-04-03T00:00:56-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[TGIF]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/04/02/tgif/"/>
+    <updated>2015-04-02T22:27:12-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/04/02/tgif</id>
+    <content type="html"><![CDATA[<p>One of the things I&rsquo;m finding pretty fun these last few fridays is
+watching some good youtube vids. I have a pretty eclectic taste so I think
+you might find some of these interesting to you.
+What I&rsquo;d like to shoot for is sharing some of the more interesting
+videos every Friday.</p>
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YxgsxaFWWHQ" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<p>If you&rsquo;re like me and love the Lord of Rings films but don&rsquo;t have the patience to slug through
+through hundreds of pages of fiction then this video is for you. It gives you a nice
+background on the mythos of the LOTR universe.</p>
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WKU0qDpu3AM" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<p>Speaking of LOTR, have you watched the trilogy only to ask yourself, &ldquo;&hellip;So what does the One Ring
+do again?&rdquo;. Well then this video is just for you.</p>
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HeYfIv5s10A" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<p>Want a theory for the existence of the Hulk? Kyle Hill takes a stab at the question
+with some science. Oh yeah!</p>
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tUEkqZxLyrg" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<p>If you&rsquo;re a big ol&#8217; comic book geek like me then you&rsquo;re loving all the little bits of news
+trickling in about the upcoming Deadpool movie.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Binding Object Intro]]></title>
@@ -138,7 +184,8 @@ see what we get.</p>
 
 <p>As you can see above our reporting service is receiving the hash as expected.</p>
 
-<p>Feel free to drop some comments or questions below.</p>
+<p>Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.</p>
 ]]></content>
   </entry>
   
