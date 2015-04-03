@@ -88,4 +88,5 @@ see what we get.
 
 As you can see above our reporting service is receiving the hash as expected.
 
-Feel free to drop some comments or questions below.
+Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.
