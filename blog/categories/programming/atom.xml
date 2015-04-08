@@ -4,7 +4,7 @@
   <title><![CDATA[Programming | Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/blog/categories/programming/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-04-07T21:14:05-05:00</updated>
+  <updated>2015-04-08T10:47:10-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -119,7 +119,7 @@ end
 #=&gt; 9
 </code></pre>
 
-<p>Finally, here is a more fleshed out implementation. Just a not, but make sure you character escape
+<p>Finally, here is a more fleshed out implementation. Just a note, but make sure you character escape
 those single quotes by using two single quotes <code>''</code> otherwise you&rsquo;ll get a SQL error on the syntax.</p>
 
 <p>If this was useful then please share on your social media connections. I also like hearing
