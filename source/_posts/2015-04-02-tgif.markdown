@@ -1,0 +1,42 @@
+---
+layout: post
+title: "TGIF"
+date: 2015-04-02 22:27:12 -0500
+comments: true
+categories: ["TGIF"]
+---
+
+One of the things I'm finding pretty fun these last few fridays is
+watching some good youtube vids. I have a pretty eclectic taste so I think
+you might find some of these interesting to you.
+What I'd like to shoot for is sharing some of the more interesting
+videos every Friday.
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YxgsxaFWWHQ" frameborder="0" allowfullscreen></iframe>
+</div>
+
+If you're like me and love the Lord of the Rings films but don't have the patience to slug 
+through hundreds of pages of fiction then this video is for you. It gives you a nice
+background on the mythos of the LOTR universe.
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WKU0qDpu3AM" frameborder="0" allowfullscreen></iframe>
+</div>
+
+Speaking of LOTR, have you watched the trilogy only to ask yourself, "...So what does the One Ring 
+do again?". Well then this video is just for you.
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HeYfIv5s10A" frameborder="0" allowfullscreen></iframe>
+</div>
+
+Want a theory for the existence of the Hulk? Kyle Hill takes a stab at the question
+with some science. Oh yeah!
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tUEkqZxLyrg" frameborder="0" allowfullscreen></iframe>
+</div>
+
+If you're a big ol' comic book geek like me then you're loving all the little bits of news
+trickling in about the upcoming Deadpool movie.

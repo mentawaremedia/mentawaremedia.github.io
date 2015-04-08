@@ -6,6 +6,13 @@ comments: true
 categories: [programming]
 tags: [ruby, Binding object] 
 author: "Juan Leal"
+
+card_type: summary
+card_title: "A Binding Object Intro"
+card_site: "@terminalbreaker" 
+card_description: "Learn a few tricks using Ruby's Binding object."
+card_image: "http://www.verygoodindicators.com/images/binding.jpg"
+card_url: "http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/"
 ---
 
 The following is a quick intro to Ruby's Binding object. The Binding object 
