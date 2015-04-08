@@ -9,9 +9,8 @@
   <meta name="author" content="Mentaware Media">
 
   
-  <meta name="description" content="There is a very powerful principle and it can be quite
-transformative if you can learn to spot it and apply it to your daily life.
-I first became &hellip;">
+  <meta name="description" content="Some of you have noticed that PostgreSQL&rsquo;s count performs painfully slow on tables
+of any significant size. If you&rsquo;re looking for a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,6 +86,216 @@ I first became &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/07/faster-count-queries/">Faster Count Queries</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-07T16:11:47-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:11 pm</span></time>
+        
+           | <a href="/blog/2015/04/07/faster-count-queries/#disqus_thread"
+             data-disqus-identifier="http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="right" src="/images/cheetah_still.jpg" width="150"></p>
+
+<p>Some of you have noticed that PostgreSQL&rsquo;s count performs painfully slow on tables
+of any significant size. If you&rsquo;re looking for a quick solution and you don&rsquo;t
+care about super exact numbers on the count then I&rsquo;ll show you what I did.</p>
+
+<p>The reason counts are so slow in postgres has to do with the way Multi-Version
+Concurrency Control(MVCC) has been implemented in the
+<a href="http://wiki.postgresql.org/wiki/Slow_Counting">product</a>. Since multiple transactions
+can see different states of the data then there can be no straightforward way for &ldquo;COUNT(*)&rdquo;
+to summarize data across the whole table. As a result postgres must walk through all rows
+in a sense.</p>
+
+<p>I found an interesting article on how to accomplish a much faster, although less accurate
+count by tapping into the EXPLAIN output through a custom <a href="https://wiki.postgresql.org/wiki/Count_estimate">function</a>.
+I&rsquo;ll walk you through the steps I took.</p>
+
+<figure class='code'><figcaption><span>count_estimate function</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">CREATE</span> <span class="k">FUNCTION</span> <span class="n">count_estimate</span><span class="p">(</span><span class="n">query</span> <span class="nb">text</span><span class="p">)</span> <span class="k">RETURNS</span> <span class="nb">integer</span> <span class="k">AS</span>
+</span><span class='line'><span class="err">$</span><span class="n">func</span><span class="err">$</span>
+</span><span class='line'><span class="k">DECLARE</span>
+</span><span class='line'>    <span class="n">rec</span>   <span class="n">record</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">rows</span>  <span class="nb">integer</span><span class="p">;</span>
+</span><span class='line'><span class="k">BEGIN</span>
+</span><span class='line'>    <span class="k">FOR</span> <span class="n">rec</span> <span class="k">IN</span> <span class="k">EXECUTE</span> <span class="s1">&#39;EXPLAIN &#39;</span> <span class="o">||</span> <span class="n">query</span> <span class="n">LOOP</span>
+</span><span class='line'>        <span class="k">rows</span> <span class="p">:</span><span class="o">=</span> <span class="k">substring</span><span class="p">(</span><span class="n">rec</span><span class="p">.</span><span class="ss">&quot;QUERY PLAN&quot;</span> <span class="k">FROM</span> <span class="s1">&#39; rows=([[:digit:]]+)&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="n">EXIT</span> <span class="k">WHEN</span> <span class="k">rows</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">RETURN</span> <span class="k">rows</span><span class="p">;</span>
+</span><span class='line'><span class="k">END</span>
+</span><span class='line'><span class="err">$</span><span class="n">func</span><span class="err">$</span> <span class="k">LANGUAGE</span> <span class="n">plpgsql</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above is the create query for out SQL function that we&rsquo;ll need to create on the server.
+First we&rsquo;ll create a migration to hold our function creation statement.</p>
+
+<figure class='code'><figcaption><span>migration</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#run this at the console first</span>
+</span><span class='line'><span class="c1">#  bundle exec rails g migration AddCountEstimateFunction</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">AddCountEstimateFunction</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">up</span>
+</span><span class='line'>    <span class="n">execute</span> <span class="o">&lt;&lt;-</span><span class="no">SQL</span>
+</span><span class='line'><span class="sh">      CREATE FUNCTION count_estimate(query text) RETURNS integer AS</span>
+</span><span class='line'><span class="sh">      $func$</span>
+</span><span class='line'><span class="sh">      DECLARE</span>
+</span><span class='line'><span class="sh">          rec   record;</span>
+</span><span class='line'><span class="sh">          rows  integer;</span>
+</span><span class='line'><span class="sh">      BEGIN</span>
+</span><span class='line'><span class="sh">          FOR rec IN EXECUTE &#39;EXPLAIN &#39; || query LOOP</span>
+</span><span class='line'><span class="sh">              rows := substring(rec.&quot;QUERY PLAN&quot; FROM &#39; rows=([[:digit:]]+)&#39;);</span>
+</span><span class='line'><span class="sh">              EXIT WHEN rows IS NOT NULL;</span>
+</span><span class='line'><span class="sh">          END LOOP;</span>
+</span><span class='line'><span class="sh">       </span>
+</span><span class='line'><span class="sh">          RETURN rows;</span>
+</span><span class='line'><span class="sh">      END</span>
+</span><span class='line'><span class="sh">      $func$ LANGUAGE plpgsql;</span>
+</span><span class='line'><span class="no">    SQL</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">down</span>
+</span><span class='line'>    <span class="n">execute</span> <span class="s2">&quot;DROP FUNCTION count_estimate(query text);&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After we run <code>bundle exec rake db:migrate</code> the function will be available for use.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT count_estimate(&#39;</span><span class="si">#{</span><span class="n">sql_query</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#Example:</span>
+</span><span class='line'><span class="c1">#  sql_query = &quot;SELECT * FROM businesses WHERE size &gt; 3&quot;</span>
+</span><span class='line'><span class="c1">#  ActiveRecord::Base.connection.execute(&quot;SELECT count_estimate(&#39;#{sql_query}&#39;)&quot;).to_a</span>
+</span><span class='line'><span class="c1">#</span>
+</span><span class='line'><span class="c1">#returns</span>
+</span><span class='line'><span class="c1">#  [{&quot;count_estimate&quot; =&gt; &quot;500&quot;}]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The snippet above shows how you would now use this SQL function</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Business</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">comment_count</span>
+</span><span class='line'>    <span class="c1">#This will return an estimate but not exactly the real number</span>
+</span><span class='line'>    <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT count_estimate(&#39;</span><span class="si">#{</span><span class="n">comments_sql_string</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="o">[</span><span class="s2">&quot;count_estimate&quot;</span><span class="o">].</span><span class="n">to_i</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">comments_sql_string</span>
+</span><span class='line'>    <span class="o">&lt;&lt;-</span><span class="no">SQL</span>
+</span><span class='line'><span class="sh">      SELECT * FROM comments </span>
+</span><span class='line'><span class="sh">      WHERE comments.business_id = #{self.id} </span>
+</span><span class='line'><span class="sh">        AND comments.status = &#39;&#39;new&#39;&#39;</span>
+</span><span class='line'><span class="no">    SQL</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#Business.last.comment_count</span>
+</span><span class='line'><span class="c1">#</span>
+</span><span class='line'><span class="c1">#=&gt; 9</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, here is a more fleshed out implementation. Just a not, but make sure you character escape
+those single quotes by using two single quotes <code>''</code> otherwise you&rsquo;ll get a SQL error on the syntax.</p>
+
+<p>If this was useful then please share on your social media connections. I also like hearing
+any suggestions and comments so feel free to drop some below.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1522,133 +1731,6 @@ please share on twitter, facebook or your prefered social media channel.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/02/15/the-paleo-diet-and-the-missing-link/">The Paleo Diet and the Missing Link</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-02-15T15:40:36-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:40 pm</span></time>
-        
-           | <a href="/blog/2015/02/15/the-paleo-diet-and-the-missing-link/#disqus_thread"
-             data-disqus-identifier="http://www.verygoodindicators.com/blog/2015/02/15/the-paleo-diet-and-the-missing-link/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>Once you have to start counting calories, <br/>it takes away from the joy of eating.</p><footer><strong>Mireille Guiliano</strong></footer></blockquote>
-
-
-<p>The Paleo Diet is an effort to eat as our prehistoric ancestors did prior to the
-advent of farming. Food such as meats, fish, nuts, leafy greens, veggies, and seeds
-are foods typically found on the diet.</p>
-
-<p>One of the things I believe is missing from the diet is the eating pattern our
-ancestors practiced. You see there were typically periods of feast and famine.
-After a successful hunt the group would feast. Then one might expect a certain amount
-of time would pass before another successful hunt would take place and thus a
-time of fasting would occur.</p>
-
-<p>The dietary practice of intermittent fasting attempts to implement in some form this type of
-eating pattern. Generally the diet limits eating to an 8 hour window with a 16 hour
-fast in between.</p>
-
-<p><img class="center" src="/images/leangains.jpg" width="473" height="358"></p>
-
-<p style="text-align:center;">
-   Martin Berkhan
-</p>
-
-
-<h2>Dietary Myths</h2>
-
-<p>Martin Berkhan, a nutritional consultant, magazine writer and personal trainer. Is
-a strong proponent of this diet and has achieved remarkable results practicing it.
-On Martin Berkhan&rsquo;s web site <a href="http://www.leangains.com/">Lean Gains</a>, he goes about
-shattering various diet myths.</p>
-
-<p>Some of my favorites are:</p>
-
-<h3>Myth: Eating frequent small meals helps you loose weight</h3>
-
-<p>An extenisve review of various meal frequencies and its effect on metabolism
-showed no effect between eating several small meals or a couple of large ones.</p>
-
-<p>To quote the review, <a href="http://www.ncbi.nlm.nih.gov/pubmed/9155494">&ldquo;More importantly, studies using
-whole-body calorimetry and doubly-labelled water to assess total 24 h
-energy expenditure find <strong>no difference between nibbling and gorging.</strong>&rdquo;</a></p>
-
-<h3>Myth: Eat smaller meals more often for hunger control.</h3>
-
-<p>Current research suggests the opposite. Eating more often leads to increased
-hunger.</p>
-
-<p><a href="http://www.ncbi.nlm.nih.gov/pubmed/20339363">&ldquo;Collectively, these data suggest that higher protein
-intake promotes satiety and challenge the concept that
-increasing the number of eating occasions enhances satiety
-in overweight and obese men&rdquo;</a></p>
-
-<h2>Examples</h2>
-
-<p>The following are some examples of the form this pattern of feeding and exercise would
-look like:</p>
-
-<h4>Pattern 1</h4>
-
-<ul>
-<li>Fasting - Fast from 8 p.m. the night before till 10 -11 a.m. or so and take 10g BCAAs.</li>
-<li>Train - Hot the gym and get your workout in.</li>
-<li>Meal One – 1 p.m.</li>
-<li>Meal Two – 4 p.m.</li>
-<li>Meal Three – 7 p.m.</li>
-</ul>
-
-
-<h4>Pattern 2</h4>
-
-<ul>
-<li>Pre-Workout Meal - 12 Noon.</li>
-<li>Train</li>
-<li>Meal Two – 4 p.m.</li>
-<li>Meal Three – 7/8 p.m.</li>
-</ul>
-
-
-<h4>Pattern 3</h4>
-
-<ul>
-<li>Meal One – Noon.</li>
-<li>Meal Two – 3 p.m.</li>
-<li>Train</li>
-<li>Meal Three – 7/8 p.m.</li>
-</ul>
-
-
-<p>Martin Berkhan claims many benefits to this type of dieting such as weight loss,
-better hormonal response and improved blood sugar levels. He cites various
-scientific studies and testimonials from his clients.</p>
-
-<p>For more information visit <a href="http://www.leangains.com/">www.leangains.com</a>.</p>
-
-<p>Feel free to drop some comments or questions below. And if you liked it then
-please share on twitter, facebook or your prefered social media channel.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1663,14 +1745,14 @@ please share on twitter, facebook or your prefered social media channel.</p>
 
 <section>
   <h1>Topics</h1>
-    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (2)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/funny'>funny (2)</a></li><li><a href='/blog/categories/linguistics'>linguistics (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (2)</a></li><li><a href='/blog/categories/performance'>performance (2)</a></li><li><a href='/blog/categories/programming'>programming (3)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li><li><a href='/blog/categories/tgif'>tgif (1)</a></li></ul>
+    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (2)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/funny'>funny (2)</a></li><li><a href='/blog/categories/linguistics'>linguistics (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (2)</a></li><li><a href='/blog/categories/performance'>performance (2)</a></li><li><a href='/blog/categories/programming'>programming (4)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li><li><a href='/blog/categories/tgif'>tgif (1)</a></li></ul>
 </section>
 
 
 
 <section style="clear: both">
   <h1>Keywords</h1>
-    <span id="tag-cloud"><a href='/blog/tags/-100-startup' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>$100 startup</a> <a href='/blog/tags/80-20' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>80/20</a> <a href='/blog/tags/athletic-performance' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>athletic performance</a> <a href='/blog/tags/bake-free' style='font-size: 140.0%; padding: 0.3333333333333333em 0.3333333333333333em 0.3333333333333333em 0.3333333333333333em'>bake free</a> <a href='/blog/tags/binding-object' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>Binding object</a> <a href='/blog/tags/books' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>books</a> <a href='/blog/tags/breakfast' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>breakfast</a> <a href='/blog/tags/chocolate' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>chocolate</a> <a href='/blog/tags/class-class' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>class Class</a> <a href='/blog/tags/constructors' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>constructors</a> <a href='/blog/tags/credit-card' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>credit card</a> <a href='/blog/tags/debt' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>debt</a> <a href='/blog/tags/dessert' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>dessert</a> <a href='/blog/tags/diaphragm' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>diaphragm</a> <a href='/blog/tags/entrepreneurship' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>entrepreneurship</a> <a href='/blog/tags/grammar' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>grammar</a> <a href='/blog/tags/grammar-nazi' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>grammar nazi</a> <a href='/blog/tags/income' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>income</a> <a href='/blog/tags/lungs' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>lungs</a> <a href='/blog/tags/o2' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>o2</a> <a href='/blog/tags/o2-trainer' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>o2 trainer</a> <a href='/blog/tags/oatmeal' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>oatmeal</a> <a href='/blog/tags/pareto-principle' style='font-size: 120.0%; padding: 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em 0.16666666666666666em'>pareto principle</a> <a href='/blog/tags/ruby' style='font-size: 160.0%; padding: 0.5em 0.5em 0.5em 0.5em'>ruby</a> </span>
+    <span id="tag-cloud"><a href='/blog/tags/-100-startup' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>$100 startup</a> <a href='/blog/tags/80-20' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>80/20</a> <a href='/blog/tags/athletic-performance' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>athletic performance</a> <a href='/blog/tags/bake-free' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>bake free</a> <a href='/blog/tags/binding-object' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>Binding object</a> <a href='/blog/tags/books' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>books</a> <a href='/blog/tags/breakfast' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>breakfast</a> <a href='/blog/tags/chocolate' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>chocolate</a> <a href='/blog/tags/class-class' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>class Class</a> <a href='/blog/tags/constructors' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>constructors</a> <a href='/blog/tags/credit-card' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>credit card</a> <a href='/blog/tags/debt' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>debt</a> <a href='/blog/tags/dessert' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>dessert</a> <a href='/blog/tags/diaphragm' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>diaphragm</a> <a href='/blog/tags/entrepreneurship' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>entrepreneurship</a> <a href='/blog/tags/grammar' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>grammar</a> <a href='/blog/tags/grammar-nazi' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>grammar nazi</a> <a href='/blog/tags/income' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>income</a> <a href='/blog/tags/lungs' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>lungs</a> <a href='/blog/tags/o2' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>o2</a> <a href='/blog/tags/o2-trainer' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>o2 trainer</a> <a href='/blog/tags/oatmeal' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>oatmeal</a> <a href='/blog/tags/pareto-principle' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>pareto principle</a> <a href='/blog/tags/postgres' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>postgres</a> <a href='/blog/tags/rails' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>rails</a> <a href='/blog/tags/ror' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>ror</a> <a href='/blog/tags/ruby' style='font-size: 160.0%; padding: 0.5em 0.5em 0.5em 0.5em'>ruby</a> </span>
 </section>
   
 </aside>

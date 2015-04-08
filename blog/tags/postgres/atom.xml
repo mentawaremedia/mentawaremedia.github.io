@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Postgres | Very Good Indicators]]></title>
+  <link href="http://www.verygoodindicators.com/blog/tags/postgres/atom.xml" rel="self"/>
+  <link href="http://www.verygoodindicators.com/"/>
+  <updated>2015-04-07T21:14:05-05:00</updated>
+  <id>http://www.verygoodindicators.com/</id>
+  <author>
+    <name><![CDATA[Mentaware Media]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Faster Count Queries]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/"/>
+    <updated>2015-04-07T16:11:47-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/cheetah_still.jpg" width="150"></p>
+
+<p>Some of you have noticed that PostgreSQL&rsquo;s count performs painfully slow on tables
+of any significant size. If you&rsquo;re looking for a quick solution and you don&rsquo;t
+care about super exact numbers on the count then I&rsquo;ll show you what I did.</p>
+
+<p>The reason counts are so slow in postgres has to do with the way Multi-Version
+Concurrency Control(MVCC) has been implemented in the
+<a href="http://wiki.postgresql.org/wiki/Slow_Counting">product</a>. Since multiple transactions
+can see different states of the data then there can be no straightforward way for &ldquo;COUNT(*)&rdquo;
+to summarize data across the whole table. As a result postgres must walk through all rows
+in a sense.</p>
+
+<p>I found an interesting article on how to accomplish a much faster, although less accurate
+count by tapping into the EXPLAIN output through a custom <a href="https://wiki.postgresql.org/wiki/Count_estimate">function</a>.
+I&rsquo;ll walk you through the steps I took.</p>
+
+<pre><code class="sql count_estimate function">CREATE FUNCTION count_estimate(query text) RETURNS integer AS
+$func$
+DECLARE
+    rec   record;
+    rows  integer;
+BEGIN
+    FOR rec IN EXECUTE 'EXPLAIN ' || query LOOP
+        rows := substring(rec."QUERY PLAN" FROM ' rows=([[:digit:]]+)');
+        EXIT WHEN rows IS NOT NULL;
+    END LOOP;
+
+    RETURN rows;
+END
+$func$ LANGUAGE plpgsql;
+</code></pre>
+
+<p>Above is the create query for out SQL function that we&rsquo;ll need to create on the server.
+First we&rsquo;ll create a migration to hold our function creation statement.</p>
+
+<pre><code class="ruby migration">#run this at the console first
+#  bundle exec rails g migration AddCountEstimateFunction
+
+
+class AddCountEstimateFunction &lt; ActiveRecord::Migration
+  def up
+    execute &lt;&lt;-SQL
+      CREATE FUNCTION count_estimate(query text) RETURNS integer AS
+      $func$
+      DECLARE
+          rec   record;
+          rows  integer;
+      BEGIN
+          FOR rec IN EXECUTE 'EXPLAIN ' || query LOOP
+              rows := substring(rec."QUERY PLAN" FROM ' rows=([[:digit:]]+)');
+              EXIT WHEN rows IS NOT NULL;
+          END LOOP;
+
+          RETURN rows;
+      END
+      $func$ LANGUAGE plpgsql;
+    SQL
+  end
+
+  def down
+    execute "DROP FUNCTION count_estimate(query text);"
+  end
+end
+</code></pre>
+
+<p>After we run <code>bundle exec rake db:migrate</code> the function will be available for use.</p>
+
+<pre><code class="ruby">ActiveRecord::Base.connection.execute("SELECT count_estimate('#{sql_query}')")
+
+#Example:
+#  sql_query = "SELECT * FROM businesses WHERE size &gt; 3"
+#  ActiveRecord::Base.connection.execute("SELECT count_estimate('#{sql_query}')").to_a
+#
+#returns
+#  [{"count_estimate" =&gt; "500"}]
+</code></pre>
+
+<p>The snippet above shows how you would now use this SQL function</p>
+
+<pre><code class="ruby">class Business &lt; ActiveRecord::Base
+
+  def comment_count
+    #This will return an estimate but not exactly the real number
+    ActiveRecord::Base.connection.execute("SELECT count_estimate('#{comments_sql_string}')").first["count_estimate"].to_i
+  end  
+
+  def comments_sql_string
+    &lt;&lt;-SQL
+      SELECT * FROM comments 
+      WHERE comments.business_id = #{self.id} 
+        AND comments.status = ''new''
+    SQL
+  end
+end
+
+#Business.last.comment_count
+#
+#=&gt; 9
+</code></pre>
+
+<p>Finally, here is a more fleshed out implementation. Just a not, but make sure you character escape
+those single quotes by using two single quotes <code>''</code> otherwise you&rsquo;ll get a SQL error on the syntax.</p>
+
+<p>If this was useful then please share on your social media connections. I also like hearing
+any suggestions and comments so feel free to drop some below.</p>
+]]></content>
+  </entry>
+  
+</feed>
