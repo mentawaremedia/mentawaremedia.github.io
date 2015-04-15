@@ -9,8 +9,14 @@
   <meta name="author" content="Mentaware Media">
 
   
-  <meta name="description" content="...compound interest is the second greatest invention of mankindJohn Maynard Keynes We&rsquo;re going to look at three different
-ways of paying off &hellip;">
+  <meta name="description" content="Visual Basic .NET1
+2
+3
+4
+5
+6
+&#39;Visual Basic .NET
+Dim sf As BaseballTeam = New BaseballTeam(&quot;San Francisco Giants&quot;) &#39;Dim - Allocates &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +92,350 @@ ways of paying off &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/15/ruby-contructors/">Ruby Constructors</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-15T13:24:08-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>1:24 pm</span></time>
+        
+           | <a href="/blog/2015/03/15/ruby-contructors/#disqus_thread"
+             data-disqus-identifier="http://www.verygoodindicators.com/blog/2015/03/15/ruby-contructors/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><figcaption><span>Visual Basic .NET</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='vb.net'><span class='line'><span class="c">&#39;Visual Basic .NET</span>
+</span><span class='line'><span class="k">Dim</span> <span class="n">sf</span> <span class="ow">As</span> <span class="n">BaseballTeam</span> <span class="o">=</span> <span class="k">New</span> <span class="n">BaseballTeam</span><span class="p">(</span><span class="s">&quot;San Francisco Giants&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&#39;Dim - Allocates space for one or more variables</span>
+</span><span class='line'><span class="c">&#39;As  - Identifies a data type in a declaration</span>
+</span><span class='line'><span class="c">&#39;New - Creates a new object instace</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Ruby</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Ruby</span>
+</span><span class='line'><span class="n">sf</span> <span class="o">=</span> <span class="no">BaseballTeam</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;San Francisco Giants&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#Ruby is not strictly typed so there&#39;s no need to identify the data type.</span>
+</span><span class='line'><span class="c1">#Object.new is a class method which allocates space and create an instance of the class.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Many languages use a &lsquo;new&rsquo; keyword which Ruby does not have to create an object instance.
+Ruby instead provides a method &lsquo;new&rsquo; which is called directly on a class.</p>
+
+<h2>Ruby Constructor Responsibilities</h2>
+
+<p>The Ruby Constructor has three jobs.</p>
+
+<ul>
+<li>It allocates space for the object</li>
+<li>It assigns instances variables their initial values</li>
+<li>It returns the instance of that class</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>Ruby Constructor Responsibilities</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">biz</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@bar</span> <span class="o">=</span> <span class="n">bar</span>
+</span><span class='line'>    <span class="vi">@biz</span> <span class="o">=</span> <span class="n">biz</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">foo</span> <span class="o">=</span> <span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Wait a second!? Why are we talking about &lsquo;initialize&rsquo; all of a sudden?
+I thought we were talking about &lsquo;new&rsquo;?</p>
+
+<h2>#initialize vs .new</h2>
+
+<figure class='code'><figcaption><span>#initialize vs .new</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'><span class="c1">#         /-- defined as an instance method</span>
+</span><span class='line'><span class="c1">#        /</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">biz</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@bar</span> <span class="o">=</span> <span class="n">bar</span>
+</span><span class='line'>    <span class="vi">@biz</span> <span class="o">=</span> <span class="n">biz</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#           /-- called on the class thus it&#39;s a class method</span>
+</span><span class='line'><span class="c1">#          /</span>
+</span><span class='line'><span class="n">foo</span> <span class="o">=</span> <span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>#initialize is an instance method</li>
+<li>.new is a class method</li>
+</ul>
+
+
+<p>To clarify, .new is the ruby constructor not the instance method #initialize. Remember,
+the constructor performs three actions.</p>
+
+<ul>
+<li>It allocates space for a new instance of the class</li>
+<li>It assigns instances variables their initial values</li>
+<li>It returns the instance of that class</li>
+</ul>
+
+
+<p>The class method .new performs these actions, not #initialize which is used for
+assigning instances variables their initial values.</p>
+
+<p>We can implement our own version of the .new method to illustrate how it might
+accomplish this.</p>
+
+<figure class='code'><figcaption><span>Ruby</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">new_object</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#                  /-- allocates a new instance of the class.</span>
+</span><span class='line'><span class="c1">#                 /    It does not call initialize</span>
+</span><span class='line'>    <span class="n">instance</span> <span class="o">=</span> <span class="n">allocate</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#         /-- pass the arguments over to #initialize in order to </span>
+</span><span class='line'><span class="c1">#        /    to set instance variables</span>
+</span><span class='line'>    <span class="n">instance</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="ss">:initialize</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#       /-- return the instance of this class    </span>
+</span><span class='line'>    <span class="n">instance</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">biz</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@bar</span> <span class="o">=</span> <span class="n">bar</span>
+</span><span class='line'>    <span class="vi">@biz</span> <span class="o">=</span> <span class="n">biz</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Console Output </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='irb'><span class='line'><span class="go">#                                   /- as you can see the standard .new method and</span>
+</span><span class='line'><span class="go">#                                  /   our implementation both return instances of the</span>
+</span><span class='line'><span class="go">#                                 /    class and set the instance variables</span>
+</span><span class='line'><span class="gp">&gt;&gt; </span><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>        <span class="c1">#=&gt; #&lt;Foo:0x007fac3e15d0a0 @bar=1, @biz=2&gt;</span>
+</span><span class='line'><span class="gp">&gt;&gt; </span><span class="no">Foo</span><span class="o">.</span><span class="n">new_object</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#=&gt; #&lt;Foo:0x007fac3e206420 @bar=1, @biz=2&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see above, our own custom constructor is functionally equivalent
+to the default constructor. Both constructors return an instance of class Foo
+with their instance variables set. This knowledge can help us do some pretty neat things.</p>
+
+<h2>Constructor overloading&hellip;sort of</h2>
+
+<figure class='code'><figcaption><span>Constructor overloading in Visual Basic .NET</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='vb.net'><span class='line'><span class="k">Public</span> <span class="k">Class</span> <span class="nc">Vehicle</span>
+</span><span class='line'>    <span class="k">Private</span> <span class="n">m_Wheels</span> <span class="ow">As</span> <span class="kt">Integer</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&#39;        /- default constructor</span>
+</span><span class='line'>    <span class="k">Sub</span> <span class="nf">New</span><span class="p">()</span>
+</span><span class='line'>        <span class="n">m_Wheels</span> <span class="o">=</span> <span class="mi">4</span>
+</span><span class='line'>    <span class="k">End</span> <span class="k">Sub</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&#39;        /- overloaded constructor</span>
+</span><span class='line'>    <span class="k">Sub</span> <span class="nf">New</span><span class="p">(</span><span class="k">ByVal</span> <span class="n">NumberOfWheels</span> <span class="ow">As</span> <span class="kt">Integer</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">m_Wheels</span> <span class="o">=</span> <span class="n">NumberOfWheels</span>
+</span><span class='line'>    <span class="k">End</span> <span class="k">Sub</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">Public</span> <span class="k">Property</span> <span class="nf">NumberOfWheels</span><span class="p">()</span>
+</span><span class='line'>        <span class="k">Get</span>
+</span><span class='line'>            <span class="k">Return</span> <span class="n">m_Wheels</span>
+</span><span class='line'>        <span class="k">End</span> <span class="k">Get</span>
+</span><span class='line'>        <span class="k">Set</span><span class="p">(</span><span class="k">ByVal</span> <span class="n">Value</span><span class="p">)</span>
+</span><span class='line'>            <span class="n">m_Wheels</span> <span class="o">=</span> <span class="n">Value</span>
+</span><span class='line'>        <span class="k">End</span> <span class="k">Set</span>
+</span><span class='line'>    <span class="k">End</span> <span class="k">Property</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">End</span> <span class="k">Class</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>One of the things I used to miss when I started working in Ruby was the ability to
+overload constructors. Strictly speaking, overloading uses the same constructor
+method name but uses a different signature or parameter list which you can&rsquo;t do in
+Ruby.</p>
+
+<figure class='code'><figcaption><span>Overloading constructors in Ruby</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Circle</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:radius</span><span class="p">,</span> <span class="ss">:area</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#=&gt; Custom Constructors</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">new_by_radius</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">circle</span> <span class="o">=</span> <span class="n">allocate</span>
+</span><span class='line'>    <span class="n">circle</span><span class="o">.</span><span class="n">init_radius</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">circle</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">new_by_area</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">circle</span> <span class="o">=</span> <span class="n">allocate</span>
+</span><span class='line'>    <span class="n">circle</span><span class="o">.</span><span class="n">init_area</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">circle</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#=&gt; Custom Initializers</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">init_radius</span><span class="p">(</span><span class="n">_radius</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@radius</span> <span class="o">=</span> <span class="n">_radius</span> <span class="o">*</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+</span><span class='line'>    <span class="vi">@area</span> <span class="o">=</span> <span class="mi">3</span><span class="o">.</span><span class="mi">14</span> <span class="o">*</span> <span class="p">(</span><span class="vi">@radius</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">init_area</span><span class="p">(</span><span class="n">_area</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@area</span> <span class="o">=</span> <span class="n">_area</span> <span class="o">*</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span>
+</span><span class='line'>    <span class="vi">@radius</span> <span class="o">=</span> <span class="no">Math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="vi">@area</span> <span class="o">/</span> <span class="mi">3</span><span class="o">.</span><span class="mi">14</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Console Output </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='irb'><span class='line'><span class="gp">&gt;&gt; </span><span class="no">Circle</span><span class="o">.</span><span class="n">new_by_radius</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#=&gt; #&lt;Circle:0x007fe77523d598 @radius=10.0, @area=314.0&gt;</span>
+</span><span class='line'><span class="gp">&gt;&gt; </span><span class="no">Circle</span><span class="o">.</span><span class="n">new_by_area</span><span class="p">(</span><span class="mi">314</span><span class="p">)</span>  <span class="c1">#=&gt; #&lt;Circle:0x007fe7752e6f08 @radius=10.0, @area=314.0&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can accomplish a similar goal by creating our own custom constructors.
+Then we can see our custom constructors in action above.</p>
+
+<h2>Summary</h2>
+
+<p>The ruby constructor performs 3 jobs; allocates space, assigns
+instance variables and returns the instance. The method .new is a class method and
+constructor; #initialize is an instance method used to assign instance variables.
+You can write your own constructors for fun and profit.</p>
+
+<p>Feel free to drop some comments or questions below. And if you liked it then
+please share on twitter, facebook or your prefered social media channel.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -926,14 +1276,14 @@ I look forward to continued use of this product and effect it has on my performa
 
 <section>
   <h1>Topics</h1>
-    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (3)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/funny'>funny (2)</a></li><li><a href='/blog/categories/linguistics'>linguistics (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (3)</a></li><li><a href='/blog/categories/performance'>performance (3)</a></li><li><a href='/blog/categories/programming'>programming (4)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li><li><a href='/blog/categories/tgif'>tgif (2)</a></li></ul>
+    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (3)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/funny'>funny (2)</a></li><li><a href='/blog/categories/linguistics'>linguistics (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (3)</a></li><li><a href='/blog/categories/performance'>performance (3)</a></li><li><a href='/blog/categories/programming'>programming (5)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li><li><a href='/blog/categories/tgif'>tgif (2)</a></li></ul>
 </section>
 
 
 
 <section style="clear: both">
   <h1>Keywords</h1>
-    <span id="tag-cloud"><a href='/blog/tags/-100-startup' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>$100 startup</a> <a href='/blog/tags/80-20' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>80/20</a> <a href='/blog/tags/athletic-performance' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>athletic performance</a> <a href='/blog/tags/bake-free' style='font-size: 130.0%; padding: 0.25em 0.25em 0.25em 0.25em'>bake free</a> <a href='/blog/tags/binding-object' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>Binding object</a> <a href='/blog/tags/books' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>books</a> <a href='/blog/tags/breakfast' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>breakfast</a> <a href='/blog/tags/chocolate' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>chocolate</a> <a href='/blog/tags/class-class' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>class Class</a> <a href='/blog/tags/constructors' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>constructors</a> <a href='/blog/tags/credit-card' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>credit card</a> <a href='/blog/tags/debt' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>debt</a> <a href='/blog/tags/dessert' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>dessert</a> <a href='/blog/tags/diaphragm' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>diaphragm</a> <a href='/blog/tags/entrepreneurship' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>entrepreneurship</a> <a href='/blog/tags/grammar' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>grammar</a> <a href='/blog/tags/grammar-nazi' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>grammar nazi</a> <a href='/blog/tags/income' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>income</a> <a href='/blog/tags/lungs' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>lungs</a> <a href='/blog/tags/o2' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>o2</a> <a href='/blog/tags/o2-trainer' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>o2 trainer</a> <a href='/blog/tags/oatmeal' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>oatmeal</a> <a href='/blog/tags/pareto-principle' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>pareto principle</a> <a href='/blog/tags/postgres' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>postgres</a> <a href='/blog/tags/rails' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>rails</a> <a href='/blog/tags/ror' style='font-size: 115.0%; padding: 0.125em 0.125em 0.125em 0.125em'>ror</a> <a href='/blog/tags/ruby' style='font-size: 160.0%; padding: 0.5em 0.5em 0.5em 0.5em'>ruby</a> </span>
+    <span id="tag-cloud"><a href='/blog/tags/-100-startup' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>$100 startup</a> <a href='/blog/tags/80-20' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>80/20</a> <a href='/blog/tags/athletic-performance' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>athletic performance</a> <a href='/blog/tags/bake-free' style='font-size: 124.0%; padding: 0.2em 0.2em 0.2em 0.2em'>bake free</a> <a href='/blog/tags/binding-object' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>Binding object</a> <a href='/blog/tags/books' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>books</a> <a href='/blog/tags/breakfast' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>breakfast</a> <a href='/blog/tags/chocolate' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>chocolate</a> <a href='/blog/tags/class-class' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>class Class</a> <a href='/blog/tags/constructors' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>constructors</a> <a href='/blog/tags/credit-card' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>credit card</a> <a href='/blog/tags/debt' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>debt</a> <a href='/blog/tags/dessert' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>dessert</a> <a href='/blog/tags/diaphragm' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>diaphragm</a> <a href='/blog/tags/entrepreneurship' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>entrepreneurship</a> <a href='/blog/tags/grammar' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>grammar</a> <a href='/blog/tags/grammar-nazi' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>grammar nazi</a> <a href='/blog/tags/income' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>income</a> <a href='/blog/tags/lungs' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>lungs</a> <a href='/blog/tags/o2' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>o2</a> <a href='/blog/tags/o2-trainer' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>o2 trainer</a> <a href='/blog/tags/oatmeal' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>oatmeal</a> <a href='/blog/tags/pareto-principle' style='font-size: 112.0%; padding: 0.1em 0.1em 0.1em 0.1em'>pareto principle</a> <a href='/blog/tags/postgres' style='font-size: 124.0%; padding: 0.2em 0.2em 0.2em 0.2em'>postgres</a> <a href='/blog/tags/rails' style='font-size: 124.0%; padding: 0.2em 0.2em 0.2em 0.2em'>rails</a> <a href='/blog/tags/ror' style='font-size: 124.0%; padding: 0.2em 0.2em 0.2em 0.2em'>ror</a> <a href='/blog/tags/ruby' style='font-size: 160.0%; padding: 0.5em 0.5em 0.5em 0.5em'>ruby</a> </span>
 </section>
   
 </aside>

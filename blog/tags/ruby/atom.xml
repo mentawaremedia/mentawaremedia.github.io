@@ -4,7 +4,7 @@
   <title><![CDATA[Ruby | Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/blog/tags/ruby/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-04-13T00:34:36-05:00</updated>
+  <updated>2015-04-14T23:10:18-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tips for Faster Queries]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/04/14/tips-for-faster-queries/"/>
+    <updated>2015-04-14T19:54:54-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/04/14/tips-for-faster-queries</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/fast_snail.jpg" width="300"></p>
+
+<p>For the last few weeks I&rsquo;ve been busy at work optimizing many of our
+slowest queries. On my last Rails related post I covered a work around for
+PostgreSQL&rsquo;s inherit slowness with COUNT queries. On this post I&rsquo;m covering
+some common tips for speeding up general queries.</p>
+
+<p>We&rsquo;ll start by looking at some code.</p>
+
+<pre><code class="ruby">#app/serializers/business_serializer.rb
+class BusinessSerializer &lt; ActiveModel::Serializer
+  attributes :name, :zip
+end
+
+#app/controllers/businesses_controller#any_ten_records
+Business.where("revenue + ? = ?", params[:amount], 100).order(:created_at).to_a.first(10)
+</code></pre>
+
+<p>In the code above I use <a href="https://github.com/rails-api/active_model_serializers">ActiveModel::Serializers</a>
+to describe which model attributes will be serialized into JSON. If you are unfamiliar
+with this gem consider reading up on it. It&rsquo;s pretty handy for DRYing up your code. The
+database I am using is PostgreSQL.</p>
+
+<h2>Don&rsquo;t SELECT *</h2>
+
+<pre><code class="ruby">
+#Business.where("revenue + ? = ?", params[:amount], 100).order(:created_at).to_a.first(10)
+Business.select(:name, :zip)
+  .where("revenue + ? = ?", params[:amount], 100)
+  .order(:created_at)
+  .to_a
+  .first(10)
+</code></pre>
+
+<p>The serailizer tells me that the only thing I need to return is <code>business#name</code>
+and <code>business#zip</code>. The more record columns you request data on, the slower your
+query might run as it will use more Network I/O and sometimes Disk I/O.
+You could boost performance by selecting only the columns you require.</p>
+
+<h2>Filter Rows With Limit</h2>
+
+<pre><code class="ruby">
+#Business.select(:name, :zip)
+#  .where("revenue + ? = ?", params[:amount], 100)
+#  .order(:created_at)
+#  .to_a
+#  .first(10)
+Business.select(:name, :zip)
+  .where("revenue + ? = ?", params[:amount], 100)
+  .limit(10)
+  .order(:created_at)
+</code></pre>
+
+<p>We can see from <code>#first(10)</code> that we are only interested in returning the first
+ten records we fetched from the query. We could potentially and unnecessarily
+request a huge record set and consume a ton of memory by instantiating those
+records as ActiveRecord objects.</p>
+
+<h2>Avoid Sorting</h2>
+
+<pre><code class="ruby">
+#Business.select(:name, :zip)
+#  .where("revenue + ? = ?", params[:amount], 100)
+#  .limit(10)
+#  .order(:created_at)
+Business.select(:name, :zip)
+  .where("revenue + ? = ?", params[:amount], 100)
+  .limit(10)
+</code></pre>
+
+<p>Sorting is sometimes unavoidable but we should try not to utilize it when
+possible. The <code>ORDER BY</code> generated will consume sorting memory on the server.
+In cases where memory becomes scarce on the server, it will spill over to
+disk making it painfully slow.</p>
+
+<h2>Don&rsquo;t Accidentally Skip Using an Index</h2>
+
+<pre><code class="ruby">
+#Business.select(:name, :zip)
+#  .where("revenue + ? = ?", params[:amount], 100)
+#  .limit(10)
+Business.select(:name, :zip)
+  .where("revenue = ? - ?", 100, params[:amount])
+  .limit(10)
+</code></pre>
+
+<p>If the businesses table is using an index on the field revenue, the original code
+would skip using the index. To take advantage of the index we need to shift the
+calculation from the left hand side of the equation to the right hand side.</p>
+
+<p>Thanks you coming by. Feel free to share and comment below.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Faster Count Queries]]></title>

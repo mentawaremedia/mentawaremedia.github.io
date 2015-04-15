@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Binding Object Intro - Very Good Indicators</title>
+  <title>Tips for Faster Queries - Very Good Indicators</title>
   <meta name="author" content="Mentaware Media">
 
   
-  <meta name="description" content="The following is a quick intro to Ruby&rsquo;s Binding object. The Binding object
-holds the execution context of that particular scope. You can &hellip;">
+  <meta name="description" content="For the last few weeks I&rsquo;ve been busy at work optimizing many of our
+slowest queries. On my last Rails related post I covered a work around &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ holds the execution context of that particular scope. You can &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/">
+  <link rel="canonical" href="http://www.verygoodindicators.com/blog/2015/04/14/tips-for-faster-queries/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -30,12 +30,12 @@ holds the execution context of that particular scope. You can &hellip;">
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@terminalbreaker" />  
-  <meta name="twitter:title" content="A Binding Object Intro" />
-  <meta name="twitter:description" content="Learn a few tricks using Ruby's Binding object." />
-  <meta name="twitter:image" content="http://www.verygoodindicators.com/images/binding.jpg" />
-  <meta name="twitter:url" content="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/">
+  
+    
+  
+  
+  
+  
 
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -121,7 +121,7 @@ holds the execution context of that particular scope. You can &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Binding Object Intro</h1>
+      <h1 class="entry-title">Tips for Faster Queries</h1>
       <div class="sharing" style="">
   
   <!-- Place this tag where you want the su badge to render -->
@@ -130,7 +130,7 @@ holds the execution context of that particular scope. You can &hellip;">
   </div>
   
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/" style="display: inline-block; vertical-align: top;">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/14/tips-for-faster-queries/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/14/tips-for-faster-queries/" style="display: inline-block; vertical-align: top;">Tweet</a>
   
   
   <div class="g-plusone" data-size="medium" style="display: inline-block; vertical-align: top;"></div>
@@ -148,7 +148,7 @@ holds the execution context of that particular scope. You can &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-04-01T18:04:49-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>6:04 pm</span></time>
+<time class='entry-date' datetime='2015-04-14T19:54:54-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:54 pm</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://www.verygoodindicators.com">Comments</a>
@@ -158,17 +158,62 @@ holds the execution context of that particular scope. You can &hellip;">
   </header>
 
 
-<div class="entry-content"><p>The following is a quick intro to Ruby&rsquo;s Binding object. The Binding object
-holds the execution context of that particular scope. You can evaluate
-variables against a particular binding to fetch or set the values of those
-variables. Let&rsquo;s look at some code and then walkthrough what is happening.</p>
+<div class="entry-content"><p><img class="right" src="/images/fast_snail.jpg" width="300"></p>
 
-<p>What we&rsquo;re going to do in the following piece of code is capture the local
-variables within the scope of Foo#run and send them to our error reporting
-service which simply puts out the results to the console. In this example I am
-using Ruby version 2.2.1.</p>
+<p>For the last few weeks I&rsquo;ve been busy at work optimizing many of our
+slowest queries. On my last Rails related post I covered a work around for
+PostgreSQL&rsquo;s inherit slowness with COUNT queries. On this post I&rsquo;m covering
+some common tips for speeding up general queries.</p>
 
-<figure class='code'><figcaption><span>Binding object example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>We&rsquo;ll start by looking at some code.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#app/serializers/business_serializer.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">BusinessSerializer</span> <span class="o">&lt;</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Serializer</span>
+</span><span class='line'>  <span class="n">attributes</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:zip</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#app/controllers/businesses_controller#any_ten_records</span>
+</span><span class='line'><span class="no">Business</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;revenue + ? = ?&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="ss">:created_at</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the code above I use <a href="https://github.com/rails-api/active_model_serializers">ActiveModel::Serializers</a>
+to describe which model attributes will be serialized into JSON. If you are unfamiliar
+with this gem consider reading up on it. It&rsquo;s pretty handy for DRYing up your code. The
+database I am using is PostgreSQL.</p>
+
+<h2>Don&rsquo;t SELECT *</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Business.where(&quot;revenue + ? = ?&quot;, params[:amount], 100).order(:created_at).to_a.first(10)</span>
+</span><span class='line'><span class="no">Business</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:zip</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;revenue + ? = ?&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="ss">:created_at</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">to_a</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The serailizer tells me that the only thing I need to return is <code>business#name</code>
+and <code>business#zip</code>. The more record columns you request data on, the slower your
+query might run as it will use more Network I/O and sometimes Disk I/O.
+You could boost performance by selecting only the columns you require.</p>
+
+<h2>Filter Rows With Limit</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -177,109 +222,69 @@ using Ruby version 2.2.1.</p>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
-</span><span class='line'>    <span class="n">fruit</span> <span class="o">=</span> <span class="s2">&quot;apple&quot;</span>
-</span><span class='line'>    <span class="n">vegi</span>  <span class="o">=</span> <span class="s2">&quot;corn&quot;</span>
-</span><span class='line'>    <span class="n">nut</span>   <span class="o">=</span> <span class="s2">&quot;peanut&quot;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">begin</span>
-</span><span class='line'>      <span class="k">raise</span>
-</span><span class='line'>    <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
-</span><span class='line'>      <span class="n">report_error</span><span class="p">(</span><span class="n">capture_variables</span><span class="p">(</span><span class="nb">binding</span><span class="p">,</span> <span class="o">[</span><span class="ss">:e</span><span class="o">]</span><span class="p">))</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">protected</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">#error reporting service</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">report_error</span><span class="p">(</span><span class="n">var_hash</span><span class="p">)</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="n">var_hash</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">capture_variables</span><span class="p">(</span><span class="n">previous_binding</span><span class="p">,</span> <span class="n">skip_vars</span> <span class="o">=</span> <span class="o">[]</span><span class="p">)</span>
-</span><span class='line'>    <span class="c1">#                    -- returns [:fruit, :vegi, :nut, :e]</span>
-</span><span class='line'>    <span class="c1">#                   / </span>
-</span><span class='line'>    <span class="n">previous_binding</span><span class="o">.</span><span class="n">local_variables</span><span class="o">.</span><span class="n">inject</span><span class="p">({})</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="p">,</span><span class="n">var</span><span class="o">|</span>
-</span><span class='line'>      <span class="k">begin</span>
-</span><span class='line'>        <span class="c1"># Binding#local_variable_get will fetch the value of the local variable</span>
-</span><span class='line'>        <span class="c1">#   for example Binding#local_variable_get(:fruit) returns &quot;apple&quot;</span>
-</span><span class='line'>        <span class="nb">hash</span><span class="o">.</span><span class="n">merge!</span><span class="p">(</span><span class="n">var</span> <span class="o">=&gt;</span> <span class="n">previous_binding</span><span class="o">.</span><span class="n">local_variable_get</span><span class="p">(</span><span class="n">var</span><span class="p">))</span> <span class="k">unless</span> <span class="n">skip_vars</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">rescue</span> <span class="no">NameError</span>
-</span><span class='line'>        <span class="c1">#We rescue NameError due to a weird artifact that raise creates.</span>
-</span><span class='line'>        <span class="c1">#The artifact appears to be a local variable but &#39;raises&#39; an error</span>
-</span><span class='line'>        <span class="c1">#  when any attempt to evaluate it occurs.</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="nb">hash</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Business.select(:name, :zip)</span>
+</span><span class='line'><span class="c1">#  .where(&quot;revenue + ? = ?&quot;, params[:amount], 100)</span>
+</span><span class='line'><span class="c1">#  .order(:created_at)</span>
+</span><span class='line'><span class="c1">#  .to_a</span>
+</span><span class='line'><span class="c1">#  .first(10)</span>
+</span><span class='line'><span class="no">Business</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:zip</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;revenue + ? = ?&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="ss">:created_at</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>If you notice on lines 3-4, we&rsquo;ve set a few local variables. On line 8, we
-intentionally raise an error. Line 10 sends our reporting service a hash
-containing all variables in that scope with their values. The hash is
-generated by the method #capture_variables.</p>
+<p>We can see from <code>#first(10)</code> that we are only interested in returning the first
+ten records we fetched from the query. We could potentially and unnecessarily
+request a huge record set and consume a ton of memory by instantiating those
+records as ActiveRecord objects.</p>
 
-<p>Here&rsquo;s how the method works. We send it the current binding by simply sending it
-&lsquo;binding&rsquo; as seen on line 10. We also send it an array of symbols representing any local
-variables we&rsquo;re not interested in reporting which in our case is &lsquo;e&rsquo;.</p>
+<h2>Avoid Sorting</h2>
 
-<p>On line 22 we call Binding#local_variables which returns an array of symbols
-representing the local variables we defined. We iterate over the collection
-of symbols with #inject so as to build a hash with the keys being the
-variable names and the values the variable values.</p>
-
-<p>On line 27 we call Binding#local_variable_get to fetch the value of the local
-variable as defined in previous execution context. Now we execute Foo.new.run to
-see what we get.</p>
-
-<figure class='code'><figcaption><span>Console Output </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='irb'><span class='line'><span class="gp">&gt;&gt; </span><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span>
-</span><span class='line'><span class="gp">&gt;&gt; </span><span class="p">{</span><span class="ss">:fruit</span><span class="o">=&gt;</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="ss">:vegi</span><span class="o">=&gt;</span><span class="s2">&quot;corn&quot;</span><span class="p">,</span> <span class="ss">:nut</span><span class="o">=&gt;</span><span class="s2">&quot;peanut&quot;</span><span class="p">}</span>
-</span><span class='line'><span class="gp">&gt;&gt; </span><span class="kp">nil</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Business.select(:name, :zip)</span>
+</span><span class='line'><span class="c1">#  .where(&quot;revenue + ? = ?&quot;, params[:amount], 100)</span>
+</span><span class='line'><span class="c1">#  .limit(10)</span>
+</span><span class='line'><span class="c1">#  .order(:created_at)</span>
+</span><span class='line'><span class="no">Business</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:zip</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;revenue + ? = ?&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>As you can see above our reporting service is receiving the hash as expected.</p>
+<p>Sorting is sometimes unavoidable but we should try not to utilize it when
+possible. The <code>ORDER BY</code> generated will consume sorting memory on the server.
+In cases where memory becomes scarce on the server, it will spill over to
+disk making it painfully slow.</p>
 
-<p>Feel free to drop some comments or questions below. And if you liked it then
-please share on twitter, facebook or your prefered social media channel.</p>
+<h2>Don&rsquo;t Accidentally Skip Using an Index</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Business.select(:name, :zip)</span>
+</span><span class='line'><span class="c1">#  .where(&quot;revenue + ? = ?&quot;, params[:amount], 100)</span>
+</span><span class='line'><span class="c1">#  .limit(10)</span>
+</span><span class='line'><span class="no">Business</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:zip</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;revenue = ? - ?&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the businesses table is using an index on the field revenue, the original code
+would skip using the index. To take advantage of the index we need to shift the
+calculation from the left hand side of the equation to the right hand side.</p>
+
+<p>Thanks you coming by. Feel free to share and comment below.</p>
 </div>
 
 
@@ -288,14 +293,14 @@ please share on twitter, facebook or your prefered social media channel.</p>
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">Juan Leal</span></span>
+<span class="byline author vcard">Posted by <span class="fn">Mentaware Media</span></span>
 
       
 
 
 
 
-<time class='entry-date' datetime='2015-04-01T18:04:49-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>6:04 pm</span></time>
+<time class='entry-date' datetime='2015-04-14T19:54:54-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:54 pm</span></time>
       
 
 <span class="categories">
@@ -315,7 +320,7 @@ please share on twitter, facebook or your prefered social media channel.</p>
   </div>
   
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/" style="display: inline-block; vertical-align: top;">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/14/tips-for-faster-queries/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/14/tips-for-faster-queries/" style="display: inline-block; vertical-align: top;">Tweet</a>
   
   
   <div class="g-plusone" data-size="medium" style="display: inline-block; vertical-align: top;"></div>
@@ -328,10 +333,8 @@ please share on twitter, facebook or your prefered social media channel.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/03/22/a-blow-against-grammar-nazis/" title="Previous Post: a blow against grammar nazis">&laquo; a blow against grammar nazis</a>
+        <a class="basic-alignment left" href="/blog/2015/04/12/build-measure-learn/" title="Previous Post: build measure learn">&laquo; build measure learn</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/04/02/tgif/" title="Next Post: TGIF">TGIF &raquo;</a>
       
     </p>
   </footer>
@@ -353,6 +356,10 @@ please share on twitter, facebook or your prefered social media channel.</p>
     <ul class="posts">
     
         <li class="related">
+        <a href="/blog/2015/04/07/faster-count-queries/">Faster Count Queries</a>
+        </li>
+    
+        <li class="related">
         <a href="/blog/2015/03/15/ruby-contructors/">ruby constructors</a>
         </li>
     
@@ -361,15 +368,11 @@ please share on twitter, facebook or your prefered social media channel.</p>
         </li>
     
         <li class="related">
-        <a href="/blog/2015/04/07/faster-count-queries/">Faster Count Queries</a>
-        </li>
-    
-        <li class="related">
         <a href="/blog/2015/03/22/a-blow-against-grammar-nazis/">a blow against grammar nazis</a>
         </li>
     
         <li class="related">
-        <a href="/blog/2015/04/14/tips-for-faster-queries/">tips for faster queries</a>
+        <a href="/blog/2015/04/12/build-measure-learn/">build measure learn</a>
         </li>
     
     </ul>
@@ -405,8 +408,8 @@ please share on twitter, facebook or your prefered social media channel.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/';
-        var disqus_url = 'http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/';
+        var disqus_identifier = 'http://www.verygoodindicators.com/blog/2015/04/14/tips-for-faster-queries/';
+        var disqus_url = 'http://www.verygoodindicators.com/blog/2015/04/14/tips-for-faster-queries/';
         var disqus_script = 'embed.js';
       
     (function () {
