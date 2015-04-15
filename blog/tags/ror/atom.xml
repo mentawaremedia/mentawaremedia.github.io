@@ -4,7 +4,7 @@
   <title><![CDATA[Ror | Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/blog/tags/ror/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-04-14T23:16:48-05:00</updated>
+  <updated>2015-04-14T23:17:52-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -108,7 +108,7 @@ Business.select(:name, :zip)
 would skip using the index. To take advantage of the index we need to shift the
 calculation from the left hand side of the equation to the right hand side.</p>
 
-<p>Thanks you for coming by. Feel free to share and comment below.</p>
+<p>Thank you for coming by. Feel free to share and comment below.</p>
 ]]></content>
   </entry>
   
