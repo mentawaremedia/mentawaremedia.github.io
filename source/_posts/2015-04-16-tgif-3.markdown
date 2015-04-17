@@ -1,0 +1,46 @@
+---
+layout: post
+title: "TGIF 3"
+date: 2015-04-16 22:07:46 -0500
+comments: true
+categories: ["TGIF"]
+---
+
+
+Welcome back to TGIF 3. The theme for this set of videos is, "Videos that soundly
+utterly boring but in the end I found deeply interesting."
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lT55_u8URU0" frameborder="0" allowfullscreen></iframe>
+</div>
+
+Kintsugi is the  Japanese art of fixing broken pottery with lacquer 
+dusted or mixed with powdered gold, silver, or platinum. Instead of hiding the
+imperfections of the breaks, they are flaunted.
+
+
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/t__AN6d8FWQ" frameborder="0" allowfullscreen></iframe>
+</div>
+
+This is a documentary on the Helvetica font. Yes that's right. Someone made a documentary...
+about a font. I found it a very interesting voyage into the world of typography.
+
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Fypi6dAJB8E" frameborder="0" allowfullscreen></iframe>
+</div>
+
+This video exposed me to the interesting world of ink. I had no idea so much art and science
+went into the process.
+
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZbK92bRW2lQ" frameborder="0" allowfullscreen></iframe>
+</div>
+
+This an episode of Nova covering Mandelbrot and fractals. Sounds like a real snooze
+fest but it turned out to be quite interesting.
+
+Well that's it. Have a great weekend.
