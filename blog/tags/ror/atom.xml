@@ -4,7 +4,7 @@
   <title><![CDATA[Ror | Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/blog/tags/ror/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-04-21T22:29:51-05:00</updated>
+  <updated>2015-04-22T09:30:39-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -45,8 +45,9 @@ experience dealing with performance issues.</p>
 <p>How fat? When ActiveRecord sits around the house, it sits AROUND the house. I know bad
 joke. Look, all the magic ActiveRecord does requires a significant amount
 code which then leads to large amount of <a href="https://blog.engineyard.com/2009/thats-not-a-memory-leak-its-bloat/">memory</a>
-used to spin up an instance. Spin up a lot of ActiveRecord instance you can easily consume
-all the available memory on the box.</p>
+used to spin up an instance. Spin up enough ActiveRecord instances that are not
+garbage collected quick enough and the available memory on your box might be
+all consumed.</p>
 
 <p>ActiveRecord instances do a lot: persistence, validation, query generation, domain logic
 and more. Yes it makes things easy and possibly makes code more readable but you&rsquo;re adding
