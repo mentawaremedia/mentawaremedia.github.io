@@ -40,7 +40,7 @@ went into the process.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZbK92bRW2lQ" frameborder="0" allowfullscreen></iframe>
 </div>
 
-This an episode of Nova covering Mandelbrot and fractals. Sounds like a real snooze
+This is an episode of Nova covering Mandelbrot and fractals. Sounds like a real snooze
 fest but it turned out to be quite interesting.
 
 Well that's it. Have a great weekend.
