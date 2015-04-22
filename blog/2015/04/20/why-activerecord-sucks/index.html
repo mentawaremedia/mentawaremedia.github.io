@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Faster Count Queries - Very Good Indicators</title>
+  <title>Why ActiveRecord Sucks - Very Good Indicators</title>
   <meta name="author" content="Mentaware Media">
 
   
-  <meta name="description" content="Some of you have noticed that PostgreSQL&rsquo;s count performs painfully slow on tables
-of any significant size. If you&rsquo;re looking for a &hellip;">
+  <meta name="description" content="Ok, so I took an old play from the American media and used a sensationalized
+title to get your attention. The fact is that I like ActiveRecord, I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ of any significant size. If you&rsquo;re looking for a &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/">
+  <link rel="canonical" href="http://www.verygoodindicators.com/blog/2015/04/20/why-activerecord-sucks/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -30,12 +30,12 @@ of any significant size. If you&rsquo;re looking for a &hellip;">
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
 
   
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@terminalbreaker" />  
-  <meta name="twitter:title" content="Faster Count Queries" />
-  <meta name="twitter:description" content="PostgreSQL's slow COUNT troubling you?" />
-  <meta name="twitter:image" content="http://www.verygoodindicators.com/images/cheetah_still.jpg" />
-  <meta name="twitter:url" content="http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/">
+  
+    
+  
+  
+  
+  
 
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -121,7 +121,7 @@ of any significant size. If you&rsquo;re looking for a &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Faster Count Queries</h1>
+      <h1 class="entry-title">Why ActiveRecord Sucks</h1>
       <div class="sharing" style="">
   
   <!-- Place this tag where you want the su badge to render -->
@@ -130,7 +130,7 @@ of any significant size. If you&rsquo;re looking for a &hellip;">
   </div>
   
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/" style="display: inline-block; vertical-align: top;">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/20/why-activerecord-sucks/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/20/why-activerecord-sucks/" style="display: inline-block; vertical-align: top;">Tweet</a>
   
   
   <div class="g-plusone" data-size="medium" style="display: inline-block; vertical-align: top;"></div>
@@ -148,7 +148,7 @@ of any significant size. If you&rsquo;re looking for a &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-04-07T16:11:47-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:11 pm</span></time>
+<time class='entry-date' datetime='2015-04-20T21:49:23-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:49 pm</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://www.verygoodindicators.com">Comments</a>
@@ -158,24 +158,46 @@ of any significant size. If you&rsquo;re looking for a &hellip;">
   </header>
 
 
-<div class="entry-content"><p><img class="right" src="/images/cheetah_still.jpg" width="150"></p>
+<div class="entry-content"><p><img class="right" src="/images/aww-man-this-topics-sucks.jpg" width="300"></p>
 
-<p>Some of you have noticed that PostgreSQL&rsquo;s count performs painfully slow on tables
-of any significant size. If you&rsquo;re looking for a quick solution and you don&rsquo;t
-care about super exact numbers on the count then I&rsquo;ll show you what I did.</p>
+<p>Ok, so I took an old play from the American media and used a sensationalized
+title to get your attention. The fact is that I like ActiveRecord, I really do.
+In fact I like it a little too much.</p>
 
-<p>The reason counts are so slow in postgres has to do with the way Multi-Version
-Concurrency Control(MVCC) has been implemented in the
-<a href="http://wiki.postgresql.org/wiki/Slow_Counting">product</a>. Since multiple transactions
-can see different states of the data then there can be no straightforward way for &ldquo;COUNT(*)&rdquo;
-to summarize data across the whole table. As a result postgres must walk through all rows
-in a sense.</p>
+<p>If you haven&rsquo;t done so you should read my last blog post titled <a href="http://www.verygoodindicators.com/blog/2015/04/19/easy-vs-simple/">&lsquo;Easy vs Simple&rsquo;</a>.
+It&rsquo;s an article very much inspired by a <a href="http://www.infoq.com/presentations/Simple-Made-Easy">talk</a>
+given by the creator of Clojure, Rich Hickey. The point my article and one of the many fine
+points in Hickey&rsquo;s lecture attempts to make is that we as developers
+have become obsessed with this idea of &lsquo;easy&rsquo;. So much are we enamored by it that
+we&rsquo;re trading it in for a vast amount of complexity and inefficiency.</p>
 
-<p>I found an interesting article on how to accomplish a much faster, although less accurate
-count by tapping into the EXPLAIN output through a custom <a href="https://wiki.postgresql.org/wiki/Count_estimate">function</a>.
-I&rsquo;ll walk you through the steps I took.</p>
+<p>Giving you a little of my background, I&rsquo;ve had the pleasure working for two very
+experienced and well known people in our profession. The first was Dave Thomas author
+of the Pickaxe Book and Hal Helms who is very well known in the ColdFusion community.
+I currently work for Hal and we have some fairly interesting discussions and arguements.
+One revolves around ORMs. He is very  much of the opinion that we should not
+use an ORM at all in Rails, at least he leans in that direction. While I am not such an
+extremist, I have been tempering my enthusiasm for ActiveRecord with recent real world
+experience dealing with performance issues.</p>
 
-<figure class='code'><figcaption><span>count_estimate function</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<h2>ActiveRecord is Fat</h2>
+
+<p>How fat? When ActiveRecord sits around the house, it sits AROUND the house. I know bad
+joke. Look, all the magic ActiveRecord does requires a significant amount
+code which then leads to large amount of <a href="https://blog.engineyard.com/2009/thats-not-a-memory-leak-its-bloat/">memory</a>
+used to spin up an instance. Spin up a lot of ActiveRecord instance you can easily consume
+all the available memory on the box.</p>
+
+<p>ActiveRecord instances do a lot: persistence, validation, query generation, domain logic
+and more. Yes it makes things easy and possibly makes code more readable but you&rsquo;re adding
+complexity at least in the background. If you&rsquo;ve ever run into a new deep ActiveRecord bug,
+good luck digging into that code for the first time.</p>
+
+<h2>Your Classes Become Dependent on ActiveRecord</h2>
+
+<p>Let compare two versions of code. One uses ActiveRecord, the other does not.</p>
+
+<figure class='code'><figcaption><span>With ActiveRecord</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -189,27 +211,98 @@ I&rsquo;ll walk you through the steps I took.</p>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">CREATE</span> <span class="k">FUNCTION</span> <span class="n">count_estimate</span><span class="p">(</span><span class="n">query</span> <span class="nb">text</span><span class="p">)</span> <span class="k">RETURNS</span> <span class="nb">integer</span> <span class="k">AS</span>
-</span><span class='line'><span class="err">$</span><span class="n">func</span><span class="err">$</span>
-</span><span class='line'><span class="k">DECLARE</span>
-</span><span class='line'>    <span class="n">rec</span>   <span class="n">record</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">rows</span>  <span class="nb">integer</span><span class="p">;</span>
-</span><span class='line'><span class="k">BEGIN</span>
-</span><span class='line'>    <span class="k">FOR</span> <span class="n">rec</span> <span class="k">IN</span> <span class="k">EXECUTE</span> <span class="s1">&#39;EXPLAIN &#39;</span> <span class="o">||</span> <span class="n">query</span> <span class="n">LOOP</span>
-</span><span class='line'>        <span class="k">rows</span> <span class="p">:</span><span class="o">=</span> <span class="k">substring</span><span class="p">(</span><span class="n">rec</span><span class="p">.</span><span class="ss">&quot;QUERY PLAN&quot;</span> <span class="k">FROM</span> <span class="s1">&#39; rows=([[:digit:]]+)&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="n">EXIT</span> <span class="k">WHEN</span> <span class="k">rows</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#app/service/foo.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="n">attributes</span> <span class="ss">:business</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="k">RETURN</span> <span class="k">rows</span><span class="p">;</span>
-</span><span class='line'><span class="k">END</span>
-</span><span class='line'><span class="err">$</span><span class="n">func</span><span class="err">$</span> <span class="k">LANGUAGE</span> <span class="n">plpgsql</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">#business is an ActiveRecord instance</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">business</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@business</span> <span class="o">=</span> <span class="n">business</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
+</span><span class='line'>    <span class="n">owners</span> <span class="o">=</span> <span class="n">business</span><span class="o">.</span><span class="n">owners</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">owners</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#app/service/biz.rb</span>
+</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">Business</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">run</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Above is the create query for out SQL function that we&rsquo;ll need to create on the server.
-First we&rsquo;ll create a migration to hold our function creation statement.</p>
 
-<figure class='code'><figcaption><span>migration</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+
+<figure class='code'><figcaption><span>Without ActiveRecord</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#app/service/foo.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span>
+</span><span class='line'>  <span class="n">attributes</span> <span class="ss">:owners</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#owners is an Array of Hashes</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">owners</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@owners</span> <span class="o">=</span> <span class="n">owners</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
+</span><span class='line'>    <span class="n">owners</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">owner</span><span class="o">|</span> <span class="n">owner</span><span class="o">[</span><span class="s2">&quot;name&quot;</span><span class="o">]</span><span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#app/service/biz.rb</span>
+</span><span class='line'><span class="no">Bar</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">Business</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">owners</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:attributes</span><span class="p">))</span><span class="o">.</span><span class="n">run</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The Foo class is dependent on ActiveRecord. In order to run my rspec
+tests on this code I&rsquo;ll have to load rails. Foo also expects the business
+object to respond to #owners and each instance of owner to respond to #name.
+This is quite a bit that we&rsquo;re asking Foo to know about the business object.
+Foo is also sensitive to changes made to Business as well such that if we chose
+to drop or rename the association to owners, the class would break.
+A good article related to this is <a href="https://pragprog.com/articles/tell-dont-ask">&ldquo;Tell, Don&rsquo;t Ask&rdquo;</a>
+which warns about this type of inadvertent coupling.</p>
+
+<p>What we should be sending Foo is data not an object containing data that then needs
+to be queried through it&rsquo;s api. Yes, I know a Hash is still
+an object but I&rsquo;m speaking semantically. As you can see, Bar is given a Hash only.
+There is no dependency on rails so my test can be run without loading rails and thus
+can be run much faster. We no longer have the coupling we witnessed before.</p>
+
+<h2>ActiveRecord is Lousy at Generating SQL</h2>
+
+<p>It&rsquo;s not the fault of ActiveRecord, ORMs all have their limits.
+For simple queries it works fine. Realize though that as your queries become
+more complex and intricate the worse the SQL will be that AR generates. There&rsquo;s
+just no way an ORM can craft a highly optimized complex query better than an
+experienced engineer.</p>
+
+<p>A backwards thing I catch myself doing sometimes is mentally figuring out how a non-trivial
+query would be crafted in SQL and then I try to rewrite it into AR. I think at that point
+I should do it in SQL.</p>
+
+<h2>ActiveRecord, not so readable</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -237,106 +330,56 @@ First we&rsquo;ll create a migration to hold our function creation statement.</p
 <span class='line-number'>26</span>
 <span class='line-number'>27</span>
 <span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#run this at the console first</span>
-</span><span class='line'><span class="c1">#  bundle exec rails g migration AddCountEstimateFunction</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">AddCountEstimateFunction</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">up</span>
-</span><span class='line'>    <span class="n">execute</span> <span class="o">&lt;&lt;-</span><span class="no">SQL</span>
-</span><span class='line'><span class="sh">      CREATE FUNCTION count_estimate(query text) RETURNS integer AS</span>
-</span><span class='line'><span class="sh">      $func$</span>
-</span><span class='line'><span class="sh">      DECLARE</span>
-</span><span class='line'><span class="sh">          rec   record;</span>
-</span><span class='line'><span class="sh">          rows  integer;</span>
-</span><span class='line'><span class="sh">      BEGIN</span>
-</span><span class='line'><span class="sh">          FOR rec IN EXECUTE &#39;EXPLAIN &#39; || query LOOP</span>
-</span><span class='line'><span class="sh">              rows := substring(rec.&quot;QUERY PLAN&quot; FROM &#39; rows=([[:digit:]]+)&#39;);</span>
-</span><span class='line'><span class="sh">              EXIT WHEN rows IS NOT NULL;</span>
-</span><span class='line'><span class="sh">          END LOOP;</span>
-</span><span class='line'><span class="sh">       </span>
-</span><span class='line'><span class="sh">          RETURN rows;</span>
-</span><span class='line'><span class="sh">      END</span>
-</span><span class='line'><span class="sh">      $func$ LANGUAGE plpgsql;</span>
-</span><span class='line'><span class="no">    SQL</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Report</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">execute</span>
+</span><span class='line'>    <span class="n">result</span> <span class="o">=</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">main_sql_string</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">down</span>
-</span><span class='line'>    <span class="n">execute</span> <span class="s2">&quot;DROP FUNCTION count_estimate(query text);&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After we run <code>bundle exec rake db:migrate</code> the function will be available for use.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT count_estimate(&#39;</span><span class="si">#{</span><span class="n">sql_query</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#Example:</span>
-</span><span class='line'><span class="c1">#  sql_query = &quot;SELECT * FROM businesses WHERE size &gt; 3&quot;</span>
-</span><span class='line'><span class="c1">#  ActiveRecord::Base.connection.execute(&quot;SELECT count_estimate(&#39;#{sql_query}&#39;)&quot;).to_a</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1">#returns</span>
-</span><span class='line'><span class="c1">#  [{&quot;count_estimate&quot; =&gt; &quot;500&quot;}]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The snippet above shows how you would now use this SQL function</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Business</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">comment_count</span>
-</span><span class='line'>    <span class="c1">#This will return an estimate but not exactly the real number</span>
-</span><span class='line'>    <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT count_estimate(&#39;</span><span class="si">#{</span><span class="n">comments_sql_string</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="o">[</span><span class="s2">&quot;count_estimate&quot;</span><span class="o">].</span><span class="n">to_i</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">comments_sql_string</span>
+</span><span class='line'>  <span class="c1">#=&gt; Main Query</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">main_sql_string</span>
 </span><span class='line'>    <span class="o">&lt;&lt;-</span><span class="no">SQL</span>
-</span><span class='line'><span class="sh">      SELECT * FROM comments </span>
-</span><span class='line'><span class="sh">      WHERE comments.business_id = #{self.id} </span>
-</span><span class='line'><span class="sh">        AND comments.status = &#39;&#39;new&#39;&#39;</span>
+</span><span class='line'><span class="sh">      SELECT businesses.name AS business_name, </span>
+</span><span class='line'><span class="sh">        COALESCE(offer.name, format(&#39;Campaign ID - %s&#39;,offer.id::text)) AS campaign_name, </span>
+</span><span class='line'><span class="sh">        COALESCE(user_replied.count,0) AS user_replied_count,</span>
+</span><span class='line'><span class="sh">      FROM businesses</span>
+</span><span class='line'><span class="sh">      INNER JOIN offer</span>
+</span><span class='line'><span class="sh">        ON businesses.id = offer.business_id</span>
+</span><span class='line'><span class="sh">      LEFT OUTER JOIN (#{user_replied_sql_string}) user_replied</span>
+</span><span class='line'><span class="sh">        ON offer.id = user_replied.offer_id</span>
+</span><span class='line'><span class="no">    SQL</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#=&gt; Subqueries</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">user_replied_sql_string</span>
+</span><span class='line'>    <span class="o">&lt;&lt;-</span><span class="no">SQL</span>
+</span><span class='line'><span class="sh">      SELECT cc_links.offer_id AS offer_id, COUNT(*) AS count </span>
+</span><span class='line'><span class="sh">      FROM conversations</span>
+</span><span class='line'><span class="sh">      INNER JOIN cc_links</span>
+</span><span class='line'><span class="sh">        ON conversations.id = cc_links.conversation_id</span>
+</span><span class='line'><span class="sh">      WHERE conversations.status = &#39;#{Conversation::Status::REPLIED_TO}&#39; </span>
+</span><span class='line'><span class="sh">      GROUP BY cc_links.offer_id</span>
 </span><span class='line'><span class="no">    SQL</span>
 </span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#Business.last.comment_count</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1">#=&gt; 9</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Finally, here is a more fleshed out implementation. Just a note, but make sure you character escape
-those single quotes by using two single quotes <code>''</code> otherwise you&rsquo;ll get a SQL error on the syntax.</p>
+<p>Take a look at code above. Can you imagine writing this in ActiveRecord. You&rsquo;d
+have various calls to #joins, #group, #select, #from plus a fair share
+of SQL fragments strewn about. For me the code above appears far more legible
+that trying to express it in AR.</p>
 
-<p>If this was useful then please share on your social media connections. I also like hearing
-any suggestions and comments so feel free to drop some below.</p>
+<p>The last point I like to make is that I think there&rsquo;s an illness going around.
+It might be caused by overzealous enthusiasm, inexperience or unwavering conviction.
+But I&rsquo;ve seen it so many times; people become entranced with an ideal, rushing towards it
+like a month to flame without the slightest thought to consequence or foresight. Again
+I&rsquo;m a fan of ActiveRecord for the ease it brings but let&rsquo;s also consider the cost
+as well.</p>
+
+<p>Take Care.</p>
 </div>
 
 
@@ -352,7 +395,7 @@ any suggestions and comments so feel free to drop some below.</p>
 
 
 
-<time class='entry-date' datetime='2015-04-07T16:11:47-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:11 pm</span></time>
+<time class='entry-date' datetime='2015-04-20T21:49:23-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:49 pm</span></time>
       
 
 <span class="categories">
@@ -372,7 +415,7 @@ any suggestions and comments so feel free to drop some below.</p>
   </div>
   
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/" style="display: inline-block; vertical-align: top;">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/20/why-activerecord-sucks/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/20/why-activerecord-sucks/" style="display: inline-block; vertical-align: top;">Tweet</a>
   
   
   <div class="g-plusone" data-size="medium" style="display: inline-block; vertical-align: top;"></div>
@@ -385,10 +428,8 @@ any suggestions and comments so feel free to drop some below.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/04/05/the-pareto-principle/" title="Previous Post: the pareto principle">&laquo; the pareto principle</a>
+        <a class="basic-alignment left" href="/blog/2015/04/19/easy-vs-simple/" title="Previous Post: easy vs simple">&laquo; easy vs simple</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/04/10/tgif-2/" title="Next Post: TGIF 2">TGIF 2 &raquo;</a>
       
     </p>
   </footer>
@@ -410,15 +451,11 @@ any suggestions and comments so feel free to drop some below.</p>
     <ul class="posts">
     
         <li class="related">
-        <a href="/blog/2015/04/20/why-activerecord-sucks/">Why ActiveRecord sucks</a>
-        </li>
-    
-        <li class="related">
         <a href="/blog/2015/03/15/ruby-contructors/">ruby constructors</a>
         </li>
     
         <li class="related">
-        <a href="/blog/2015/03/20/class-class/">class Class</a>
+        <a href="/blog/2015/03/22/a-blow-against-grammar-nazis/">a blow against grammar nazis</a>
         </li>
     
         <li class="related">
@@ -426,7 +463,11 @@ any suggestions and comments so feel free to drop some below.</p>
         </li>
     
         <li class="related">
-        <a href="/blog/2015/04/01/binding-object-intro/">binding object intro</a>
+        <a href="/blog/2015/04/07/faster-count-queries/">Faster Count Queries</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2015/03/20/class-class/">class Class</a>
         </li>
     
     </ul>
@@ -462,8 +503,8 @@ any suggestions and comments so feel free to drop some below.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/';
-        var disqus_url = 'http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/';
+        var disqus_identifier = 'http://www.verygoodindicators.com/blog/2015/04/20/why-activerecord-sucks/';
+        var disqus_url = 'http://www.verygoodindicators.com/blog/2015/04/20/why-activerecord-sucks/';
         var disqus_script = 'embed.js';
       
     (function () {

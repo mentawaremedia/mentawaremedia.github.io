@@ -4,7 +4,7 @@
   <title><![CDATA[Ror | Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/blog/tags/ror/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-04-21T19:42:26-05:00</updated>
+  <updated>2015-04-21T22:21:16-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,166 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why ActiveRecord Sucks]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/04/20/why-activerecord-sucks/"/>
+    <updated>2015-04-20T21:49:23-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/04/20/why-activerecord-sucks</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/aww-man-this-topics-sucks.jpg" width="300"></p>
+
+<p>Ok, so I took an old play from the American media and used a sensationalized
+title to get your attention. The fact is that I like ActiveRecord, I really do.
+In fact I like it a little too much.</p>
+
+<p>If you haven&rsquo;t done so you should read my last blog post titled <a href="http://www.verygoodindicators.com/blog/2015/04/19/easy-vs-simple/">&lsquo;Easy vs Simple&rsquo;</a>.
+It&rsquo;s an article very much inspired by a <a href="http://www.infoq.com/presentations/Simple-Made-Easy">talk</a>
+given by the creator of Clojure, Rich Hickey. The point my article and one of the many fine
+points in Hickey&rsquo;s lecture attempts to make is that we as developers
+have become obsessed with this idea of &lsquo;easy&rsquo;. So much are we enamored by it that
+we&rsquo;re trading it in for a vast amount of complexity and inefficiency.</p>
+
+<p>Giving you a little of my background, I&rsquo;ve had the pleasure working for two very
+experienced and well known people in our profession. The first was Dave Thomas author
+of the Pickaxe Book and Hal Helms who is very well known in the ColdFusion community.
+I currently work for Hal and we have some fairly interesting discussions and arguements.
+One revolves around ORMs. He is very  much of the opinion that we should not
+use an ORM at all in Rails, at least he leans in that direction. While I am not such an
+extremist, I have been tempering my enthusiasm for ActiveRecord with recent real world
+experience dealing with performance issues.</p>
+
+<h2>ActiveRecord is Fat</h2>
+
+<p>How fat? When ActiveRecord sits around the house, it sits AROUND the house. I know bad
+joke. Look, all the magic ActiveRecord does requires a significant amount
+code which then leads to large amount of <a href="https://blog.engineyard.com/2009/thats-not-a-memory-leak-its-bloat/">memory</a>
+used to spin up an instance. Spin up a lot of ActiveRecord instance you can easily consume
+all the available memory on the box.</p>
+
+<p>ActiveRecord instances do a lot: persistence, validation, query generation, domain logic
+and more. Yes it makes things easy and possibly makes code more readable but you&rsquo;re adding
+complexity at least in the background. If you&rsquo;ve ever run into a new deep ActiveRecord bug,
+good luck digging into that code for the first time.</p>
+
+<h2>Your Classes Become Dependent on ActiveRecord</h2>
+
+<p>Let compare two versions of code. One uses ActiveRecord, the other does not.</p>
+
+<pre><code class="ruby With ActiveRecord">#app/service/foo.rb
+class Foo 
+  attributes :business
+
+  #business is an ActiveRecord instance
+  def initialize(business)
+    @business = business
+  end
+
+  def run
+    owners = business.owners
+
+    owners.map(&amp;:name)
+  end
+end
+
+#app/service/biz.rb
+Foo.new(Business.find(1)).run
+</code></pre>
+
+<pre><code class="ruby Without ActiveRecord">#app/service/foo.rb
+class Bar 
+  attributes :owners
+
+  #owners is an Array of Hashes
+  def initialize(owners)
+    @owners = owners
+  end
+
+  def run
+    owners.map {|owner| owner["name"]}
+  end
+end
+
+#app/service/biz.rb
+Bar.new(Business.find(1).owners.map(&amp;:attributes)).run
+</code></pre>
+
+<p>The Foo class is dependent on ActiveRecord. In order to run my rspec
+tests on this code I&rsquo;ll have to load rails. Foo also expects the business
+object to respond to #owners and each instance of owner to respond to #name.
+This is quite a bit that we&rsquo;re asking Foo to know about the business object.
+Foo is also sensitive to changes made to Business as well such that if we chose
+to drop or rename the association to owners, the class would break.
+A good article related to this is <a href="https://pragprog.com/articles/tell-dont-ask">&ldquo;Tell, Don&rsquo;t Ask&rdquo;</a>
+which warns about this type of inadvertent coupling.</p>
+
+<p>What we should be sending Foo is data not an object containing data that then needs
+to be queried through it&rsquo;s api. Yes, I know a Hash is still
+an object but I&rsquo;m speaking semantically. As you can see, Bar is given a Hash only.
+There is no dependency on rails so my test can be run without loading rails and thus
+can be run much faster. We no longer have the coupling we witnessed before.</p>
+
+<h2>ActiveRecord is Lousy at Generating SQL</h2>
+
+<p>It&rsquo;s not the fault of ActiveRecord, ORMs all have their limits.
+For simple queries it works fine. Realize though that as your queries become
+more complex and intricate the worse the SQL will be that AR generates. There&rsquo;s
+just no way an ORM can craft a highly optimized complex query better than an
+experienced engineer.</p>
+
+<p>A backwards thing I catch myself doing sometimes is mentally figuring out how a non-trivial
+query would be crafted in SQL and then I try to rewrite it into AR. I think at that point
+I should do it in SQL.</p>
+
+<h2>ActiveRecord, not so readable</h2>
+
+<pre><code class="ruby">class Report
+  def execute
+    result = ActiveRecord::Base.connection.execute(main_sql_string).to_a
+  end
+
+  #=&gt; Main Query
+  def main_sql_string
+    &lt;&lt;-SQL
+      SELECT businesses.name AS business_name, 
+        COALESCE(offer.name, format('Campaign ID - %s',offer.id::text)) AS campaign_name, 
+        COALESCE(user_replied.count,0) AS user_replied_count,
+      FROM businesses
+      INNER JOIN offer
+        ON businesses.id = offer.business_id
+      LEFT OUTER JOIN (#{user_replied_sql_string}) user_replied
+        ON offer.id = user_replied.offer_id
+    SQL
+  end
+
+  #=&gt; Subqueries
+  def user_replied_sql_string
+    &lt;&lt;-SQL
+      SELECT cc_links.offer_id AS offer_id, COUNT(*) AS count 
+      FROM conversations
+      INNER JOIN cc_links
+        ON conversations.id = cc_links.conversation_id
+      WHERE conversations.status = '#{Conversation::Status::REPLIED_TO}' 
+      GROUP BY cc_links.offer_id
+    SQL
+  end
+end
+</code></pre>
+
+<p>Take a look at code above. Can you imagine writing this in ActiveRecord. You&rsquo;d
+have various calls to #joins, #group, #select, #from plus a fair share
+of SQL fragments strewn about. For me the code above appears far more legible
+that trying to express it in AR.</p>
+
+<p>The last point I like to make is that I think there&rsquo;s an illness going around.
+It might be caused by overzealous enthusiasm, inexperience or unwavering conviction.
+But I&rsquo;ve seen it so many times; people become entranced with an ideal, rushing towards it
+like a month to flame without the slightest thought to consequence or foresight. Again
+I&rsquo;m a fan of ActiveRecord for the ease it brings but let&rsquo;s also consider the cost
+as well.</p>
+
+<p>Take Care.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tips for Faster Queries]]></title>
