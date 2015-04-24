@@ -9,8 +9,8 @@
   <meta name="author" content="Mentaware Media">
 
   
-  <meta name="description" content="Ok, so I took an old play from the American media and used a sensationalized
-title to get your attention. The fact is that I like ActiveRecord, I &hellip;">
+  <meta name="description" content="Hello all. Thanks for coming by for TGIF 4. It&rsquo;s been another week and time
+to end it with some vids. The theme this week is touchingly sweet &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,73 @@ title to get your attention. The fact is that I like ActiveRecord, I &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/23/tgif-4/">TGIF 4</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-23T20:09:12-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>8:09 pm</span></time>
+        
+           | <a href="/blog/2015/04/23/tgif-4/#disqus_thread"
+             data-disqus-identifier="http://www.verygoodindicators.com/blog/2015/04/23/tgif-4/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Hello all. Thanks for coming by for TGIF 4. It&rsquo;s been another week and time
+to end it with some vids. The theme this week is touchingly sweet videos that
+will probably give you cavities. Hope you enjoy.</p>
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Bpu0TIXzI1w" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<p>According to person who uploaded this video, &ldquo;The fireworks show had just ended,
+but she thought she kept hearing them outside. So we sang to keep her mind preoccupied.
+In the end, nothing competes with fireworks.&rdquo;</p>
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sJxxdQox7n0" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<p>This is an incredible and short documentary covering an orchestra using instruments made
+from trash found at the dump. A wonderful story about ingenuity.</p>
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jU4oA3kkAWU" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<p>This is an inspiring story about an unlikely child soccer team which persevered despite many
+obstacles.</p>
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xZjykPITuq0" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<p>While this is only a car commercial, I found the overall message very powerful and words
+to live by.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1174,159 +1241,6 @@ trickling in about the upcoming Deadpool movie.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/01/binding-object-intro/">Binding Object Intro</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-01T18:04:49-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>6:04 pm</span></time>
-        
-           | <a href="/blog/2015/04/01/binding-object-intro/#disqus_thread"
-             data-disqus-identifier="http://www.verygoodindicators.com/blog/2015/04/01/binding-object-intro/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The following is a quick intro to Ruby&rsquo;s Binding object. The Binding object
-holds the execution context of that particular scope. You can evaluate
-variables against a particular binding to fetch or set the values of those
-variables. Let&rsquo;s look at some code and then walkthrough what is happening.</p>
-
-<p>What we&rsquo;re going to do in the following piece of code is capture the local
-variables within the scope of Foo#run and send them to our error reporting
-service which simply puts out the results to the console. In this example I am
-using Ruby version 2.2.1.</p>
-
-<figure class='code'><figcaption><span>Binding object example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
-</span><span class='line'>    <span class="n">fruit</span> <span class="o">=</span> <span class="s2">&quot;apple&quot;</span>
-</span><span class='line'>    <span class="n">vegi</span>  <span class="o">=</span> <span class="s2">&quot;corn&quot;</span>
-</span><span class='line'>    <span class="n">nut</span>   <span class="o">=</span> <span class="s2">&quot;peanut&quot;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">begin</span>
-</span><span class='line'>      <span class="k">raise</span>
-</span><span class='line'>    <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
-</span><span class='line'>      <span class="n">report_error</span><span class="p">(</span><span class="n">capture_variables</span><span class="p">(</span><span class="nb">binding</span><span class="p">,</span> <span class="o">[</span><span class="ss">:e</span><span class="o">]</span><span class="p">))</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">protected</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">#error reporting service</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">report_error</span><span class="p">(</span><span class="n">var_hash</span><span class="p">)</span>
-</span><span class='line'>    <span class="nb">puts</span> <span class="n">var_hash</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">capture_variables</span><span class="p">(</span><span class="n">previous_binding</span><span class="p">,</span> <span class="n">skip_vars</span> <span class="o">=</span> <span class="o">[]</span><span class="p">)</span>
-</span><span class='line'>    <span class="c1">#                    -- returns [:fruit, :vegi, :nut, :e]</span>
-</span><span class='line'>    <span class="c1">#                   / </span>
-</span><span class='line'>    <span class="n">previous_binding</span><span class="o">.</span><span class="n">local_variables</span><span class="o">.</span><span class="n">inject</span><span class="p">({})</span> <span class="k">do</span> <span class="o">|</span><span class="nb">hash</span><span class="p">,</span><span class="n">var</span><span class="o">|</span>
-</span><span class='line'>      <span class="k">begin</span>
-</span><span class='line'>        <span class="c1"># Binding#local_variable_get will fetch the value of the local variable</span>
-</span><span class='line'>        <span class="c1">#   for example Binding#local_variable_get(:fruit) returns &quot;apple&quot;</span>
-</span><span class='line'>        <span class="nb">hash</span><span class="o">.</span><span class="n">merge!</span><span class="p">(</span><span class="n">var</span> <span class="o">=&gt;</span> <span class="n">previous_binding</span><span class="o">.</span><span class="n">local_variable_get</span><span class="p">(</span><span class="n">var</span><span class="p">))</span> <span class="k">unless</span> <span class="n">skip_vars</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
-</span><span class='line'>      <span class="k">rescue</span> <span class="no">NameError</span>
-</span><span class='line'>        <span class="c1">#We rescue NameError due to a weird artifact that raise creates.</span>
-</span><span class='line'>        <span class="c1">#The artifact appears to be a local variable but &#39;raises&#39; an error</span>
-</span><span class='line'>        <span class="c1">#  when any attempt to evaluate it occurs.</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="nb">hash</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you notice on lines 3-4, we&rsquo;ve set a few local variables. On line 8, we
-intentionally raise an error. Line 10 sends our reporting service a hash
-containing all variables in that scope with their values. The hash is
-generated by the method #capture_variables.</p>
-
-<p>Here&rsquo;s how the method works. We send it the current binding by simply sending it
-&lsquo;binding&rsquo; as seen on line 10. We also send it an array of symbols representing any local
-variables we&rsquo;re not interested in reporting which in our case is &lsquo;e&rsquo;.</p>
-
-<p>On line 22 we call Binding#local_variables which returns an array of symbols
-representing the local variables we defined. We iterate over the collection
-of symbols with #inject so as to build a hash with the keys being the
-variable names and the values the variable values.</p>
-
-<p>On line 27 we call Binding#local_variable_get to fetch the value of the local
-variable as defined in previous execution context. Now we execute Foo.new.run to
-see what we get.</p>
-
-<figure class='code'><figcaption><span>Console Output </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='irb'><span class='line'><span class="gp">&gt;&gt; </span><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span>
-</span><span class='line'><span class="gp">&gt;&gt; </span><span class="p">{</span><span class="ss">:fruit</span><span class="o">=&gt;</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="ss">:vegi</span><span class="o">=&gt;</span><span class="s2">&quot;corn&quot;</span><span class="p">,</span> <span class="ss">:nut</span><span class="o">=&gt;</span><span class="s2">&quot;peanut&quot;</span><span class="p">}</span>
-</span><span class='line'><span class="gp">&gt;&gt; </span><span class="kp">nil</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As you can see above our reporting service is receiving the hash as expected.</p>
-
-<p>Feel free to drop some comments or questions below. And if you liked it then
-please share on twitter, facebook or your prefered social media channel.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1341,7 +1255,7 @@ please share on twitter, facebook or your prefered social media channel.</p>
 
 <section>
   <h1>Topics</h1>
-    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (3)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/funny'>funny (2)</a></li><li><a href='/blog/categories/linguistics'>linguistics (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (4)</a></li><li><a href='/blog/categories/performance'>performance (4)</a></li><li><a href='/blog/categories/programming'>programming (6)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li><li><a href='/blog/categories/tgif'>tgif (3)</a></li></ul>
+    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (3)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/funny'>funny (2)</a></li><li><a href='/blog/categories/linguistics'>linguistics (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (4)</a></li><li><a href='/blog/categories/performance'>performance (4)</a></li><li><a href='/blog/categories/programming'>programming (6)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li><li><a href='/blog/categories/tgif'>tgif (4)</a></li></ul>
 </section>
 
 
