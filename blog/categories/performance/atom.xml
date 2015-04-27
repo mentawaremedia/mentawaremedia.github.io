@@ -4,7 +4,7 @@
   <title><![CDATA[Performance | Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/blog/categories/performance/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-04-23T21:21:16-05:00</updated>
+  <updated>2015-04-27T00:19:33-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Problem Solving for Everyday Life]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/04/26/problem-solving-for-everyday-life/"/>
+    <updated>2015-04-26T13:31:47-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/04/26/problem-solving-for-everyday-life</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/confusion_scrabble.jpg" width="300"></p>
+
+<p>I was going to name this article, &ldquo;Algebra for everyday problem solving,&rdquo; but
+I was concerned many people would assume this had to do with figuring out the
+speed of a train having left the station two hours ago. Well, that&rsquo;s not what this
+all about. Instead it&rsquo;s much more interesting.</p>
+
+<p>Lets look at some basic algebra and then I&rsquo;ll elaborate.</p>
+
+<pre><code class="ruby">10 + x = 12
+
+therefore
+
+10 + 2 = 12
+</code></pre>
+
+<p>If we look at the problem on line 1 above, we see that at first we don&rsquo;t know what &lsquo;x&rsquo; is.
+What we do know is that 10 plus that value will yield us 12. So it&rsquo;s very easy to then determine
+that &lsquo;x&rsquo; is in fact equal to &lsquo;2&rsquo;. So what just happened here?</p>
+
+<p>What happened is that we had an unknown (x), two knowns (10 and 12) and an
+established relationship between them and from that we were able to determine the unknown.</p>
+
+<h2>The Confusion</h2>
+
+<p>A confusion is often made of several unknown factors. The more unknowns the more
+confusing the situation can be. Likewise, the more knowns there are the less confusion
+there is. This then can aid us in gaining a foothold into the resolution problems.</p>
+
+<p>One must operate from those elements which have the highest degree of certainty and
+truth. From that solid foundation we attempt to solve one of the unkowns, then another and
+another until all elements are solved.</p>
+
+<p>For example, the police find a dead body? Who is it? How did he die? When? Was it murder?
+Who killed him? There are many unknowns. They run his fingerprints and find out who he is.
+They take the body to the coroner and get the time of death and probable cause of death.
+Now they know it was Joe Burns, he died 48 hours ago and he was struck with a bat
+which caused the death. They now have some nice solid knowns to operate from from.</p>
+
+<p>Since they know he died 48 hours ago, they canvas the area looking for witnesses present
+around that time. They can also use the time of death to eliminate suspects by
+verifying alibis. They can look for a particular murder weapon.
+With his ID, they can find his friends and family and ascertain possible
+suspects.</p>
+
+<p>Thus the police can begin to solve this mystery from building more and more knowns from
+a declining number unknowns.</p>
+
+<h2>Look Out for&hellip;</h2>
+
+<p>One tries to operate from highest known one can achieve. This does not mean the
+&lsquo;known&rsquo; is necessarily correct; it&rsquo;s just the most correct datum we have
+available. For example in our crime drama, it&rsquo;s possible the
+body may have been affected by some process which caused an incorrect conclusion as to
+the time of death. Thus shifting the time line of events.</p>
+
+<p>Occam&rsquo;s razor is very often misstated as the simplest answer is usually the correct
+one. This is quite an incorrect statement. Actually, the principle states that the answer
+with the least number of assumptions is the correct one. Complexity is not the issue,
+assumptions are the problem.</p>
+
+<p>So, beware of operating off of assumptions and here-say. The best thing is as direct an observation
+as one can obtain. In solving issues at work, solutions have often been delayed by just taking
+a coworkers word for it. This is not to say people are not truthful it&rsquo;s just that
+we often have issues recalling things accurately or we might miscommunicate what we have
+observed.</p>
+
+<p>Play a game of telephone sometime with a group of friends and you&rsquo;ll be amazed how easily
+facts are distorted within a few retellings.</p>
+
+<p>Well, I hope this has been of value.</p>
+
+<p>Take Care.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Easy vs Simple]]></title>
