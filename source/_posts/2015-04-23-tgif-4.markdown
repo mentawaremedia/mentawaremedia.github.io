@@ -1,0 +1,51 @@
+---
+layout: post
+title: "TGIF 4"
+date: 2015-04-23 20:09:12 -0500
+comments: true
+categories: ["TGIF"]
+
+card_type: photo
+card_title: "TGIF 4 - sweet videos"
+card_site: "@terminalbreaker" 
+card_description: "Videos so sweet, you'll get cavities"
+card_image: "http://www.verygoodindicators.com/images/tgif4_kitten.jpg"
+card_url: "http://www.verygoodindicators.com/blog/2015/04/23/tgif-4/"
+---
+
+{% img right /images/tgif4_kitten.jpg 300 %}
+
+Hello all. Thanks for coming by for TGIF 4. It's been another week and time 
+to end it with some vids. The theme this week is touchingly sweet videos that
+will probably give you cavities. Hope you enjoy.
+
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Bpu0TIXzI1w" frameborder="0" allowfullscreen></iframe>
+</div>
+
+According to person who uploaded this video, "The fireworks show had just ended, 
+but she thought she kept hearing them outside. So we sang to keep her mind preoccupied. 
+In the end, nothing competes with fireworks."
+
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sJxxdQox7n0" frameborder="0" allowfullscreen></iframe>
+</div>
+
+This is an incredible and short documentary covering an orchestra using instruments made
+from trash found at the dump. A wonderful story about ingenuity.
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jU4oA3kkAWU" frameborder="0" allowfullscreen></iframe>
+</div>
+
+This is an inspiring story about an unlikely child soccer team which persevered despite many
+obstacles.
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xZjykPITuq0" frameborder="0" allowfullscreen></iframe>
+</div>
+
+While this is only a car commercial, I found the overall message very powerful and words
+to live by.
