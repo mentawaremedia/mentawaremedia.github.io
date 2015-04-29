@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Easy vs Simple - Very Good Indicators</title>
+  <title>Yet Another Article About Ruby Closures - Very Good Indicators</title>
   <meta name="author" content="Mentaware Media">
 
   
-  <meta name="description" content="The meaning of words naturally evolve over time. As a consequence certain words
-will unfortunately lose their distinctive meaning and become an &hellip;">
+  <meta name="description" content="Today was the first day of company sponsored training on react.js, the new snazzy
+js library by the fine folks at Facebook. Our instructor Ryan &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ will unfortunately lose their distinctive meaning and become an &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.verygoodindicators.com/blog/2015/04/19/easy-vs-simple/">
+  <link rel="canonical" href="http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -30,12 +30,12 @@ will unfortunately lose their distinctive meaning and become an &hellip;">
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
 
   
-  
-    
-  
-  
-  
-  
+  <meta name="twitter:card" content="photo" />
+  <meta name="twitter:site" content="@terminalbreaker" />  
+  <meta name="twitter:title" content="Yet Another Article About Ruby Closures" />
+  <meta name="twitter:description" content="Some data on Blocks, Procs and Lambdas" />
+  <meta name="twitter:image" content="http://www.verygoodindicators.com/images/closures_keyboard.jpg" />
+  <meta name="twitter:url" content="http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks/">
 
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -121,7 +121,7 @@ will unfortunately lose their distinctive meaning and become an &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Easy vs Simple</h1>
+      <h1 class="entry-title">Yet Another Article About Ruby Closures</h1>
       <div class="sharing" style="">
   
   <!-- Place this tag where you want the su badge to render -->
@@ -130,7 +130,7 @@ will unfortunately lose their distinctive meaning and become an &hellip;">
   </div>
   
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/19/easy-vs-simple/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/19/easy-vs-simple/" style="display: inline-block; vertical-align: top;">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks/" style="display: inline-block; vertical-align: top;">Tweet</a>
   
   
   <div class="g-plusone" data-size="medium" style="display: inline-block; vertical-align: top;"></div>
@@ -148,7 +148,7 @@ will unfortunately lose their distinctive meaning and become an &hellip;">
 
 
 
-<time class='entry-date' datetime='2015-04-19T16:47:24-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:47 pm</span></time>
+<time class='entry-date' datetime='2015-04-28T19:23:52-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:23 pm</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://www.verygoodindicators.com">Comments</a>
@@ -158,72 +158,220 @@ will unfortunately lose their distinctive meaning and become an &hellip;">
   </header>
 
 
-<div class="entry-content"><p><img class="right" src="/images/easy_street.jpg" width="300"></p>
+<div class="entry-content"><p><img class="right" src="/images/closures_keyboard.jpg" width="300"></p>
 
-<p>The meaning of words naturally evolve over time. As a consequence certain words
-will unfortunately lose their distinctive meaning and become an undistinguished
-synonym for another word. This is what I believe has happened with the words
-&lsquo;easy&rsquo; and &lsquo;simple&rsquo; which are now used quite interchangeablely. The original
-meaning of these words can help us illustrate a very important idea.</p>
+<p>Today was the first day of company sponsored training on react.js, the new snazzy
+js library by the fine folks at Facebook. Our instructor Ryan Florence was
+apparently familiar with Ruby and quizzed me a bit on Procs and lambdas. I tend to use
+blocks most often, lambdas quite infrequently and Procs very, very rarely.
+As such I felt my knowledge of these deserved a little review and what better
+way to review than to write a little article about the subject and share it
+with all of you.</p>
 
-<p>We&rsquo;ll start by looking at their definitions.</p>
+<h2>Closures</h2>
 
-<h2>Definitions</h2>
+<p>Ruby Blocks, Procs and lambdas are basically Ruby&rsquo;s implementation on closures.
+If you&rsquo;re familiar with what a closure is, it&rsquo;s basically a piece of code that
+is bound to the environment in which that piece of code was defined.</p>
 
-<blockquote><p>easy - requiring little effort; presenting few difficulties; not difficult.</p><p>simple - easily done, used, or understood.</p><footer><strong>Macmillian Dictionary for Students</strong></footer></blockquote>
+<h2>Blocks</h2>
+
+<p>Ruby blocks are syntax literals for Proc objects, defined as instructions
+between curly braces <code>{}</code> or <code>do...end</code> phrases for multiline blocks which may
+optionally take arguments and return values.</p>
+
+<figure class='code'><figcaption><span>Block Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
+</span><span class='line'>    <span class="k">yield</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="mi">20</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>As you can see these words are very close in meaning today. Let&rsquo;s take a look
-at what they used to mean.</p>
+<p>In the example given above on line 10 thru 12 we are creating a block. The block
+consists of the code on line 11 along with it&rsquo;s environment. This block is sent over
+to line 3 where it called implicitly by the <code>yield</code> statement.</p>
 
-<h2>Origins</h2>
+<h2>Procs</h2>
 
-<p>&lsquo;Easy&rsquo; originally came from the Latin word ADJACERE which means to lie near. This
-makes sense as those things which lie near physically or mentally are easy to
-reach.</p>
+<p>Proc is short for procedure. A Proc is a encapsulation of code used to perform
+a specific task. A way of thinking of Procs and their behavior is like this.</p>
 
-<p>&lsquo;Simple&rsquo; comes for the Latin word SIMPLEX which means single fold. In other words
-something is simple when it consists of very few parts. Thus when something
-has little in the way of parts it then is not a difficult thing to grasp.</p>
+<figure class='code'><figcaption><span>Proc Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">my_proc</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">my_proc</span><span class="o">.</span><span class="n">call</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Ho&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">proc</span> <span class="o">=</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Hi&quot;</span>
+</span><span class='line'>  <span class="k">return</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="nb">proc</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Hi </span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#==&gt; Equivalent To</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hi&quot;</span>
+</span><span class='line'>    <span class="k">return</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Ho&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Bar</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Hi </span>
+</span></code></pre></td></tr></table></div></figure>
 
-<h2>Observations</h2>
 
-<p>I&rsquo;d like to point out the origin of &lsquo;easy&rsquo; implies a certain subjectivity. As
-things which are easy for me (near my mind) ,due to my experience, may not
-be easy for someone else. In contrast &lsquo;simple&rsquo; is more objective. The more parts
-and more intertwined and dependent those parts are of a thing, the less simple
-that thing is.</p>
+<p>If a Proc contains a <code>return</code> it will do a hard <code>return</code> and exit completely out of
+the method it called. As such <code>"Ho"</code> will never be printed to the console.</p>
 
-<p>For example Spanish is a simple language, Grammatically, it has fewer
-irregularities than other romance languages. This would be an objective
-statement.</p>
+<p>This makes sense since it is designed as encapulation of
+a procedure. As you can see from the example above the Proc#call on line 3 is
+functionally equivalent to line 21-22.</p>
 
-<p>However Spanish is easy for me since it&rsquo;s my first language and
-difficult for my wife since she does not speak it. Thus we see easy
-take on a more subjective role.</p>
+<h2>Lambda</h2>
 
-<h2>Okay, so what?</h2>
+<p>Lambda get its name from lambda calculus. In this sense lambdas take the form
+of anonymous functions.</p>
 
-<p>We are obsessed with the easy at the cost of complexity.The benefits or
-detriments can be argued but it is none the less there. It is easy (close, near)
-to go to the market and purchase a carton of orange juice but have you ever
-wondered how complex (many parts) it was to produce that carton and it&rsquo;s contents?</p>
+<figure class='code'><figcaption><span>Lambda Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">my_lam</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">my_lam</span><span class="o">.</span><span class="n">call</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Ho&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">lam</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Hi&quot;</span>
+</span><span class='line'>  <span class="k">return</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">lam</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Hi</span>
+</span><span class='line'><span class="c1"># Ho</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#==&gt; Equivalent To</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
+</span><span class='line'>    <span class="n">lam</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Ho&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">lam</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hi&quot;</span>
+</span><span class='line'>    <span class="k">return</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Bar</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>It&rsquo;s far easier to use power windows but the mechanism has many parts and with
-many parts comes the probability that something will go wrong sooner than a simpler
-mechanism,  requiring service. It can be easy to ship a package but not so simple to find
-one lost in the labyrinth it traveled.</p>
 
-<p>Cheating, stealing and lying are all easy. We gain what we desire immediately.
-The consequence is complexity. Keeping track of the lies told, avoiding discovery,
-and having people distrust and hate us does not a simple life make.</p>
+<p>The difference between <code>Foo</code> and <code>Bar</code> is that <code>Foo#run</code> executes an anonymous
+method defined by the lambda where as <code>Bar#run</code> executes the named method
+<code>Bar#lam</code>.</p>
 
-<p>This trade off between easy and simple is especially of concern to those who
-build things such as engineers. Some select at tool or technique because
-of it&rsquo;s ease of use yet it may actually lead to a complex structure which is
-difficult to maintain and service.</p>
+<p>The <code>return</code> statement in the lambda returns from the anonymous method just
+as a <code>return</code> in a named method will return from that method. Thus it will not
+exit out of the method in which it was invoked.</p>
 
-<p>Keep this in mind when doing something because it&rsquo;s easy.</p>
+<h2>Conclusion</h2>
+
+<p>So I know I&rsquo;m skipping a whole bunch of stuff regrading Blocks, Procs and Lambdas
+like parameter passing and appearance in argument lists but unfortunately I got
+a late start on this article so I&rsquo;ll have to write some supplements to this
+in the coming weeks.</p>
+
+<p>Bye.</p>
 </div>
 
 
@@ -239,12 +387,12 @@ difficult to maintain and service.</p>
 
 
 
-<time class='entry-date' datetime='2015-04-19T16:47:24-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:47 pm</span></time>
+<time class='entry-date' datetime='2015-04-28T19:23:52-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:23 pm</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/making-money/'>making money</a>, <a class='category' href='/blog/categories/performance/'>performance</a>
+    <a class='category' href='/blog/categories/programming/'>programming</a>
   
 </span>
 
@@ -259,7 +407,7 @@ difficult to maintain and service.</p>
   </div>
   
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/19/easy-vs-simple/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/19/easy-vs-simple/" style="display: inline-block; vertical-align: top;">Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks/" data-via="mentawaremedia" data-counturl="http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks/" style="display: inline-block; vertical-align: top;">Tweet</a>
   
   
   <div class="g-plusone" data-size="medium" style="display: inline-block; vertical-align: top;"></div>
@@ -272,20 +420,12 @@ difficult to maintain and service.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/04/16/tgif-3/" title="Previous Post: TGIF 3">&laquo; TGIF 3</a>
+        <a class="basic-alignment left" href="/blog/2015/04/26/problem-solving-for-everyday-life/" title="Previous Post: problem solving for everyday life">&laquo; problem solving for everyday life</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/04/20/why-activerecord-sucks/" title="Next Post: Why ActiveRecord Sucks">Why ActiveRecord Sucks &raquo;</a>
       
     </p>
   </footer>
 </article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
 
 </div>
 
@@ -297,11 +437,11 @@ difficult to maintain and service.</p>
     <ul class="posts">
     
         <li class="related">
-        <a href="/blog/2015/03/22/a-blow-against-grammar-nazis/">a blow against grammar nazis</a>
+        <a href="/blog/2015/03/15/ruby-contructors/">ruby constructors</a>
         </li>
     
         <li class="related">
-        <a href="/blog/2015/04/26/problem-solving-for-everyday-life/">problem solving for everyday life</a>
+        <a href="/blog/2015/03/20/class-class/">class Class</a>
         </li>
     
         <li class="related">
@@ -309,11 +449,11 @@ difficult to maintain and service.</p>
         </li>
     
         <li class="related">
-        <a href="/blog/2015/04/12/build-measure-learn/">build measure learn</a>
+        <a href="/blog/2015/04/01/binding-object-intro/">binding object intro</a>
         </li>
     
         <li class="related">
-        <a href="/blog/2015/04/28/yet-another-article-about-blocks/">Yet Another Article About Ruby Closures</a>
+        <a href="/blog/2015/04/07/faster-count-queries/">Faster Count Queries</a>
         </li>
     
     </ul>
@@ -348,10 +488,7 @@ difficult to maintain and service.</p>
       var disqus_shortname = 'verygoodindicators';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.verygoodindicators.com/blog/2015/04/19/easy-vs-simple/';
-        var disqus_url = 'http://www.verygoodindicators.com/blog/2015/04/19/easy-vs-simple/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

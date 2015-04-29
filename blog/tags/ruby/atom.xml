@@ -4,7 +4,7 @@
   <title><![CDATA[Ruby | Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/blog/tags/ruby/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-04-27T00:23:05-05:00</updated>
+  <updated>2015-04-29T01:03:58-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,152 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Yet Another Article About Ruby Closures]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks/"/>
+    <updated>2015-04-28T19:23:52-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/closures_keyboard.jpg" width="300"></p>
+
+<p>Today was the first day of company sponsored training on react.js, the new snazzy
+js library by the fine folks at Facebook. Our instructor Ryan Florence was
+apparently familiar with Ruby and quizzed me a bit on Procs and lambdas. I tend to use
+blocks most often, lambdas quite infrequently and Procs very, very rarely.
+As such I felt my knowledge of these deserved a little review and what better
+way to review than to write a little article about the subject and share it
+with all of you.</p>
+
+<h2>Closures</h2>
+
+<p>Ruby Blocks, Procs and lambdas are basically Ruby&rsquo;s implementation on closures.
+If you&rsquo;re familiar with what a closure is, it&rsquo;s basically a piece of code that
+is bound to the environment in which that piece of code was defined.</p>
+
+<h2>Blocks</h2>
+
+<p>Ruby blocks are syntax literals for Proc objects, defined as instructions
+between curly braces <code>{}</code> or <code>do...end</code> phrases for multiline blocks which may
+optionally take arguments and return values.</p>
+
+<pre><code class="ruby Block Example">class Foo
+  def run
+    yield
+  end
+end
+
+a = 10
+b = 20
+
+Foo.new.run do
+  a + b
+end
+</code></pre>
+
+<p>In the example given above on line 10 thru 12 we are creating a block. The block
+consists of the code on line 11 along with it&rsquo;s environment. This block is sent over
+to line 3 where it called implicitly by the <code>yield</code> statement.</p>
+
+<h2>Procs</h2>
+
+<p>Proc is short for procedure. A Proc is a encapsulation of code used to perform
+a specific task. A way of thinking of Procs and their behavior is like this.</p>
+
+<pre><code class="ruby Proc Example">class Foo
+  def run(my_proc)
+    my_proc.call
+    puts "Ho"
+  end
+end
+
+proc = Proc.new do
+  puts "Hi"
+  return
+end
+
+Foo.new.run(proc)
+
+# Hi 
+
+#==&gt; Equivalent To
+
+class Bar
+  def run
+    puts "Hi"
+    return
+    puts "Ho"
+  end
+end
+
+Bar.new.run
+
+# Hi 
+</code></pre>
+
+<p>If a Proc contains a <code>return</code> it will do a hard <code>return</code> and exit completely out of
+the method it called. As such <code>"Ho"</code> will never be printed to the console.</p>
+
+<p>This makes sense since it is designed as encapulation of
+a procedure. As you can see from the example above the Proc#call on line 3 is
+functionally equivalent to line 21-22.</p>
+
+<h2>Lambda</h2>
+
+<p>Lambda get its name from lambda calculus. In this sense lambdas take the form
+of anonymous functions.</p>
+
+<pre><code class="ruby Lambda Example">class Foo
+  def run(my_lam)
+    my_lam.call
+    puts "Ho"
+  end
+end
+
+lam = lambda do
+  puts "Hi"
+  return
+end
+
+Foo.new.run(lam)
+
+# Hi
+# Ho
+
+#==&gt; Equivalent To
+
+class Bar
+  def run
+    lam
+    puts "Ho"
+  end
+
+  def lam
+    puts "Hi"
+    return
+  end
+end
+
+Bar.new.run
+</code></pre>
+
+<p>The difference between <code>Foo</code> and <code>Bar</code> is that <code>Foo#run</code> executes an anonymous
+method defined by the lambda where as <code>Bar#run</code> executes the named method
+<code>Bar#lam</code>.</p>
+
+<p>The <code>return</code> statement in the lambda returns from the anonymous method just
+as a <code>return</code> in a named method will return from that method. Thus it will not
+exit out of the method in which it was invoked.</p>
+
+<h2>Conclusion</h2>
+
+<p>So I know I&rsquo;m skipping a whole bunch of stuff regrading Blocks, Procs and Lambdas
+like parameter passing and appearance in argument lists but unfortunately I got
+a late start on this article so I&rsquo;ll have to write some supplements to this
+in the coming weeks.</p>
+
+<p>Bye.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Why ActiveRecord Sucks]]></title>
@@ -469,67 +615,6 @@ see what we get.</p>
 <p>As you can see above our reporting service is receiving the hash as expected.</p>
 
 <p>Feel free to drop some comments or questions below. And if you liked it then
-please share on twitter, facebook or your prefered social media channel.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Class Class]]></title>
-    <link href="http://www.verygoodindicators.com/blog/2015/03/20/class-class/"/>
-    <updated>2015-03-20T20:53:35-05:00</updated>
-    <id>http://www.verygoodindicators.com/blog/2015/03/20/class-class</id>
-    <content type="html"><![CDATA[<p>This will post will be short and sweet; we&rsquo;ll cover the Ruby class Class. For
-those unfamiliar with the class called Class, it is basically a Ruby object for creating
-Ruby classes. This comes in very handy when doing metaprogramming or writing code that
-generates code.</p>
-
-<pre><code class="ruby Typical Way of Creating a class">class Foo
-  def hey
-    "hey"
-  end
-end
-</code></pre>
-
-<p>Above you&rsquo;ll see the regular old way of creating a class in Ruby.</p>
-
-<pre><code class="ruby Class Way of Creating a class">Foo = Class.new do
-  def hey
-    "hey"
-  end
-end
-</code></pre>
-
-<p>You can do the exact same thing using Class as the example above shows. Subclassing
-can also be done very easily.</p>
-
-<pre><code class="ruby Typical Way of Subclassing">class Bar &lt; Foo
-
-end
-</code></pre>
-
-<p>Above is how one would typically do subclassing. Class Bar inherits from class Foo.</p>
-
-<pre><code class="ruby Class Way of Subclassing">Bar = Class.new(Foo)
-</code></pre>
-
-<p>And here is how it&rsquo;s accomplished with class Class.</p>
-
-<p>A usual situation where I use Class is when I need to create custom errors. I think
-we can all be code snobs from time to time (I hope it&rsquo;s not just me) so I maybe overly
-critical when I say the following. When people attempt to cram multiple lines of ruby
-code on one line using &lsquo;;&rsquo;, a little piece of my dies.</p>
-
-<pre><code class="ruby ...kill me now">class NameNotDefined &lt; RuntimeError; end
-</code></pre>
-
-<p>Is it just me or is the above just painful to look at?</p>
-
-<pre><code class="ruby A blissful expression">NameNotDefined = Class.new(RuntimeError)
-</code></pre>
-
-<p>Now isn&rsquo;t this so much better? I can now relax.</p>
-
-<p>I hope it&rsquo;s been educational. Feel free to drop some comments or questions below. And if you liked it then
 please share on twitter, facebook or your prefered social media channel.</p>
 ]]></content>
   </entry>

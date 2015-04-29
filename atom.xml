@@ -4,7 +4,7 @@
   <title><![CDATA[Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-04-27T00:23:05-05:00</updated>
+  <updated>2015-04-29T01:03:58-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,228 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Yet Another Article About Ruby Closures]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks/"/>
+    <updated>2015-04-28T19:23:52-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://www.verygoodindicators.com/images/closures_keyboard.jpg" width="300"></p>
+
+<p>Today was the first day of company sponsored training on react.js, the new snazzy
+js library by the fine folks at Facebook. Our instructor Ryan Florence was
+apparently familiar with Ruby and quizzed me a bit on Procs and lambdas. I tend to use
+blocks most often, lambdas quite infrequently and Procs very, very rarely.
+As such I felt my knowledge of these deserved a little review and what better
+way to review than to write a little article about the subject and share it
+with all of you.</p>
+
+<h2>Closures</h2>
+
+<p>Ruby Blocks, Procs and lambdas are basically Ruby&rsquo;s implementation on closures.
+If you&rsquo;re familiar with what a closure is, it&rsquo;s basically a piece of code that
+is bound to the environment in which that piece of code was defined.</p>
+
+<h2>Blocks</h2>
+
+<p>Ruby blocks are syntax literals for Proc objects, defined as instructions
+between curly braces <code>{}</code> or <code>do...end</code> phrases for multiline blocks which may
+optionally take arguments and return values.</p>
+
+<figure class='code'><figcaption><span>Block Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
+</span><span class='line'>    <span class="k">yield</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'><span class="n">b</span> <span class="o">=</span> <span class="mi">20</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the example given above on line 10 thru 12 we are creating a block. The block
+consists of the code on line 11 along with it&rsquo;s environment. This block is sent over
+to line 3 where it called implicitly by the <code>yield</code> statement.</p>
+
+<h2>Procs</h2>
+
+<p>Proc is short for procedure. A Proc is a encapsulation of code used to perform
+a specific task. A way of thinking of Procs and their behavior is like this.</p>
+
+<figure class='code'><figcaption><span>Proc Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">my_proc</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">my_proc</span><span class="o">.</span><span class="n">call</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Ho&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">proc</span> <span class="o">=</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Hi&quot;</span>
+</span><span class='line'>  <span class="k">return</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="nb">proc</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Hi </span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#==&gt; Equivalent To</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hi&quot;</span>
+</span><span class='line'>    <span class="k">return</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Ho&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Bar</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Hi </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If a Proc contains a <code>return</code> it will do a hard <code>return</code> and exit completely out of
+the method it called. As such <code>"Ho"</code> will never be printed to the console.</p>
+
+<p>This makes sense since it is designed as encapulation of
+a procedure. As you can see from the example above the Proc#call on line 3 is
+functionally equivalent to line 21-22.</p>
+
+<h2>Lambda</h2>
+
+<p>Lambda get its name from lambda calculus. In this sense lambdas take the form
+of anonymous functions.</p>
+
+<figure class='code'><figcaption><span>Lambda Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">my_lam</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">my_lam</span><span class="o">.</span><span class="n">call</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Ho&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">lam</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;Hi&quot;</span>
+</span><span class='line'>  <span class="k">return</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Foo</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">lam</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Hi</span>
+</span><span class='line'><span class="c1"># Ho</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#==&gt; Equivalent To</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">run</span>
+</span><span class='line'>    <span class="n">lam</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Ho&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">lam</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Hi&quot;</span>
+</span><span class='line'>    <span class="k">return</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Bar</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">run</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The difference between <code>Foo</code> and <code>Bar</code> is that <code>Foo#run</code> executes an anonymous
+method defined by the lambda where as <code>Bar#run</code> executes the named method
+<code>Bar#lam</code>.</p>
+
+<p>The <code>return</code> statement in the lambda returns from the anonymous method just
+as a <code>return</code> in a named method will return from that method. Thus it will not
+exit out of the method in which it was invoked.</p>
+
+<h2>Conclusion</h2>
+
+<p>So I know I&rsquo;m skipping a whole bunch of stuff regrading Blocks, Procs and Lambdas
+like parameter passing and appearance in argument lists but unfortunately I got
+a late start on this article so I&rsquo;ll have to write some supplements to this
+in the coming weeks.</p>
+
+<p>Bye.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Problem Solving for Everyday Life]]></title>
@@ -2255,64 +2477,6 @@ better hormonal response and improved blood sugar levels. He cites various
 scientific studies and testimonials from his clients.</p>
 
 <p>For more information visit <a href="http://www.leangains.com/">www.leangains.com</a>.</p>
-
-<p>Feel free to drop some comments or questions below. And if you liked it then
-please share on twitter, facebook or your prefered social media channel.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[From Passion to Income: Convergence]]></title>
-    <link href="http://www.verygoodindicators.com/blog/2015/02/14/from-passion-to-income/"/>
-    <updated>2015-02-14T20:46:52-06:00</updated>
-    <id>http://www.verygoodindicators.com/blog/2015/02/14/from-passion-to-income</id>
-    <content type="html"><![CDATA[<blockquote><p>Choose a job you love, and you will never have to work a day in your life.</p><footer><strong>Confucius</strong></footer></blockquote>
-
-
-<p>One of my recent reads is the book <em>&lsquo;The $100 Startup&rsquo;</em>.
-It&rsquo;s inspiring and full of great advice
-on starting a business on shoe string budget. The author
-has done a great deal of research finding people followed their dreams made
-it as well as how they did it.</p>
-
-<p>One of the ideas covered in the book is called <em>&lsquo;Convergence&rsquo;</em>. This
-occurs when a person able to generate income from the thing or things he
-is passionate about.</p>
-
-<p>While there are many ways to make money, I would say most would either be boring or
-life draining. Being stuck in a job or career that brings you no joy is
-just grueling and painful. That&rsquo;s where the daily grind of 8 to 5 will just burn you
-out after a few years.</p>
-
-<p>On the other side is being passionate about things which bring you no income. While I may love
-walks in the park, I doubt I&rsquo;ll ever make much money at it.</p>
-
-<p>However, don&rsquo;t be too quick to quit on that crazy idea. It often
-just takes a little creativity to pull it off.
-<a href="http://www.businessinsider.com/richest-youtube-stars-2014-3#19-theradbrad-2">Bradley &ldquo;The Rad Brad&rdquo; Colburn</a>, for example,
-makes between $137 thousand - $1.38 million dollars a year doing humorous video game &lsquo;walkthroughs&rsquo; on YouTube.</p>
-
-<p><img class="center" src="http://www.verygoodindicators.com/images/convergence.jpg" width="592" height="420"></p>
-
-<p>Here are the steps.</p>
-
-<p>&nbsp;&nbsp;1. List out the things you love to do and are passionate about.<br/>
-&nbsp;&nbsp;2. Figure out which are likely to make you income.<br/>
-&nbsp;&nbsp;3. Do that.</p>
-
-<p>I did something similar in the summer of 1999. After working at several unsatisfying odd jobs
-over the years, I realized I needed good income and fulfilling work. I had no formal education but
-a lot of interest in various things. I was a good artist but I figured there was no decent income
-in that and the demand didn&rsquo;t seem high for it at the time. I did like computers and had above
-average knowledge so I thought, &ldquo;Maybe I&rsquo;ll try that&rdquo;.</p>
-
-<p>I bought various computer science books, studied in the evenings and landed a job in
-tech support about 6 months later. From there, I continued studying,
-was promoted to the software development department. I attended
-several classes at a couple of local 2 year colleges.</p>
-
-<p>To this day I continue expanding my skill set, looking at what&rsquo;s in demand and doing that. I&rsquo;ve
-greatly expanded my income and I love what I do. You can do it too.</p>
 
 <p>Feel free to drop some comments or questions below. And if you liked it then
 please share on twitter, facebook or your prefered social media channel.</p>
