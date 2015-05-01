@@ -4,6 +4,13 @@ title: "problem solving for everyday life"
 date: 2015-04-26 13:31:47 -0500
 comments: true
 categories: [performance]
+
+card_type: photo
+card_title: "Problem Solving for Everyday Life"
+card_site: "@terminalbreaker" 
+card_description: "Solving problems by eliminating unknowns"
+card_image: "http://www.verygoodindicators.com/images/confusion_scrabble.jpg"
+card_url: "http://www.verygoodindicators.com/blog/2015/04/26/problem-solving-for-everyday-life/"
 ---
 
 {% img right /images/confusion_scrabble.jpg 300 %}
