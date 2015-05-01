@@ -9,8 +9,8 @@
   <meta name="author" content="Mentaware Media">
 
   
-  <meta name="description" content="Today was the first day of company sponsored training on react.js, the new snazzy
-js library by the fine folks at Facebook. Our instructor Ryan &hellip;">
+  <meta name="description" content="We it&rsquo;s finally here. If you&rsquo;re a Marvel fan boy or just loved the Avengers and
+have been anticipating Avengers 2 well it&rsquo;s &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,66 @@ js library by the fine folks at Facebook. Our instructor Ryan &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/30/tgif-5/">TGIF 5</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-30T22:34:56-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:34 pm</span></time>
+        
+           | <a href="/blog/2015/04/30/tgif-5/#disqus_thread"
+             data-disqus-identifier="http://www.verygoodindicators.com/blog/2015/04/30/tgif-5/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="right" src="/images/tgif5.jpg" width="400"></p>
+
+<p>We it&rsquo;s finally here. If you&rsquo;re a Marvel fan boy or just loved the Avengers and
+have been anticipating Avengers 2 well it&rsquo;s finally out in theaters today in the
+USA.</p>
+
+<p>You may have also heard of the eventual movies Infinity War Part I &amp; II. If you
+also saw Guardians of the Galaxy you&rsquo;ll remember talk about the Infinity Stones.
+This set following set of videos will hopefully clear up some things and fill in the gaps
+as to where the Marvel movies are heading in regards to all this noise.</p>
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MKbsIOagLkE?list=PLkU8R8coCrLdfGVt4uZzQxXycbNX4DwVh" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<p>This following series of videos covers everthing you want to know about the
+Infinity Stones (Gems) and Thanos in the Marvel Universe.</p>
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3e940DgnBUg" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<p>Of course in the Marvel Cinematic Universe a few things have been tweaked in regards
+to the Inifinity Stones(Gems).This video covers who made the Infinity Stones in
+the movies.</p>
+
+<p>Alright Enjoy!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1246,216 +1306,6 @@ an appearance of Thor.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/07/faster-count-queries/">Faster Count Queries</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-07T16:11:47-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>4:11 pm</span></time>
-        
-           | <a href="/blog/2015/04/07/faster-count-queries/#disqus_thread"
-             data-disqus-identifier="http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="right" src="/images/cheetah_still.jpg" width="150"></p>
-
-<p>Some of you have noticed that PostgreSQL&rsquo;s count performs painfully slow on tables
-of any significant size. If you&rsquo;re looking for a quick solution and you don&rsquo;t
-care about super exact numbers on the count then I&rsquo;ll show you what I did.</p>
-
-<p>The reason counts are so slow in postgres has to do with the way Multi-Version
-Concurrency Control(MVCC) has been implemented in the
-<a href="http://wiki.postgresql.org/wiki/Slow_Counting">product</a>. Since multiple transactions
-can see different states of the data then there can be no straightforward way for &ldquo;COUNT(*)&rdquo;
-to summarize data across the whole table. As a result postgres must walk through all rows
-in a sense.</p>
-
-<p>I found an interesting article on how to accomplish a much faster, although less accurate
-count by tapping into the EXPLAIN output through a custom <a href="https://wiki.postgresql.org/wiki/Count_estimate">function</a>.
-I&rsquo;ll walk you through the steps I took.</p>
-
-<figure class='code'><figcaption><span>count_estimate function</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">CREATE</span> <span class="k">FUNCTION</span> <span class="n">count_estimate</span><span class="p">(</span><span class="n">query</span> <span class="nb">text</span><span class="p">)</span> <span class="k">RETURNS</span> <span class="nb">integer</span> <span class="k">AS</span>
-</span><span class='line'><span class="err">$</span><span class="n">func</span><span class="err">$</span>
-</span><span class='line'><span class="k">DECLARE</span>
-</span><span class='line'>    <span class="n">rec</span>   <span class="n">record</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">rows</span>  <span class="nb">integer</span><span class="p">;</span>
-</span><span class='line'><span class="k">BEGIN</span>
-</span><span class='line'>    <span class="k">FOR</span> <span class="n">rec</span> <span class="k">IN</span> <span class="k">EXECUTE</span> <span class="s1">&#39;EXPLAIN &#39;</span> <span class="o">||</span> <span class="n">query</span> <span class="n">LOOP</span>
-</span><span class='line'>        <span class="k">rows</span> <span class="p">:</span><span class="o">=</span> <span class="k">substring</span><span class="p">(</span><span class="n">rec</span><span class="p">.</span><span class="ss">&quot;QUERY PLAN&quot;</span> <span class="k">FROM</span> <span class="s1">&#39; rows=([[:digit:]]+)&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="n">EXIT</span> <span class="k">WHEN</span> <span class="k">rows</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">RETURN</span> <span class="k">rows</span><span class="p">;</span>
-</span><span class='line'><span class="k">END</span>
-</span><span class='line'><span class="err">$</span><span class="n">func</span><span class="err">$</span> <span class="k">LANGUAGE</span> <span class="n">plpgsql</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Above is the create query for out SQL function that we&rsquo;ll need to create on the server.
-First we&rsquo;ll create a migration to hold our function creation statement.</p>
-
-<figure class='code'><figcaption><span>migration</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#run this at the console first</span>
-</span><span class='line'><span class="c1">#  bundle exec rails g migration AddCountEstimateFunction</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">AddCountEstimateFunction</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">up</span>
-</span><span class='line'>    <span class="n">execute</span> <span class="o">&lt;&lt;-</span><span class="no">SQL</span>
-</span><span class='line'><span class="sh">      CREATE FUNCTION count_estimate(query text) RETURNS integer AS</span>
-</span><span class='line'><span class="sh">      $func$</span>
-</span><span class='line'><span class="sh">      DECLARE</span>
-</span><span class='line'><span class="sh">          rec   record;</span>
-</span><span class='line'><span class="sh">          rows  integer;</span>
-</span><span class='line'><span class="sh">      BEGIN</span>
-</span><span class='line'><span class="sh">          FOR rec IN EXECUTE &#39;EXPLAIN &#39; || query LOOP</span>
-</span><span class='line'><span class="sh">              rows := substring(rec.&quot;QUERY PLAN&quot; FROM &#39; rows=([[:digit:]]+)&#39;);</span>
-</span><span class='line'><span class="sh">              EXIT WHEN rows IS NOT NULL;</span>
-</span><span class='line'><span class="sh">          END LOOP;</span>
-</span><span class='line'><span class="sh">       </span>
-</span><span class='line'><span class="sh">          RETURN rows;</span>
-</span><span class='line'><span class="sh">      END</span>
-</span><span class='line'><span class="sh">      $func$ LANGUAGE plpgsql;</span>
-</span><span class='line'><span class="no">    SQL</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">down</span>
-</span><span class='line'>    <span class="n">execute</span> <span class="s2">&quot;DROP FUNCTION count_estimate(query text);&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>After we run <code>bundle exec rake db:migrate</code> the function will be available for use.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT count_estimate(&#39;</span><span class="si">#{</span><span class="n">sql_query</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#Example:</span>
-</span><span class='line'><span class="c1">#  sql_query = &quot;SELECT * FROM businesses WHERE size &gt; 3&quot;</span>
-</span><span class='line'><span class="c1">#  ActiveRecord::Base.connection.execute(&quot;SELECT count_estimate(&#39;#{sql_query}&#39;)&quot;).to_a</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1">#returns</span>
-</span><span class='line'><span class="c1">#  [{&quot;count_estimate&quot; =&gt; &quot;500&quot;}]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The snippet above shows how you would now use this SQL function</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Business</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">comment_count</span>
-</span><span class='line'>    <span class="c1">#This will return an estimate but not exactly the real number</span>
-</span><span class='line'>    <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT count_estimate(&#39;</span><span class="si">#{</span><span class="n">comments_sql_string</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="o">[</span><span class="s2">&quot;count_estimate&quot;</span><span class="o">].</span><span class="n">to_i</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">comments_sql_string</span>
-</span><span class='line'>    <span class="o">&lt;&lt;-</span><span class="no">SQL</span>
-</span><span class='line'><span class="sh">      SELECT * FROM comments </span>
-</span><span class='line'><span class="sh">      WHERE comments.business_id = #{self.id} </span>
-</span><span class='line'><span class="sh">        AND comments.status = &#39;&#39;new&#39;&#39;</span>
-</span><span class='line'><span class="no">    SQL</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#Business.last.comment_count</span>
-</span><span class='line'><span class="c1">#</span>
-</span><span class='line'><span class="c1">#=&gt; 9</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Finally, here is a more fleshed out implementation. Just a note, but make sure you character escape
-those single quotes by using two single quotes <code>''</code> otherwise you&rsquo;ll get a SQL error on the syntax.</p>
-
-<p>If this was useful then please share on your social media connections. I also like hearing
-any suggestions and comments so feel free to drop some below.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1470,7 +1320,7 @@ any suggestions and comments so feel free to drop some below.</p>
 
 <section>
   <h1>Topics</h1>
-    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (3)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/funny'>funny (2)</a></li><li><a href='/blog/categories/linguistics'>linguistics (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (4)</a></li><li><a href='/blog/categories/performance'>performance (5)</a></li><li><a href='/blog/categories/programming'>programming (7)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li><li><a href='/blog/categories/tgif'>tgif (4)</a></li></ul>
+    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (3)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/funny'>funny (2)</a></li><li><a href='/blog/categories/linguistics'>linguistics (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (4)</a></li><li><a href='/blog/categories/performance'>performance (5)</a></li><li><a href='/blog/categories/programming'>programming (7)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li><li><a href='/blog/categories/tgif'>tgif (5)</a></li></ul>
 </section>
 
 
