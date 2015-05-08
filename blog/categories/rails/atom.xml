@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Rails | Very Good Indicators]]></title>
+  <link href="http://www.verygoodindicators.com/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://www.verygoodindicators.com/"/>
+  <updated>2015-05-07T23:07:49-05:00</updated>
+  <id>http://www.verygoodindicators.com/</id>
+  <author>
+    <name><![CDATA[Mentaware Media]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The &amp; Operator]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/05/05/the-and-operator/"/>
+    <updated>2015-05-05T23:11:31-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/05/05/the-and-operator</id>
+    <content type="html"><![CDATA[<p>The post builds on my last blog post <a href="http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks/">&lsquo;Yet Another Article About Ruby Closures&rsquo;</a>.
+We&rsquo;re going to take a quick peek into the &lsquo;&amp;&rsquo; operator as it applies to ruby blocks.
+Let&rsquo;s take a look at some code.</p>
+
+<pre><code class="ruby">class Foo
+  def run(&amp;blk)
+    blk.call
+  end
+end
+
+
+Foo.new.run do
+  puts "I ran!"
+end
+
+#I ran!
+</code></pre>
+
+<p>In when <code>&amp;</code> appears in front of an object as in <code>&amp;blk</code>, it can do one of three
+things:</p>
+
+<ul>
+<li>if the object is a block, it&rsquo;ll convert it into a simple proc</li>
+<li>if the object is a Proc, it&rsquo;ll convert it into a block</li>
+<li>if the object is not a block nor Proc, it&rsquo;ll call #to_proc on the object.</li>
+</ul>
+
+
+<p>In our example above <code>&amp;blk</code> is converting the block <code>puts "I ran!"</code> into a simple
+proc and assigning it to the variable <code>blk</code> which we can then invoke by calling <code>#call</code>.</p>
+
+<pre><code class="ruby">proc = Proc.new {puts "I ran!"}
+
+Foo.new.run(&amp;proc)
+
+#I ran!
+</code></pre>
+
+<p>Now, in the example above, I first create a Proc and assign it to the variable <code>proc</code>.
+Then I convert it to a block with <code>&amp;</code> and pass it to <code>Foo#run</code>.</p>
+
+<p>On the next post I&rsquo;ll cover Symbol to proc which covers our last condition where
+<code>#to_proc</code> is called on the object.</p>
+]]></content>
+  </entry>
+  
+</feed>

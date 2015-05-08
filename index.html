@@ -9,8 +9,8 @@
   <meta name="author" content="Mentaware Media">
 
   
-  <meta name="description" content="The post builds on my last blog post &lsquo;Yet Another Article About Ruby Closures&rsquo;.
-We&rsquo;re going to take a quick peek into the &lsquo;& &hellip;">
+  <meta name="description" content="Well it&rsquo;s Friday again! Time to start the weekend up again. My wife loves goats. She finds them adorable and funny so the
+theme today is goats. ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,69 @@ We&rsquo;re going to take a quick peek into the &lsquo;& &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/07/tgif-6/">TGIF 6</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-07T22:25:19-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:25 pm</span></time>
+        
+           | <a href="/blog/2015/05/07/tgif-6/#disqus_thread"
+             data-disqus-identifier="http://www.verygoodindicators.com/blog/2015/05/07/tgif-6/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Well it&rsquo;s Friday again! Time to start the weekend up again.</p>
+
+<p>My wife loves goats. She finds them adorable and funny so the
+theme today is goats.</p>
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jsgEOfvuv30" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SIaFtAKnqBU" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+
+
+<div style="text-align:center;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Sz0eWkXNflI" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+
+
+<div style="text-align:center;">
+<iframe width="420" height="315" src="https://www.youtube.com/embed/YqXYHe3ev20" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1181,164 +1244,6 @@ fest but it turned out to be quite interesting.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/14/tips-for-faster-queries/">Tips for Faster Queries</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-14T19:54:54-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:54 pm</span></time>
-        
-           | <a href="/blog/2015/04/14/tips-for-faster-queries/#disqus_thread"
-             data-disqus-identifier="http://www.verygoodindicators.com/blog/2015/04/14/tips-for-faster-queries/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="right" src="/images/fast_snail.jpg" width="300"></p>
-
-<p>For the last few weeks I&rsquo;ve been busy at work optimizing many of our
-slowest queries. On my last Rails related post I covered a work around for
-PostgreSQL&rsquo;s inherit slowness with COUNT queries. On this post I&rsquo;m covering
-some common tips for speeding up general queries.</p>
-
-<p>We&rsquo;ll start by looking at some code.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#app/serializers/business_serializer.rb</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">BusinessSerializer</span> <span class="o">&lt;</span> <span class="no">ActiveModel</span><span class="o">::</span><span class="no">Serializer</span>
-</span><span class='line'>  <span class="n">attributes</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:zip</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#app/controllers/businesses_controller#any_ten_records</span>
-</span><span class='line'><span class="no">Business</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;revenue + ? = ?&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="ss">:created_at</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In the code above I use <a href="https://github.com/rails-api/active_model_serializers">ActiveModel::Serializers</a>
-to describe which model attributes will be serialized into JSON. If you are unfamiliar
-with this gem consider reading up on it. It&rsquo;s pretty handy for DRYing up your code. The
-database I am using is PostgreSQL.</p>
-
-<h2>Don&rsquo;t SELECT *</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Business.where(&quot;revenue + ? = ?&quot;, params[:amount], 100).order(:created_at).to_a.first(10)</span>
-</span><span class='line'><span class="no">Business</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:zip</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;revenue + ? = ?&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="ss">:created_at</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">to_a</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The serailizer tells me that the only thing I need to return is <code>business#name</code>
-and <code>business#zip</code>. The more record columns you request data on, the slower your
-query might run as it will use more Network I/O and sometimes Disk I/O.
-You could boost performance by selecting only the columns you require.</p>
-
-<h2>Filter Rows With Limit</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Business.select(:name, :zip)</span>
-</span><span class='line'><span class="c1">#  .where(&quot;revenue + ? = ?&quot;, params[:amount], 100)</span>
-</span><span class='line'><span class="c1">#  .order(:created_at)</span>
-</span><span class='line'><span class="c1">#  .to_a</span>
-</span><span class='line'><span class="c1">#  .first(10)</span>
-</span><span class='line'><span class="no">Business</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:zip</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;revenue + ? = ?&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="ss">:created_at</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We can see from <code>#first(10)</code> that we are only interested in returning the first
-ten records we fetched from the query. We could potentially and unnecessarily
-request a huge record set and consume a ton of memory by instantiating those
-records as ActiveRecord objects.</p>
-
-<h2>Avoid Sorting</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Business.select(:name, :zip)</span>
-</span><span class='line'><span class="c1">#  .where(&quot;revenue + ? = ?&quot;, params[:amount], 100)</span>
-</span><span class='line'><span class="c1">#  .limit(10)</span>
-</span><span class='line'><span class="c1">#  .order(:created_at)</span>
-</span><span class='line'><span class="no">Business</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:zip</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;revenue + ? = ?&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Sorting is sometimes unavoidable but we should try not to utilize it when
-possible. The <code>ORDER BY</code> generated will consume sorting memory on the server.
-In cases where memory becomes scarce on the server, it will spill over to
-disk making it painfully slow.</p>
-
-<h2>Don&rsquo;t Accidentally Skip Using an Index</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Business.select(:name, :zip)</span>
-</span><span class='line'><span class="c1">#  .where(&quot;revenue + ? = ?&quot;, params[:amount], 100)</span>
-</span><span class='line'><span class="c1">#  .limit(10)</span>
-</span><span class='line'><span class="no">Business</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span> <span class="ss">:zip</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;revenue = ? - ?&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If the businesses table is using an index on the field revenue, the original code
-would skip using the index. To take advantage of the index we need to shift the
-calculation from the left hand side of the equation to the right hand side.</p>
-
-<p>Thank you for coming by. Feel free to share and comment below.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/posts/2">&larr; Older</a>
@@ -1353,7 +1258,7 @@ calculation from the left hand side of the equation to the right hand side.</p>
 
 <section>
   <h1>Topics</h1>
-    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (3)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/funny'>funny (2)</a></li><li><a href='/blog/categories/linguistics'>linguistics (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (5)</a></li><li><a href='/blog/categories/performance'>performance (6)</a></li><li><a href='/blog/categories/programming'>programming (7)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li><li><a href='/blog/categories/tgif'>tgif (5)</a></li></ul>
+    <ul id="category-list" class="group"><li><a href='/blog/categories/biohacking'>biohacking (2)</a></li><li><a href='/blog/categories/books'>books (3)</a></li><li><a href='/blog/categories/debt'>debt (2)</a></li><li><a href='/blog/categories/diet'>diet (1)</a></li><li><a href='/blog/categories/funny'>funny (2)</a></li><li><a href='/blog/categories/linguistics'>linguistics (1)</a></li><li><a href='/blog/categories/low-carb'>low carb (3)</a></li><li><a href='/blog/categories/making-money'>making money (5)</a></li><li><a href='/blog/categories/performance'>performance (6)</a></li><li><a href='/blog/categories/programming'>programming (7)</a></li><li><a href='/blog/categories/rails'>rails (1)</a></li><li><a href='/blog/categories/recipes'>recipes (2)</a></li><li><a href='/blog/categories/ror'>ror (1)</a></li><li><a href='/blog/categories/ruby'>ruby (1)</a></li><li><a href='/blog/categories/technology'>technology (1)</a></li><li><a href='/blog/categories/tgif'>tgif (6)</a></li></ul>
 </section>
 
 
