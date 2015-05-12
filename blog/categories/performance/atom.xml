@@ -4,7 +4,7 @@
   <title><![CDATA[Performance | Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/blog/categories/performance/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-05-07T23:15:20-05:00</updated>
+  <updated>2015-05-11T23:19:38-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Business Tweaks]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/05/10/business-tweaks/"/>
+    <updated>2015-05-10T15:26:54-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/05/10/business-tweaks</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/business_tweaks.jpg" width="300"></p>
+
+<p>This following post covers a chapter from the book &lsquo;The $100 Startup&rsquo; written
+by Chris Guillebeau. It illustrates some ideas on increasing income through some
+small incremental improvements. We&rsquo;ll begin by defining some terms.</p>
+
+<h2>Traffic, Conversion Rates and Average Sales Price</h2>
+
+<p>We&rsquo;ll define &lsquo;traffic&rsquo; as visitors to a particular physical location or
+website. If you own a store, it would mean the number of people walking in
+the front door. If it&rsquo;s a website you own then it would be the number of
+visitors to the site.</p>
+
+<p>Next we&rsquo;ll define &lsquo;conversation rate&rsquo; as the number of visitors that then
+purchase something. If say 100 people visited our site and 3 purchase something
+then we would have a conversation rate of 3%.</p>
+
+<p>The first goal is getting a good amount of people walking in the door or
+visiting your site. This could be accomplished with marketing, word of mouth,
+social media campaigns, etc.</p>
+
+<p>Without a good volume of attention from prospective customers, it would be
+very difficult to grow a starting venture. Getting eyeballs on your products,
+your store, your brand would be basic to beginning and continued growth.</p>
+
+<p>You&rsquo;ll want to convert as many of those visitors as you can into customers. The
+percentage of visitors become customer is the conversation rate.
+The conversion rate for a brick and mortar store can be <a href="http://www.retailtouchpoints.com/retail-store-ops/19-retailers-counting-on-conversion-analysis-to-drive-store-metrics">from 20% - 40%</a>.
+An online store the rate is more like <a href="http://www.searchmarketingstandard.com/what-is-the-average-conversion-rate">2% - 3%</a>.</p>
+
+<p>A typical methodology for increasing conversion is A/B testing of promotional materials
+and offers. For example an offer &lsquo;A&rsquo; is run and it converts 3% of visitors into
+clients. Offer &lsquo;B&rsquo; is run and it converts at 5%. We now have a good indicator that
+offers similar to that of &lsquo;B&rsquo; generates more clients.</p>
+
+<p>Lastly is increasing average sales price. This can be accomplished through up-selling,
+cross-selling and after sale offering.</p>
+
+<h2>Up-selling, Cross-selling, and After Sale Offering</h2>
+
+<p>Up-selling means to entice the customer to purchase a more expensive item, upgrade
+or purchase add-ons inorder to make a more profitable sale. For example if someone
+is buying a car, a sales person would attempt to have the person upgrade their car
+with door edge protectors or wheel locks.</p>
+
+<p>Cross-selling usually involves selling complimentary products to the customer. If you&rsquo;ve
+shopped Amazon.com you&rsquo;ll often see suggested products in the form of, &ldquo;Customers
+who bought this product also bought these.&rdquo; This is an attempt to have the customer
+add additional merchandise to their order.</p>
+
+<p>An after sale offering takes the form of sending a customer some sort of special
+limited time offer after they have made a purchase in order to entice them to buy
+more product.</p>
+
+<h2>Summary</h2>
+
+<p>The idea is that a small percentage increase in traffic, conversion rate and average
+sales price results in a substantial overall increase in revenue.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The User Experience]]></title>
@@ -303,56 +369,6 @@ improvement or health related topic. Wednesday I&rsquo;ll release an article for
 folks doing software development and Fridays I&rsquo;ll close out the week with
 something fun such as some interesting Youtube videos. Thanks to all my
 return visitors. I hope you come back soon.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Pareto Principle]]></title>
-    <link href="http://www.verygoodindicators.com/blog/2015/04/05/the-pareto-principle/"/>
-    <updated>2015-04-05T17:51:33-05:00</updated>
-    <id>http://www.verygoodindicators.com/blog/2015/04/05/the-pareto-principle</id>
-    <content type="html"><![CDATA[<p>There is a very powerful principle and it can be quite
-transformative if you can learn to spot it and apply it to your daily life.
-I first became aware of the Pareto Principle when I worked as a
-developer at a company in the business of selling software to mid-level
-manufacturing companies.</p>
-
-<p><img class="right" src="/images/pareto-principle.jpg" width="300"></p>
-
-<p>The Pareto Principle goes by many names such the 80/20 principle, Pareto&rsquo;s
-Law, the law of the vital few and more. What it basically states is that
-20% of the causes drive 80% of the effects. Another way of saying this is
-that 20% of the inputs results in 80% of the outputs. For example a company
-will likely find that 20% of their customers generate 80% of their income.</p>
-
-<p>Microsoft found that fixing the top 20% of the most reported bugs eliminated
-80% of the related errors and crashes in a given <a href="http://en.wikipedia.org/wiki/Pareto_principle">system</a>.
-Other observations have included things such as:</p>
-
-<ul>
-<li>20% of motorists cause 80% of traffic accidents</li>
-<li>20% of criminals account for 80% of the value of all crime</li>
-<li>20% of the clothes a person person owns is worn 80% of the time.</li>
-</ul>
-
-
-<p>I was recently reintroduced to the principle upon reading Tim Ferriss&#8217; book,
-The 4-hour Workweek. He drives home the idea of eliminating waste through its
-use and this is one way the principle can be transformative.</p>
-
-<p>If a company realizes that 80% of it&rsquo;s time is consumed by 20% of its customers
-then it must ask itself the hard question, &ldquo;Should we part ways with those clients.&rdquo;
-If those clients are contribiting only a small amount of the revenue but
-are capitalizing most of the time then indeed parting ways maybe the smart choice.</p>
-
-<p>We may find in our own daily lives that 20% of our activities consume
-80% of our time. These activities could consist of web surfing, answering
-emails, and other unproductive activities. Should we remove or greatly
-limit these activities then we could recoop signifact chunks of time
-as well as reduce our stress.</p>
-
-<p>Give it some thought and see if this principle can be applied to an area
-of your life, activity or business.</p>
 ]]></content>
   </entry>
   

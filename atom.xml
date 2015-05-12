@@ -4,7 +4,7 @@
   <title><![CDATA[Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-05-07T23:15:20-05:00</updated>
+  <updated>2015-05-11T23:19:38-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Business Tweaks]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/05/10/business-tweaks/"/>
+    <updated>2015-05-10T15:26:54-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/05/10/business-tweaks</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://www.verygoodindicators.com/images/business_tweaks.jpg" width="300"></p>
+
+<p>This following post covers a chapter from the book &lsquo;The $100 Startup&rsquo; written
+by Chris Guillebeau. It illustrates some ideas on increasing income through some
+small incremental improvements. We&rsquo;ll begin by defining some terms.</p>
+
+<h2>Traffic, Conversion Rates and Average Sales Price</h2>
+
+<p>We&rsquo;ll define &lsquo;traffic&rsquo; as visitors to a particular physical location or
+website. If you own a store, it would mean the number of people walking in
+the front door. If it&rsquo;s a website you own then it would be the number of
+visitors to the site.</p>
+
+<p>Next we&rsquo;ll define &lsquo;conversation rate&rsquo; as the number of visitors that then
+purchase something. If say 100 people visited our site and 3 purchase something
+then we would have a conversation rate of 3%.</p>
+
+<p>The first goal is getting a good amount of people walking in the door or
+visiting your site. This could be accomplished with marketing, word of mouth,
+social media campaigns, etc.</p>
+
+<p>Without a good volume of attention from prospective customers, it would be
+very difficult to grow a starting venture. Getting eyeballs on your products,
+your store, your brand would be basic to beginning and continued growth.</p>
+
+<p>You&rsquo;ll want to convert as many of those visitors as you can into customers. The
+percentage of visitors become customer is the conversation rate.
+The conversion rate for a brick and mortar store can be <a href="http://www.retailtouchpoints.com/retail-store-ops/19-retailers-counting-on-conversion-analysis-to-drive-store-metrics">from 20% - 40%</a>.
+An online store the rate is more like <a href="http://www.searchmarketingstandard.com/what-is-the-average-conversion-rate">2% - 3%</a>.</p>
+
+<p>A typical methodology for increasing conversion is A/B testing of promotional materials
+and offers. For example an offer &lsquo;A&rsquo; is run and it converts 3% of visitors into
+clients. Offer &lsquo;B&rsquo; is run and it converts at 5%. We now have a good indicator that
+offers similar to that of &lsquo;B&rsquo; generates more clients.</p>
+
+<p>Lastly is increasing average sales price. This can be accomplished through up-selling,
+cross-selling and after sale offering.</p>
+
+<h2>Up-selling, Cross-selling, and After Sale Offering</h2>
+
+<p>Up-selling means to entice the customer to purchase a more expensive item, upgrade
+or purchase add-ons inorder to make a more profitable sale. For example if someone
+is buying a car, a sales person would attempt to have the person upgrade their car
+with door edge protectors or wheel locks.</p>
+
+<p>Cross-selling usually involves selling complimentary products to the customer. If you&rsquo;ve
+shopped Amazon.com you&rsquo;ll often see suggested products in the form of, &ldquo;Customers
+who bought this product also bought these.&rdquo; This is an attempt to have the customer
+add additional merchandise to their order.</p>
+
+<p>An after sale offering takes the form of sending a customer some sort of special
+limited time offer after they have made a purchase in order to entice them to buy
+more product.</p>
+
+<h2>Summary</h2>
+
+<p>The idea is that a small percentage increase in traffic, conversion rate and average
+sales price results in a substantial overall increase in revenue.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[TGIF 6]]></title>
@@ -1811,89 +1877,6 @@ Christmas presents to his family yet for some strange reason has no problem acce
 them.</p>
 
 <p>Feel free to drop some comments or questions below. And if you liked it then
-please share on twitter, facebook or your prefered social media channel.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Class Class]]></title>
-    <link href="http://www.verygoodindicators.com/blog/2015/03/20/class-class/"/>
-    <updated>2015-03-20T20:53:35-05:00</updated>
-    <id>http://www.verygoodindicators.com/blog/2015/03/20/class-class</id>
-    <content type="html"><![CDATA[<p>This will post will be short and sweet; we&rsquo;ll cover the Ruby class Class. For
-those unfamiliar with the class called Class, it is basically a Ruby object for creating
-Ruby classes. This comes in very handy when doing metaprogramming or writing code that
-generates code.</p>
-
-<figure class='code'><figcaption><span>Typical Way of Creating a class</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">hey</span>
-</span><span class='line'>    <span class="s2">&quot;hey&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Above you&rsquo;ll see the regular old way of creating a class in Ruby.</p>
-
-<figure class='code'><figcaption><span>Class Way of Creating a class</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Foo</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">hey</span>
-</span><span class='line'>    <span class="s2">&quot;hey&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can do the exact same thing using Class as the example above shows. Subclassing
-can also be done very easily.</p>
-
-<figure class='code'><figcaption><span>Typical Way of Subclassing</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="o">&lt;</span> <span class="no">Foo</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Above is how one would typically do subclassing. Class Bar inherits from class Foo.</p>
-
-<figure class='code'><figcaption><span>Class Way of Subclassing</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Bar</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">Foo</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And here is how it&rsquo;s accomplished with class Class.</p>
-
-<p>A usual situation where I use Class is when I need to create custom errors. I think
-we can all be code snobs from time to time (I hope it&rsquo;s not just me) so I maybe overly
-critical when I say the following. When people attempt to cram multiple lines of ruby
-code on one line using &lsquo;;&rsquo;, a little piece of my dies.</p>
-
-<figure class='code'><figcaption><span>&#8230;kill me now</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">NameNotDefined</span> <span class="o">&lt;</span> <span class="no">RuntimeError</span><span class="p">;</span> <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Is it just me or is the above just painful to look at?</p>
-
-<figure class='code'><figcaption><span>A blissful expression</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">NameNotDefined</span> <span class="o">=</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">RuntimeError</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now isn&rsquo;t this so much better? I can now relax.</p>
-
-<p>I hope it&rsquo;s been educational. Feel free to drop some comments or questions below. And if you liked it then
 please share on twitter, facebook or your prefered social media channel.</p>
 ]]></content>
   </entry>
