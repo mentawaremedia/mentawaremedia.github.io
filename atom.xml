@@ -4,7 +4,7 @@
   <title><![CDATA[Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-05-11T23:20:32-05:00</updated>
+  <updated>2015-05-22T11:27:26-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,117 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Object#method]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/05/14/object-number-method/"/>
+    <updated>2015-05-14T13:47:13-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/05/14/object-number-method</id>
+    <content type="html"><![CDATA[<p>In this post we&rsquo;ll dig a bit into <code>Object#method</code> and what it does. We&rsquo;ll
+also hook this into the last Ruby related post <a href="http://www.verygoodindicators.com/blog/2015/05/05/the-and-operator/">&lsquo;The &amp; Operator&rsquo;</a>.</p>
+
+<p>What <code>Object#method</code> essentially does is return a Method object which behaves
+like one of Ruby&rsquo;s other closure objects. Once executed you could pretty much
+use it as you would a lambda. Let&rsquo;s play around with some code and see it in
+action.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Foo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">square</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">number</span> <span class="o">**</span> <span class="mi">2</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">sq</span> <span class="o">=</span> <span class="no">Foo</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="ss">:square</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">sq</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#returns 16</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On line 7 about we&rsquo;re instantiating a <code>Method</code> object and assign it to the variable
+<code>sq</code> which refers to our <code>Foo.square</code> method. We can pass this object around as we
+wish or execute it by invoking <code>#call</code> just like we would a lambda.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">array</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sq</span><span class="p">)</span>
+</span><span class='line'><span class="c1">#returns [1, 4, 9, 16]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#OR</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">array</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="no">Foo</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="ss">:square</span><span class="p">))</span>
+</span><span class='line'><span class="c1">#returns [1, 4, 9, 16]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you recall in my last ruby post we covered the <code>&amp;</code> operator and some of the functions
+<a href="http://www.verygoodindicators.com/blog/2015/05/05/the-and-operator/">it could perform</a>. In the code above you&rsquo;ll see
+that we can use the <code>&amp;</code> similarly with a Method object in order to execute the method on each
+element of our collection.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Bar</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:amount</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@amount</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">increment</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@amount</span> <span class="o">+=</span> <span class="n">number</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">inc</span> <span class="o">=</span> <span class="no">Bar</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">method</span><span class="p">(</span><span class="ss">:increment</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="o">].</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">inc</span><span class="p">)</span><span class="o">.</span><span class="n">inspect</span>
+</span><span class='line'><span class="c1">#returns [1, 2, 3, 4] </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Remember that a Method object is a closure and as such it carries around it&rsquo;s own environment
+which in the case above would be the instance variables of the class. The <code>Bar#increment</code> method will take
+a number as an input and add it to the <code>@amount</code> instance variable and return the new value.
+Thus when we execute the <code>inc</code> Method object on each element of the array, we can see the
+result incrementing as expected.</p>
+
+<p>Hope you enjoyed this little article.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Business Tweaks]]></title>
@@ -1834,50 +1945,6 @@ http://m.youtube.com</div>
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Immortalize a Former Coworker]]></title>
-    <link href="http://www.verygoodindicators.com/blog/2015/03/21/how-immortalize-a-former-coworker/"/>
-    <updated>2015-03-21T15:12:56-05:00</updated>
-    <id>http://www.verygoodindicators.com/blog/2015/03/21/how-immortalize-a-former-coworker</id>
-    <content type="html"><![CDATA[<p><img class="center" src="http://www.verygoodindicators.com/images/shawshank_red.jpg" width="473" height="358"></p>
-
-<blockquote><p>Sometimes it makes me sad, though, Andy being gone. I have to remind <br/>myself that some birds aren&#8217;t meant to be caged, that&#8217;s all. Their <br/>feathers are just too bright and when they fly away, the part <br/>of you that knows it was a sin to lock them up does rejoice&#8230;but still, <br/>the place you live is that much more drab and empty that they&#8217;re gone.</p><footer><strong>Red</strong> <cite>The Shawshank Redemption</cite></footer></blockquote>
-
-
-<p>There are times when you miss a fomer coworker. Maybe they were really good at what
-they did. Perhaps they were clever, upbeat or eccentric. Or maybe they offered much
-needed comic relief.</p>
-
-<p>A couple of months ago one of my coworkers decided to take a couple years off from work to
-strike it on his own to build a product he&rsquo;s passionate about without the
-daily pressures of a job.</p>
-
-<p>He&rsquo;s a young guy with his own offbeat sense of humor. Those of us that worked with him
-found him quite hilarious.</p>
-
-<p>I don&rsquo;t know what inspired me to do this but I drew a caricature of him on dry erase
-painted wall of our office and I every so often I update the captions on it. People read
-it have a good laugh and it&rsquo;s almost like he never left.</p>
-
-<p><img class="center" src="http://www.verygoodindicators.com/images/hpisms_1.jpg" width="900"></p>
-
-<p>Now, this coworker is a young guy just a few years out of college. He is an atheist who
-seems to disappear into his room for days according to his roommate. He loves to play
-video games downing a six pack of Monster Energy drinks and a family size bag of Skittles&hellip;
-ok, I made up that last bit.</p>
-
-<p><img class="center" src="http://www.verygoodindicators.com/images/hpisms_2.jpg" width="900"></p>
-
-<p>I theorize that he must be keeping a joural of all the wrongs inflicted on him by the
-world yet I have absolutely no proof whatsoever. He apparently is not compelled to give
-Christmas presents to his family yet for some strange reason has no problem accepting
-them.</p>
-
-<p>Feel free to drop some comments or questions below. And if you liked it then
-please share on twitter, facebook or your prefered social media channel.</p>
 ]]></content>
   </entry>
   

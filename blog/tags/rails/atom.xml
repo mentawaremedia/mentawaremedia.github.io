@@ -4,7 +4,7 @@
   <title><![CDATA[Rails | Very Good Indicators]]></title>
   <link href="http://www.verygoodindicators.com/blog/tags/rails/atom.xml" rel="self"/>
   <link href="http://www.verygoodindicators.com/"/>
-  <updated>2015-05-11T23:20:32-05:00</updated>
+  <updated>2015-05-22T11:27:26-05:00</updated>
   <id>http://www.verygoodindicators.com/</id>
   <author>
     <name><![CDATA[Mentaware Media]]></name>
@@ -12,6 +12,130 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Object#method]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/05/14/object-number-method/"/>
+    <updated>2015-05-14T13:47:13-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/05/14/object-number-method</id>
+    <content type="html"><![CDATA[<p>In this post we&rsquo;ll dig a bit into <code>Object#method</code> and what it does. We&rsquo;ll
+also hook this into the last Ruby related post <a href="/blog/2015/05/05/the-and-operator/">&lsquo;The &amp; Operator&rsquo;</a>.</p>
+
+<p>What <code>Object#method</code> essentially does is return a Method object which behaves
+like one of Ruby&rsquo;s other closure objects. Once executed you could pretty much
+use it as you would a lambda. Let&rsquo;s play around with some code and see it in
+action.</p>
+
+<pre><code class="ruby">class Foo
+  def self.square(number)
+    number ** 2
+  end
+end
+
+sq = Foo.method(:square)
+
+sq.call(4)
+#returns 16
+</code></pre>
+
+<p>On line 7 about we&rsquo;re instantiating a <code>Method</code> object and assign it to the variable
+<code>sq</code> which refers to our <code>Foo.square</code> method. We can pass this object around as we
+wish or execute it by invoking <code>#call</code> just like we would a lambda.</p>
+
+<pre><code class="ruby">array = [1,2,3,4]
+
+array.map(&amp;sq)
+#returns [1, 4, 9, 16]
+
+#OR
+
+array.map(&amp;Foo.method(:square))
+#returns [1, 4, 9, 16]
+</code></pre>
+
+<p>If you recall in my last ruby post we covered the <code>&amp;</code> operator and some of the functions
+<a href="/blog/2015/05/05/the-and-operator/">it could perform</a>. In the code above you&rsquo;ll see
+that we can use the <code>&amp;</code> similarly with a Method object in order to execute the method on each
+element of our collection.</p>
+
+<pre><code class="ruby">class Bar
+  attr_accessor :amount
+
+  def initialize
+    @amount = 0
+  end
+
+  def increment(number)
+    @amount += number
+  end
+end
+
+inc = Bar.new.method(:increment)
+
+[1,1,1,1].map(&amp;inc).inspect
+#returns [1, 2, 3, 4] 
+</code></pre>
+
+<p>Remember that a Method object is a closure and as such it carries around it&rsquo;s own environment
+which in the case above would be the instance variables of the class. The <code>Bar#increment</code> method will take
+a number as an input and add it to the <code>@amount</code> instance variable and return the new value.
+Thus when we execute the <code>inc</code> Method object on each element of the array, we can see the
+result incrementing as expected.</p>
+
+<p>Hope you enjoyed this little article.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The &amp; Operator]]></title>
+    <link href="http://www.verygoodindicators.com/blog/2015/05/05/the-and-operator/"/>
+    <updated>2015-05-05T23:11:31-05:00</updated>
+    <id>http://www.verygoodindicators.com/blog/2015/05/05/the-and-operator</id>
+    <content type="html"><![CDATA[<p>The post builds on my last blog post <a href="http://www.verygoodindicators.com/blog/2015/04/28/yet-another-article-about-blocks/">&lsquo;Yet Another Article About Ruby Closures&rsquo;</a>.
+We&rsquo;re going to take a quick peek into the &lsquo;&amp;&rsquo; operator as it applies to ruby blocks.
+Let&rsquo;s take a look at some code.</p>
+
+<pre><code class="ruby">class Foo
+  def run(&amp;blk)
+    blk.call
+  end
+end
+
+
+Foo.new.run do
+  puts "I ran!"
+end
+
+#I ran!
+</code></pre>
+
+<p>In when <code>&amp;</code> appears in front of an object as in <code>&amp;blk</code>, it can do one of three
+things:</p>
+
+<ul>
+<li>if the object is a block, it&rsquo;ll convert it into a simple proc</li>
+<li>if the object is a Proc, it&rsquo;ll convert it into a block</li>
+<li>if the object is not a block nor Proc, it&rsquo;ll call #to_proc on the object.</li>
+</ul>
+
+
+<p>In our example above <code>&amp;blk</code> is converting the block <code>puts "I ran!"</code> into a simple
+proc and assigning it to the variable <code>blk</code> which we can then invoke by calling <code>#call</code>.</p>
+
+<pre><code class="ruby">proc = Proc.new {puts "I ran!"}
+
+Foo.new.run(&amp;proc)
+
+#I ran!
+</code></pre>
+
+<p>Now, in the example above, I first create a Proc and assign it to the variable <code>proc</code>.
+Then I convert it to a block with <code>&amp;</code> and pass it to <code>Foo#run</code>.</p>
+
+<p>On the next post I&rsquo;ll cover Symbol to proc which covers our last condition where
+<code>#to_proc</code> is called on the object.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Yet Another Article About Ruby Closures]]></title>
@@ -416,120 +540,6 @@ would skip using the index. To take advantage of the index we need to shift the
 calculation from the left hand side of the equation to the right hand side.</p>
 
 <p>Thank you for coming by. Feel free to share and comment below.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Faster Count Queries]]></title>
-    <link href="http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries/"/>
-    <updated>2015-04-07T16:11:47-05:00</updated>
-    <id>http://www.verygoodindicators.com/blog/2015/04/07/faster-count-queries</id>
-    <content type="html"><![CDATA[<p><img class="right" src="/images/cheetah_still.jpg" width="150"></p>
-
-<p>Some of you have noticed that PostgreSQL&rsquo;s count performs painfully slow on tables
-of any significant size. If you&rsquo;re looking for a quick solution and you don&rsquo;t
-care about super exact numbers on the count then I&rsquo;ll show you what I did.</p>
-
-<p>The reason counts are so slow in postgres has to do with the way Multi-Version
-Concurrency Control(MVCC) has been implemented in the
-<a href="http://wiki.postgresql.org/wiki/Slow_Counting">product</a>. Since multiple transactions
-can see different states of the data then there can be no straightforward way for &ldquo;COUNT(*)&rdquo;
-to summarize data across the whole table. As a result postgres must walk through all rows
-in a sense.</p>
-
-<p>I found an interesting article on how to accomplish a much faster, although less accurate
-count by tapping into the EXPLAIN output through a custom <a href="https://wiki.postgresql.org/wiki/Count_estimate">function</a>.
-I&rsquo;ll walk you through the steps I took.</p>
-
-<pre><code class="sql count_estimate function">CREATE FUNCTION count_estimate(query text) RETURNS integer AS
-$func$
-DECLARE
-    rec   record;
-    rows  integer;
-BEGIN
-    FOR rec IN EXECUTE 'EXPLAIN ' || query LOOP
-        rows := substring(rec."QUERY PLAN" FROM ' rows=([[:digit:]]+)');
-        EXIT WHEN rows IS NOT NULL;
-    END LOOP;
-
-    RETURN rows;
-END
-$func$ LANGUAGE plpgsql;
-</code></pre>
-
-<p>Above is the create query for out SQL function that we&rsquo;ll need to create on the server.
-First we&rsquo;ll create a migration to hold our function creation statement.</p>
-
-<pre><code class="ruby migration">#run this at the console first
-#  bundle exec rails g migration AddCountEstimateFunction
-
-
-class AddCountEstimateFunction &lt; ActiveRecord::Migration
-  def up
-    execute &lt;&lt;-SQL
-      CREATE FUNCTION count_estimate(query text) RETURNS integer AS
-      $func$
-      DECLARE
-          rec   record;
-          rows  integer;
-      BEGIN
-          FOR rec IN EXECUTE 'EXPLAIN ' || query LOOP
-              rows := substring(rec."QUERY PLAN" FROM ' rows=([[:digit:]]+)');
-              EXIT WHEN rows IS NOT NULL;
-          END LOOP;
-
-          RETURN rows;
-      END
-      $func$ LANGUAGE plpgsql;
-    SQL
-  end
-
-  def down
-    execute "DROP FUNCTION count_estimate(query text);"
-  end
-end
-</code></pre>
-
-<p>After we run <code>bundle exec rake db:migrate</code> the function will be available for use.</p>
-
-<pre><code class="ruby">ActiveRecord::Base.connection.execute("SELECT count_estimate('#{sql_query}')")
-
-#Example:
-#  sql_query = "SELECT * FROM businesses WHERE size &gt; 3"
-#  ActiveRecord::Base.connection.execute("SELECT count_estimate('#{sql_query}')").to_a
-#
-#returns
-#  [{"count_estimate" =&gt; "500"}]
-</code></pre>
-
-<p>The snippet above shows how you would now use this SQL function</p>
-
-<pre><code class="ruby">class Business &lt; ActiveRecord::Base
-
-  def comment_count
-    #This will return an estimate but not exactly the real number
-    ActiveRecord::Base.connection.execute("SELECT count_estimate('#{comments_sql_string}')").first["count_estimate"].to_i
-  end  
-
-  def comments_sql_string
-    &lt;&lt;-SQL
-      SELECT * FROM comments 
-      WHERE comments.business_id = #{self.id} 
-        AND comments.status = ''new''
-    SQL
-  end
-end
-
-#Business.last.comment_count
-#
-#=&gt; 9
-</code></pre>
-
-<p>Finally, here is a more fleshed out implementation. Just a note, but make sure you character escape
-those single quotes by using two single quotes <code>''</code> otherwise you&rsquo;ll get a SQL error on the syntax.</p>
-
-<p>If this was useful then please share on your social media connections. I also like hearing
-any suggestions and comments so feel free to drop some below.</p>
 ]]></content>
   </entry>
   
